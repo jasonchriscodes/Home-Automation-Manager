@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
+import { NavLink } from "react-router-dom";
 import { IoIosArrowBack } from "react-icons/io";
+import { AiOutlineAppstore } from "react-icons/ai";
+import { SlSettings } from "react-icons/sl";
 
 const Sidebar = () => {
   const SidebarAnimation = {
@@ -37,6 +40,25 @@ const Sidebar = () => {
             width={45}
           />
           <span className="text-xl whitespace-pre"> Auto Home</span>
+        </div>
+
+        {/* menus */}
+        <div className="flex flex-col h-full">
+          <ul className="whitespace-pre px-2.5 text-[0.9rem] py-5 flex flex-col gap-1 font-medium overflow-x-hidden">
+            <li>
+              <NavLink to="/" className={"link"}>
+                <AiOutlineAppstore size={23} className="min-w-max" />
+                Home
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/settings" className={"link"}>
+                <SlSettings size={23} className="min-w-max" />
+                Settings
+              </NavLink>
+            </li>
+          </ul>
+          <div className=""></div>
         </div>
 
         {/* control button */}
