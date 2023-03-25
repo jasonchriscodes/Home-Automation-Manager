@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useMediaQuery } from "react-responsive";
 import { Link, NavLink } from "react-router-dom";
 import { IoIosArrowBack } from "react-icons/io";
 import { AiOutlineAppstore } from "react-icons/ai";
 import { SlSettings } from "react-icons/sl";
-import { MdDevicesOther } from "react-icons/md";
+import { MdDevicesOther, MdMenu } from "react-icons/md";
 import { TbReportAnalytics } from "react-icons/tb";
 import SubMenu from "./SubMenu";
 
@@ -50,6 +50,16 @@ const Sidebar = () => {
         },
       };
 
+  useEffect(() => {
+    if (isTab) {
+      // mobile
+      setIsOpen(false);
+    } else {
+      // laptop
+      setIsOpen(true);
+    }
+  }, [isTab]);
+
   const subMenusList = [
     {
       name: "devices",
@@ -65,6 +75,12 @@ const Sidebar = () => {
 
   return (
     <div>
+      <div
+        onClick={() => setIsOpen(false)}
+        className={`md:hidden fixed inset-0 max-h-screen z-[998] bg-black/50 ${
+          isOpen ? "block" : "hidden"
+        }`}
+      ></div>
       <motion.div
         variants={SidebarAnimation}
         animate={isOpen ? "open" : "closed"}
@@ -162,6 +178,9 @@ const Sidebar = () => {
           <IoIosArrowBack size={25} />
         </motion.div>
       </motion.div>
+      <div className="m-3 md-hidden" onClick={() => setIsOpen(true)}>
+        <MdMenu size={25} />
+      </div>
     </div>
   );
 };
