@@ -7,11 +7,11 @@ const SubMenu = ({ data }) => {
   return (
     <>
       <li className={`link ${pathname.includes(data.name) && "text-blue-600"}`}>
-        <data.icon size={23} />
+        <data.icon size={23} className="min-w-max" />
         <p className="capitalize flex-1">{data.name}</p>
         <IoIosArrowDown className="" />
       </li>
-      <ul>
+      <ul className="flex flex-col pl-14 text=[0.8rem] font-normal overflow-hidden">
         {data.menus.map((menu) => (
           <li key={menu}>
             {/* 
