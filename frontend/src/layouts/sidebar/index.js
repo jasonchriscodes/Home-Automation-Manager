@@ -28,6 +28,18 @@ const Sidebar = () => {
         animate={isOpen ? "open" : "closed"}
         className="bg-white text-gray shadow-xl z-[999] w-[16rem] max-w-[16rem] h-screen overflow-hidden md:relative fixed"
       >
+        {/* app logo */}
+        <div className="flex items-center gap-2.5 font-medium border-b border-slate-300 py-3 mx-3">
+          <img
+            style={{ width: "60px", height: "auto" }}
+            src="https://res.cloudinary.com/jasoncloud13542/image/upload/v1679723690/AutoHome_mh4ax6.png"
+            alt="app-logo"
+            width={45}
+          />
+          <span className="text-xl whitespace-pre"> Auto Home</span>
+        </div>
+
+        {/* control button */}
         <motion.div
           animate={
             isOpen
