@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { IoIosArrowBack } from "react-icons/io";
 import { AiOutlineAppstore } from "react-icons/ai";
 import { SlSettings } from "react-icons/sl";
@@ -25,7 +25,7 @@ const Sidebar = () => {
     },
   };
 
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
 
   const subMenusList = [
     {
@@ -60,7 +60,7 @@ const Sidebar = () => {
 
         {/* menus */}
         <div className="flex flex-col h-full">
-          <ul className="whitespace-pre px-2.5 text-[0.9rem] py-5 flex flex-col gap-1 font-medium overflow-x-hidden scrollbar-thin scrollbar-track-white scrollbar-thumb-slate-100">
+          <ul className="whitespace-pre px-2.5 text-[0.9rem] py-5 flex flex-col max-h-full gap-1 font-medium overflow-x-hidden scrollbar-thin scrollbar-track-white scrollbar-thumb-slate-100">
             <li>
               <NavLink to="/" className={"link"}>
                 <AiOutlineAppstore size={23} className="min-w-max" />
@@ -89,7 +89,22 @@ const Sidebar = () => {
               </NavLink>
             </li>
           </ul>
-          <div className=""></div>
+          <div className="flex-1 text-sm z-50  max-h-10 my-auto  whitespace-pre   w-full  font-medium  ">
+            <div
+              className={
+                isOpen
+                  ? "flex border-y border-slate-300 p-4 items-center justify-start gap-6"
+                  : "flex border-y border-slate-300 p-4 items-center justify-start gap-6 "
+              }
+            >
+              <img
+                src="https://res.cloudinary.com/jasoncloud13542/image/upload/v1668564257/Foto_wajah_baju_hitam_zdh7b2.jpg"
+                className="w-12 h-12 rounded-full"
+                alt="user-profile"
+              />
+              <p>Jason Christian</p>
+            </div>
+          </div>
         </div>
 
         {/* control button */}
