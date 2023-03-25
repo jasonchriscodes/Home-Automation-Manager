@@ -89,14 +89,14 @@ const Sidebar = () => {
               </NavLink>
             </li>
           </ul>
-          <div className="flex-1 text-sm z-50  max-h-10 my-auto  whitespace-pre   w-full  font-medium  ">
-            <div
-              className={
-                isOpen
-                  ? "flex border-y border-slate-300 p-4 items-center justify-start gap-6"
-                  : "flex border-y border-slate-300 p-4 items-center justify-start gap-6 "
-              }
-            >
+          <div
+            className={
+              isOpen
+                ? "flex-1 text-sm z-50  max-h-10 my-auto  whitespace-pre   w-full  font-medium"
+                : "flex-1 text-sm z-50 justify-start my-auto  whitespace-pre   w-full  font-medium"
+            }
+          >
+            <div className="flex border-y border-slate-300 pl-4 pr-4 pt-2 pb-2 items-center justify-start gap-6 ">
               <img
                 src="https://res.cloudinary.com/jasoncloud13542/image/upload/v1668564257/Foto_wajah_baju_hitam_zdh7b2.jpg"
                 className="w-12 h-12 rounded-full"
