@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
+import { IoIosArrowBack } from "react-icons/io";
 
 const Sidebar = () => {
   const SidebarAnimation = {
@@ -26,7 +27,16 @@ const Sidebar = () => {
         variants={SidebarAnimation}
         animate={isOpen ? "open" : "closed"}
         className="bg-white text-gray shadow-xl z-[999] w-[16rem] max-w-[16rem] h-screen overflow-hidden md:relative fixed"
-      ></motion.div>
+      >
+        <div
+          onClick={() => setIsOpen(!isOpen)}
+          className="absolute w-fit h-fit z-50 right-2 bottom-5 cursor-pointer
+          border-dark-purple border-2 rounded-full hover:bg-blue-100
+          "
+        >
+          <IoIosArrowBack size={25} />
+        </div>
+      </motion.div>
     </div>
   );
 };
