@@ -15,7 +15,7 @@ function App() {
         <Routes>
           <Route index element={<Home />} />
           <Route path="/devices/:deviceId" element={<Devices />} />
-          <Route path="/analytics:analyticId" element={<Analytics />} />
+          <Route path="/analytics/:analyticId" element={<Analytics />} />
           <Route path="/settings" element={<Settings />} />
           <Route path="/account" element={<Account />} />
         </Routes>

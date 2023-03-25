@@ -4,6 +4,9 @@ import { NavLink } from "react-router-dom";
 import { IoIosArrowBack } from "react-icons/io";
 import { AiOutlineAppstore } from "react-icons/ai";
 import { SlSettings } from "react-icons/sl";
+import { MdDevicesOther } from "react-icons/md";
+import { TbReportAnalytics } from "react-icons/tb";
+import SubMenu from "./SubMenu";
 
 const Sidebar = () => {
   const SidebarAnimation = {
@@ -23,6 +26,19 @@ const Sidebar = () => {
   };
 
   const [isOpen, setIsOpen] = useState(false);
+
+  const subMenusList = [
+    {
+      name: "devices",
+      icon: MdDevicesOther,
+      menus: ["light", "curtain", "water plan", "door security"],
+    },
+    {
+      name: "analytics",
+      icon: TbReportAnalytics,
+      menus: ["dashboard", "realtime", "events"],
+    },
+  ];
 
   return (
     <div>
@@ -51,6 +67,19 @@ const Sidebar = () => {
                 Home
               </NavLink>
             </li>
+
+            {/* submenus */}
+            <div className="border-y py-5 border-slate-300">
+              <small className="pl-3 text-slate-500 inline-block mb-2">
+                Device menus
+              </small>
+              {subMenusList?.map((menu) => (
+                <div key={menu.name} className="flex flex-col gap-1">
+                  <SubMenu data={menu} />
+                </div>
+              ))}
+            </div>
+
             <li>
               <NavLink to="/settings" className={"link"}>
                 <SlSettings size={23} className="min-w-max" />
