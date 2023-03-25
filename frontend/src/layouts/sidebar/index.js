@@ -90,6 +90,7 @@ const Sidebar = () => {
       ></div>
       <motion.div
         variants={SidebarAnimation}
+        initial={{ x: isTab ? -250 : 0 }}
         animate={isOpen ? "open" : "closed"}
         className="bg-white text-gray shadow-xl z-[999] w-[16rem] max-w-[16rem] h-screen overflow-hidden md:relative fixed"
       >
