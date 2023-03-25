@@ -15,7 +15,9 @@ const SubMenu = ({ data }) => {
       >
         <data.icon size={23} className="min-w-max" />
         <p className="capitalize flex-1">{data.name}</p>
-        <IoIosArrowDown className="" />
+        <IoIosArrowDown
+          className={`${subMenuOpen && "rotate-180"} duration-200`}
+        />
       </li>
       <motion.ul
         animate={
