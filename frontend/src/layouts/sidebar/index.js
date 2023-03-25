@@ -31,7 +31,7 @@ const Sidebar = () => {
         <div
           onClick={() => setIsOpen(!isOpen)}
           className="absolute w-fit h-fit z-50 right-2 bottom-5 cursor-pointer
-          border-dark-purple border-2 rounded-full hover:bg-blue-100
+          border-dark-purple border-2 rounded-full hover:bg-blue-100 md:block hidden
           "
         >
           <IoIosArrowBack size={25} />
