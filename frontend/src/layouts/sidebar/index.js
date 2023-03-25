@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
+import { useMediaQuery } from "react-responsive";
 import { Link, NavLink } from "react-router-dom";
 import { IoIosArrowBack } from "react-icons/io";
 import { AiOutlineAppstore } from "react-icons/ai";
@@ -9,23 +10,45 @@ import { TbReportAnalytics } from "react-icons/tb";
 import SubMenu from "./SubMenu";
 
 const Sidebar = () => {
-  const SidebarAnimation = {
-    // System view
-    open: {
-      width: "16rem",
-      transition: {
-        damping: 40,
-      },
-    },
-    closed: {
-      width: "4rem",
-      transition: {
-        damping: 40,
-      },
-    },
-  };
+  let isTab = useMediaQuery({ query: "(max-width: 768px)" });
+  console.log("isTab=" + isTab);
+  // sidebar open state
+  const [isOpen, setIsOpen] = useState(isTab ? false : true);
 
-  const [isOpen, setIsOpen] = useState(true);
+  const SidebarAnimation = isTab
+    ? // mobile view
+      {
+        open: {
+          x: 0,
+          width: "16rem",
+          transition: {
+            damping: 40,
+          },
+        },
+        closed: {
+          x: -250,
+          width: 0,
+          transition: {
+            damping: 40,
+            delay: 0.15,
+          },
+        },
+      }
+    : {
+        // system view
+        open: {
+          width: "16rem",
+          transition: {
+            damping: 40,
+          },
+        },
+        closed: {
+          width: "4rem",
+          transition: {
+            damping: 40,
+          },
+        },
+      };
 
   const subMenusList = [
     {
