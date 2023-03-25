@@ -69,16 +69,18 @@ const Sidebar = () => {
             </li>
 
             {/* submenus */}
-            <div className="border-y py-5 border-slate-300">
-              <small className="pl-3 text-slate-500 inline-block mb-2">
-                Device menus
-              </small>
-              {subMenusList?.map((menu) => (
-                <div key={menu.name} className="flex flex-col gap-1">
-                  <SubMenu data={menu} />
-                </div>
-              ))}
-            </div>
+            {isOpen && (
+              <div className="border-y py-5 border-slate-300">
+                <small className="pl-3 text-slate-500 inline-block mb-2">
+                  Device menus
+                </small>
+                {subMenusList?.map((menu) => (
+                  <div key={menu.name} className="flex flex-col gap-1">
+                    <SubMenu data={menu} />
+                  </div>
+                ))}
+              </div>
+            )}
 
             <li>
               <NavLink to="/settings" className={"link"}>
