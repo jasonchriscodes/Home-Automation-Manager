@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useMediaQuery } from "react-responsive";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { IoIosArrowBack } from "react-icons/io";
 import { AiOutlineAppstore } from "react-icons/ai";
 import { SlSettings } from "react-icons/sl";
@@ -11,6 +11,8 @@ import SubMenu from "./SubMenu";
 
 const Sidebar = () => {
   let isTab = useMediaQuery({ query: "(max-width: 768px)" });
+  const { pathname } = useLocation();
+
   console.log("isTab=" + isTab);
   // sidebar open state
   const [isOpen, setIsOpen] = useState(isTab ? false : true);
@@ -59,6 +61,11 @@ const Sidebar = () => {
       setIsOpen(true);
     }
   }, [isTab]);
+
+  // pathname change -> close sidebar (only mobile view)
+  useEffect(() => {
+    isTab && setIsOpen(false);
+  }, [pathname]);
 
   const subMenusList = [
     {
