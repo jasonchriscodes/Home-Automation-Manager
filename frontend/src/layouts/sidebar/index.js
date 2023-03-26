@@ -192,7 +192,7 @@ const Sidebar = () => {
             duration: 0,
           }}
           onClick={() => setIsOpen(!isOpen)}
-          className="absolute w-fit h-fit z-50 right-5 bottom-3 cursor-pointer
+          className="absolute w-fit h-fit z-50 right-5 bottom-5 cursor-pointer
           border-dark-purple border-2 rounded-full hover:bg-blue-100 md:block hidden
           "
         >
