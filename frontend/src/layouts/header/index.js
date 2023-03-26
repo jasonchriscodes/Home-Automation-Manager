@@ -1,5 +1,9 @@
 import React from "react";
-import { HiOutlineSearch } from "react-icons/hi";
+import {
+  HiOutlineBell,
+  HiOutlineChatAlt,
+  HiOutlineSearch,
+} from "react-icons/hi";
 
 const index = ({ children }) => {
   return (
@@ -15,7 +19,10 @@ const index = ({ children }) => {
           className="text-sm focus:outline-none active:outline-none h-10 w-[24rem] border border-gray-300 rounded-md pr-4 pl-11"
         />
       </div>
-      <div>Side button</div>
+      <div className="flex items-center gap-2 mr-2">
+        <HiOutlineChatAlt fontSize={24} />
+        <HiOutlineBell fontSize={24} />
+      </div>
       {/* <div className="max-w-5xl flex-1 mx-auto py-4">{children}</div> */}
     </div>
   );
