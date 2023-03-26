@@ -6,8 +6,7 @@ function RootLayout({ children }) {
     <div className="flex">
       <Sidebar />
       <div className="flex-1">
-        <Header />
-        <main className="max-w-5xl flex-1 mx-auto py-4">{children}</main>
+        <Header children={children} />
       </div>
     </div>
   );
