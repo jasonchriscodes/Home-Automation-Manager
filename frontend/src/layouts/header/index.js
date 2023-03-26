@@ -5,7 +5,7 @@ import {
   HiOutlineSearch,
 } from "react-icons/hi";
 import { Popover, Transition } from "@headlessui/react";
-import { classNames } from "classnames";
+import classNames from "classnames";
 
 const index = ({ children }) => {
   return (
