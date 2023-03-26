@@ -7,6 +7,7 @@ import { AiOutlineAppstore } from "react-icons/ai";
 import { SlSettings } from "react-icons/sl";
 import { MdDevicesOther, MdMenu } from "react-icons/md";
 import { TbReportAnalytics } from "react-icons/tb";
+import { HiOutlineQuestionMarkCircle, HiOutlineLogout } from "react-icons/hi";
 import SubMenu from "./SubMenu";
 
 const Sidebar = () => {
@@ -139,6 +140,18 @@ const Sidebar = () => {
               <NavLink to="/settings" className={"link"}>
                 <SlSettings size={23} className="min-w-max" />
                 Settings
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/helpandsupport" className={"link"}>
+                <HiOutlineQuestionMarkCircle size={23} className="min-w-max" />
+                Help & Support
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/logout" className={"link"}>
+                <HiOutlineLogout size={23} className="min-w-max" />
+                Logout
               </NavLink>
             </li>
           </ul>
