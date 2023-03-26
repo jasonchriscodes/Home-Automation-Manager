@@ -199,7 +199,10 @@ const Sidebar = () => {
           <IoIosArrowBack size={25} />
         </motion.div>
       </motion.div>
-      <div className="m-3 md-hidden" onClick={() => setIsOpen(true)}>
+      <div
+        className="m-3 md-hidden lg:hidden xl:hidden 2xl:hidden"
+        onClick={() => setIsOpen(true)}
+      >
         <MdMenu size={25} />
       </div>
     </div>
