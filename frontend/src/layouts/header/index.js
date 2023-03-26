@@ -4,6 +4,7 @@ import {
   HiOutlineChatAlt,
   HiOutlineSearch,
 } from "react-icons/hi";
+import { Popover } from "@headlessui/react";
 
 const index = ({ children }) => {
   return (
@@ -20,7 +21,15 @@ const index = ({ children }) => {
         />
       </div>
       <div className="flex items-center gap-2 mr-2">
-        <HiOutlineChatAlt fontSize={24} />
+        <Popover className="relative">
+          {({ open }) => (
+            <>
+              <Popover.Button className="p-1.5 rounded-sm inline-flex items-center text-gray-700 hover:text-opacity-100 focus:outline-none active:bg-gray-100">
+                <HiOutlineChatAlt fontSize={24} />
+              </Popover.Button>
+            </>
+          )}
+        </Popover>
         <HiOutlineBell fontSize={24} />
       </div>
       {/* <div className="max-w-5xl flex-1 mx-auto py-4">{children}</div> */}
