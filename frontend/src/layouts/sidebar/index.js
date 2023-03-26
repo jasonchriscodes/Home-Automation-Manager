@@ -97,7 +97,7 @@ const Sidebar = () => {
         {/* app logo */}
         <div className="flex items-center gap-2.5 font-medium border-b border-slate-300 py-3 mx-3">
           <img
-            style={{ width: "60px", height: "auto" }}
+            style={{ width: "55px", height: "auto" }}
             src="https://res.cloudinary.com/jasoncloud13542/image/upload/v1679723690/AutoHome_mh4ax6.png"
             alt="app-logo"
             width={45}

@@ -3,7 +3,7 @@ import Header from "./header";
 
 function RootLayout({ children }) {
   return (
-    <div className="flex gap-5">
+    <div className="flex">
       <Sidebar />
       <div className="flex-1">
         <Header />
