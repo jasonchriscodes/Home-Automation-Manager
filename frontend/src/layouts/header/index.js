@@ -7,10 +7,10 @@ import {
 import { Popover, Transition } from "@headlessui/react";
 import classNames from "classnames";
 
-const index = ({ children }) => {
+const index = ({ title }) => {
   return (
     <div className="bg-white h-20 px-4 flex justify-between items-center border-b border-gray-200">
-      <div className="max-w-5xl flex-1 mx-auto py-4">{children}</div>
+      <div className="max-w-5xl flex-1 mx-auto py-4">{title}</div>
       <div className="flex items-center gap-2 mr-2">
         <Popover className="relative">
           {({ open }) => (
