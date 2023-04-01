@@ -4,11 +4,11 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import RootLayout from "./layouts/RootLayout";
 import Account from "./pages/Account";
 import Analytics from "./pages/Analytics";
-import Devices from "./pages/Devices";
 import Home from "./pages/Home";
 import Settings from "./pages/Settings";
 import HelpAndSupport from "./pages/HelpAndSupport";
 import Logout from "./pages/Logout";
+import Rooms from "./pages/Rooms";
 
 function App() {
   return (
@@ -16,7 +16,7 @@ function App() {
       <RootLayout>
         <Routes>
           <Route index element={<Home />} />
-          <Route path="/devices/:deviceId" element={<Devices />} />
+          <Route path="/rooms/:roomId" element={<Rooms />} />
           <Route path="/analytics/:analyticId" element={<Analytics />} />
           <Route path="/settings" element={<Settings />} />
           <Route path="/helpandsupport" element={<HelpAndSupport />} />

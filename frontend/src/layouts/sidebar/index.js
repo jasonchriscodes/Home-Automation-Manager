@@ -70,9 +70,9 @@ const Sidebar = () => {
 
   const subMenusList = [
     {
-      name: "devices",
+      name: "rooms",
       icon: MdDevicesOther,
-      menus: ["light", "curtain", "water plan", "door security"],
+      menus: ["bedroom", "kitchen", "livingroom", "office"],
     },
     {
       name: "analytics",

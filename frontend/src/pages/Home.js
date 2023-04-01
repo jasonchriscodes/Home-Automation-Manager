@@ -23,7 +23,7 @@ const Home = () => {
         <Toogle className="z-10" />
       </div>
       <div className="icon h-17 flex flex-col justify-center items-center px-4 shadow-md hover:bg-[#DBEAFE] -z-1 gap-10">
-        <Link to="/rooms/bedroom">
+        <Link to="/rooms/kitchen">
           <div className="flex space-x-12 items-center">
             <div className="flex-col mr-10">
               <h1 className="text-4xl">Kitchen</h1>
@@ -35,7 +35,7 @@ const Home = () => {
         <Toogle className="z-10" />
       </div>
       <div className="icon h-17 flex flex-col justify-center items-center px-4 shadow-md hover:bg-[#DBEAFE] -z-1 gap-10">
-        <Link to="/rooms/bedroom">
+        <Link to="/rooms/livingroom">
           <div className="flex space-x-12 items-center">
             <div className="flex-col mr-10">
               <h1 className="text-4xl">Living Room</h1>
@@ -47,7 +47,7 @@ const Home = () => {
         <Toogle className="z-10" />
       </div>
       <div className="icon h-17 flex flex-col justify-center items-center px-4 shadow-md hover:bg-[#DBEAFE] -z-1 gap-10">
-        <Link to="/rooms/bedroom">
+        <Link to="/rooms/office">
           <div className="flex space-x-12 items-center">
             <div className="flex-col mr-10">
               <h1 className="text-4xl">Office</h1>
