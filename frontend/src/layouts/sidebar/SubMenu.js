@@ -1,21 +1,23 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { IoIosArrowDown } from "react-icons/io";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 
 const SubMenu = ({ data }) => {
   const { pathname } = useLocation();
   const [subMenuOpen, setSubMenuOpen] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <>
       <li
         className={`link ${pathname.includes(data.name) && "text-blue-600"}`}
-        onClick={() => setSubMenuOpen(!subMenuOpen)}
+        onClick={() => navigate("/rooms")}
       >
         <data.icon size={23} className="min-w-max" />
         <p className="capitalize flex-1">{data.name}</p>
         <IoIosArrowDown
+          onClick={() => setSubMenuOpen(!subMenuOpen)}
           className={`${subMenuOpen && "rotate-180"} duration-200`}
         />
       </li>

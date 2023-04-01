@@ -74,11 +74,6 @@ const Sidebar = () => {
       icon: MdDevicesOther,
       menus: ["bedroom", "kitchen", "livingroom", "office"],
     },
-    {
-      name: "analytics",
-      icon: TbReportAnalytics,
-      menus: ["dashboard", "realtime", "events"],
-    },
   ];
 
   return (
@@ -136,6 +131,12 @@ const Sidebar = () => {
               </div>
             )}
 
+            <li>
+              <NavLink to="/analytics" className={"link"}>
+                <TbReportAnalytics size={23} className="min-w-max" />
+                Analytics
+              </NavLink>
+            </li>
             <li>
               <NavLink to="/settings" className={"link"}>
                 <SlSettings size={23} className="min-w-max" />
