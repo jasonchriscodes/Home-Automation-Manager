@@ -24,3 +24,7 @@
 .active {
   @apply bg-blue-100 text-blue-600;
 }
+
+.icon:hover{
+color: #2563EB;
+}
