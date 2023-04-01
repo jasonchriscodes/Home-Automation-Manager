@@ -82,7 +82,7 @@ const Sidebar = () => {
   ];
 
   return (
-    <div>
+    <div className="h-screen sticky top-0">
       <div
         onClick={() => setIsOpen(false)}
         className={`md:hidden fixed inset-0 max-h-screen z-[998] bg-black/50 ${
