@@ -24,7 +24,7 @@ const Rooms = () => {
 
   return (
     <div className="h-screen mx-5">
-      <div className="flex justify-center p-6">
+      <div className="flex justify-center">
         <VectorMap
           className="h-1/2 w-full"
           maxZoomFactor={4}
