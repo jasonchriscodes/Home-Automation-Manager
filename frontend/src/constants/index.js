@@ -16,35 +16,35 @@ export const buildingData = {
         type: "Polygon",
         coordinates: [
           [
-            [10, -80],
-            [-80, -80],
-            [-80, 80],
-            [40, 80],
-            [40, -20],
-            [100, -20],
-            [100, -80],
-            [30, -80],
-            [30, -74],
-            [34, -74],
-            [34, -68],
-            [40, -68],
-            [40, -74],
-            [94, -74],
-            [94, -26],
-            [40, -26],
-            [40, -60],
-            [34, -60],
-            [34, 74],
-            [-74, 74],
-            [-74, 30],
+            [10, -80], // livingroom bottom
+            [-150, -80], // livingroom, bedrrom, kitchen left
+            [-150, 80], // livingroom, bedrrom, kitchen left
+            [40, 80], // livingroom, bedrrom, kitchen right
+            [40, -20], // livingroom, bedrrom, kitchen right
+            [150, -20], // office right
+            [150, -80], // office right
+            [30, -80], // office right
+            [30, -74], // office right
+            [34, -74], // office left
+            [34, -68], // office right
+            [40, -68], // office left
+            [40, -74], // office left
+            [144, -74], // office right inner
+            [144, -26], // office right inner
+            [40, -26], // office left
+            [40, -60], // office left
+            [34, -60], // livingroom, bedrrom, kitchen right
+            [34, 74], // livingroom, bedrrom, kitchen right
+            [-144, 74], // bedroom left
+            [-144, 30], // bedroom left
             [10, 30],
             [10, 24],
-            [-74, 24],
-            [-74, -24],
+            [-144, 24],
+            [-144, -24],
             [10, -24],
             [10, -30],
-            [-74, -30],
-            [-74, -74],
+            [-144, -30],
+            [-144, -74],
             [10, -74],
           ],
         ],
@@ -67,10 +67,10 @@ export const roomsData = {
         type: "Polygon",
         coordinates: [
           [
-            [-74, -30],
+            [-144, -30],
             [34, -30],
             [34, -74],
-            [-74, -74],
+            [-144, -74],
           ],
         ],
       },
@@ -86,10 +86,10 @@ export const roomsData = {
         type: "Polygon",
         coordinates: [
           [
-            [-74, 24],
+            [-144, 24],
             [34, 24],
             [34, -24],
-            [-74, -24],
+            [-144, -24],
           ],
         ],
       },
@@ -105,10 +105,10 @@ export const roomsData = {
         type: "Polygon",
         coordinates: [
           [
-            [-74, 74],
+            [-144, 74],
             [34, 74],
             [34, 30],
-            [-74, 30],
+            [-144, 30],
           ],
         ],
       },
@@ -125,8 +125,8 @@ export const roomsData = {
         coordinates: [
           [
             [40, -26],
-            [94, -26],
-            [94, -74],
+            [144, -26],
+            [144, -74],
             [40, -74],
           ],
         ],
