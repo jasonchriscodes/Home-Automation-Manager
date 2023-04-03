@@ -10,6 +10,8 @@ import { TbReportAnalytics } from "react-icons/tb";
 import { HiOutlineQuestionMarkCircle, HiOutlineLogout } from "react-icons/hi";
 import SubMenu from "./SubMenu";
 
+const imageFolder = "/assets";
+
 const Sidebar = () => {
   let isTab = useMediaQuery({ query: "(max-width: 768px)" });
   const { pathname } = useLocation();
@@ -94,7 +96,7 @@ const Sidebar = () => {
         <div className="flex items-center gap-2.5 font-medium border-b border-slate-300 py-3 mx-3">
           <img
             style={{ width: "55px", height: "auto" }}
-            src="https://res.cloudinary.com/jasoncloud13542/image/upload/v1679723690/AutoHome_mh4ax6.png"
+            src={`${imageFolder}/logo.png`}
             alt="app-logo"
             width={45}
           />
@@ -165,7 +167,7 @@ const Sidebar = () => {
           >
             <div className="flex border-y border-slate-300 pl-4 pr-4 pt-2 pb-2 items-center justify-start gap-6 ">
               <img
-                src="https://res.cloudinary.com/jasoncloud13542/image/upload/v1668564257/Foto_wajah_baju_hitam_zdh7b2.jpg"
+                src={`${imageFolder}/profile-image.jpg`}
                 className="w-12 h-12 rounded-full"
                 alt="user-profile"
               />
