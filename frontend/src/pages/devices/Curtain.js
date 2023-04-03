@@ -30,12 +30,14 @@ const Curtain = () => {
     : "to-blue-400 bg-pos-100";
 
   return (
-    <div className="p-4 shadow-md flex flex-wrap flex-col justify-around bg-white">
+    <div className="p-4 shadow-md flex flex-wrap flex-col justify-between bg-white">
       <div className="flex-col">
         <div className="flex items-start flex-row justify-between p-3">
           <h1>Curtain</h1>
           <Switch />
         </div>
+      </div>
+      <div className="flex-col">
         <div className="flex items-start flex-row justify-center p-3 gap-12">
           <button
             onClick={handleClick}
