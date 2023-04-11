@@ -44,7 +44,7 @@ export default function StaticDateTimePickerLandscape() {
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <StaticDateTimePicker
-        className=""
+        className="shadow-md"
         orientation="portrait"
         defaultValue={initialValue}
         loading={isLoading}
