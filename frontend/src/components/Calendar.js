@@ -17,7 +17,7 @@ export default function StaticDateTimePickerLandscape() {
 
     const isSelected =
       !props.outsideCurrentMonth &&
-      highlightedDays.indexOf(props.day.date()) > 0;
+      highlightedDays.indexOf(props.day.date()) >= 0;
 
     return (
       <Badge
