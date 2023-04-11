@@ -9,6 +9,9 @@ const Bin = () => {
           <h1>Bin</h1>
           <Switch />
         </div>
+        <div className="flex items-start flex-row justify-center p-3">
+          <h1>Set time for scrap collections</h1>
+        </div>
       </div>
       <div className="flex-col">
         <div className="flex items-start flex-row justify-center p-3 gap-12">
