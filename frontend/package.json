@@ -21,6 +21,7 @@
     "@testing-library/user-event": "^13.5.0",
     "classnames": "^2.3.2",
     "date-fns": "^2.29.3",
+    "dayjs": "^1.11.7",
     "devexpress-diagram": "^2.1.57",
     "devexpress-gantt": "^4.0.27",
     "devextreme": "^22.2.5",
