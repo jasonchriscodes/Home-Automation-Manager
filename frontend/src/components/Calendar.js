@@ -6,6 +6,8 @@ import dayjs from "dayjs";
 import { DayCalendarSkeleton } from "@mui/x-date-pickers";
 import { Badge } from "@mui/material";
 import { PickersDay } from "@mui/x-date-pickers/PickersDay";
+import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
+import { red } from "@mui/material/colors";
 
 export default function StaticDateTimePickerLandscape() {
   const initialValue = dayjs("2022-04-17");
@@ -23,7 +25,11 @@ export default function StaticDateTimePickerLandscape() {
       <Badge
         key={props.day.toString()}
         overlap="circular"
-        badgeContent={isSelected ? "🌚" : undefined}
+        badgeContent={
+          isSelected ? (
+            <FiberManualRecordIcon sx={{ color: red[500], fontSize: 16 }} />
+          ) : undefined
+        }
       >
         <PickersDay
           {...other}
