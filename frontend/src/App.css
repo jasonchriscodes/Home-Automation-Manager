@@ -107,3 +107,16 @@
 .slider-curtain-box i {
   margin:0 10px;
 }
+
+
+/* Calendar */
+.css-1hbyad5-MuiTypography-root{
+  display: none !important;
+}
+.css-4pax7l-MuiPickersLayout-root .MuiPickersLayout-toolbar{
+  background-color: #DBEAFE;
+}
+
+.css-1qs309j-MuiButtonBase-root-MuiPickersDay-root.Mui-selected{
+  background-color: #2563EB !important;
+}

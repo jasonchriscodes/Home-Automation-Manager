@@ -8,6 +8,7 @@ import { Badge } from "@mui/material";
 import { PickersDay } from "@mui/x-date-pickers/PickersDay";
 import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
 import { red } from "@mui/material/colors";
+import "./../App.css";
 
 export default function StaticDateTimePickerLandscape() {
   const initialValue = dayjs("2022-04-17");
@@ -43,7 +44,8 @@ export default function StaticDateTimePickerLandscape() {
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <StaticDateTimePicker
-        orientation="landscape"
+        className=""
+        orientation="portrait"
         defaultValue={initialValue}
         loading={isLoading}
         renderLoading={() => <DayCalendarSkeleton />}
