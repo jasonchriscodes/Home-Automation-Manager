@@ -120,3 +120,7 @@
 .css-1qs309j-MuiButtonBase-root-MuiPickersDay-root.Mui-selected{
   background-color: #2563EB !important;
 }
+
+.css-1e6y48t-MuiButtonBase-root-MuiButton-root {
+  display: none !important;
+}
