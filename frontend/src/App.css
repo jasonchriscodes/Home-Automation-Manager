@@ -124,3 +124,7 @@
 .css-1e6y48t-MuiButtonBase-root-MuiButton-root {
   display: none !important;
 }
+
+.animate-spin-fast {
+  animation-duration: 0.8s;
+}
