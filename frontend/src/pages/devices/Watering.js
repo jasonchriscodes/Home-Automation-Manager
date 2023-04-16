@@ -5,6 +5,8 @@ import { faSync } from "@fortawesome/free-solid-svg-icons";
 import { faDroplet } from "@fortawesome/free-solid-svg-icons";
 import { faTemperatureHalf } from "@fortawesome/free-solid-svg-icons";
 import { faSun } from "@fortawesome/free-solid-svg-icons";
+import { CircularProgressbarWithChildren } from "react-circular-progressbar";
+import "react-circular-progressbar/dist/styles.css";
 
 const Watering = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -30,6 +32,22 @@ const Watering = () => {
     }, 1500); // Change the timeout value to match refresh time
   };
 
+  const percentage = 66;
+
+  function Container(props) {
+    return (
+      <div>
+        <div style={{ display: "flex" }}>
+          <div style={{ width: "70%" }}>
+            <h3 className="h5">{props.label}</h3>
+            <p>{props.description}</p>
+          </div>
+          <div style={{ width: "30%", paddingRight: 30 }}>{props.children}</div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="p-4 shadow-md flex flex-wrap flex-col justify-between bg-white">
       <div className="flex-col">
@@ -43,12 +61,12 @@ const Watering = () => {
           backgroundImage: `url("https://res.cloudinary.com/jasoncloud13542/image/upload/v1681652448/bonsai2_jm96dr.png")`,
           backgroundRepeat: "no-repeat",
           backgroundPosition: "center",
-          height: "600px",
+          height: "470px",
         }}
       >
-        <div className="pl-3 pt-20">
+        <div className="pl-3 pt-20 -mt-14">
           <button
-            className="text-gray-300 font-bold rounded"
+            className="text-gray-400 font-bold rounded -mt-10"
             onClick={handleSpinClick}
             style={{ fontSize: 20 }}
           >
@@ -98,6 +116,32 @@ const Watering = () => {
               <p className="text-xl px-2 font-bold">70%</p>
             </div>
             <p className="text-md font-light">Light</p>
+          </div>
+        </div>
+      </div>
+      <div className="-mt-20 pl-3">
+        <div className="flex items-start flex-row justify-between">
+          <div className="flex flex-col ">
+            <p className="text-xl font-bold">Watering schedule</p>
+            <p className="text-md font-light">Today is 17.04.2023</p>
+          </div>
+          <div>
+            <Container>
+              <CircularProgressbarWithChildren
+                value={percentage}
+                strokeWidth={5}
+              >
+                {/* Put any JSX content in here that you'd like. It'll be vertically and horizonally centered. */}
+                <img
+                  style={{ width: 20, marginTop: -2 }}
+                  src="https://res.cloudinary.com/jasoncloud13542/image/upload/v1681661824/droplet-solid_oyqych.png"
+                  alt="water-droplet"
+                />
+                <div style={{ fontSize: 12, marginTop: 1 }}>
+                  <strong>66%</strong>
+                </div>
+              </CircularProgressbarWithChildren>
+            </Container>
           </div>
         </div>
       </div>
