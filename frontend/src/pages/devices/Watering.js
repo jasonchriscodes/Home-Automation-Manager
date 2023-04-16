@@ -40,7 +40,7 @@ const Watering = () => {
       </div>
       <div
         style={{
-          backgroundImage: `url("https://res.cloudinary.com/jasoncloud13542/image/upload/v1681651538/bonsai_k3rw5g.png")`,
+          backgroundImage: `url("https://res.cloudinary.com/jasoncloud13542/image/upload/v1681652448/bonsai2_jm96dr.png")`,
           backgroundRepeat: "no-repeat",
           backgroundPosition: "center",
           height: "600px",
