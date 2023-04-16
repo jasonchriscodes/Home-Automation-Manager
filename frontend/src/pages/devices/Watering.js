@@ -5,6 +5,7 @@ import { faSync } from "@fortawesome/free-solid-svg-icons";
 import { faDroplet } from "@fortawesome/free-solid-svg-icons";
 import { faTemperatureHalf } from "@fortawesome/free-solid-svg-icons";
 import { faSun } from "@fortawesome/free-solid-svg-icons";
+import { faS, faM, faW, faT } from "@fortawesome/free-solid-svg-icons";
 import { CircularProgressbarWithChildren } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 
@@ -42,7 +43,7 @@ const Watering = () => {
             <h3 className="h5">{props.label}</h3>
             <p>{props.description}</p>
           </div>
-          <div style={{ width: "30%", paddingRight: 30 }}>{props.children}</div>
+          <div style={{ width: "30%" }}>{props.children}</div>
         </div>
       </div>
     );
@@ -119,17 +120,17 @@ const Watering = () => {
           </div>
         </div>
       </div>
-      <div className="-mt-20 pl-3">
+      <div className="-mt-20 p-2 m-2 bg-blue-100 rounded-xl">
         <div className="flex items-start flex-row justify-between">
-          <div className="flex flex-col ">
+          <div className="flex flex-col p-2">
             <p className="text-xl font-bold">Watering schedule</p>
             <p className="text-md font-light">Today is 17.04.2023</p>
           </div>
-          <div>
+          <div className="pr-2">
             <Container>
               <CircularProgressbarWithChildren
                 value={percentage}
-                strokeWidth={5}
+                strokeWidth={6}
               >
                 {/* Put any JSX content in here that you'd like. It'll be vertically and horizonally centered. */}
                 <img
@@ -142,6 +143,68 @@ const Watering = () => {
                 </div>
               </CircularProgressbarWithChildren>
             </Container>
+          </div>
+        </div>
+        <div className="flex flex-row pt-4">
+          <div className="flex-col py-2 mx-3 px-2.5 bg-[#00A3F8] rounded-3xl">
+            <div className="flex items-center justify-center">
+              <p className="text-xl mx-2 py-1 font-bold text-white">10</p>
+            </div>
+            <FontAwesomeIcon
+              icon={faDroplet}
+              style={{ fontSize: 25 }}
+              className="text-[#2563EB] mx-0.2 p-3.5 items-center justify-center bg-white rounded-2xl"
+            />
+          </div>
+          <div className="flex-col py-2 mx-3 px-2.5 bg-gray-300 rounded-3xl">
+            <div className="flex items-center justify-center">
+              <p className="text-xl mx-2 py-1 font-bold text-white">11</p>
+            </div>
+            <FontAwesomeIcon
+              icon={faS}
+              style={{ fontSize: 25 }}
+              className="text-[#2563EB] mx-0.2 p-3.5 items-center justify-center bg-white rounded-2xl"
+            />
+          </div>
+          <div className="flex-col py-2 mx-3 px-2.5 bg-gray-300 rounded-3xl">
+            <div className="flex items-center justify-center">
+              <p className="text-xl mx-2 py-1 font-bold text-white">12</p>
+            </div>
+            <FontAwesomeIcon
+              icon={faM}
+              style={{ fontSize: 25 }}
+              className="text-[#2563EB] mx-0.2 p-3.5 items-center justify-center bg-white rounded-2xl"
+            />
+          </div>
+          <div className="flex-col py-2 mx-3 px-2.5 bg-black rounded-3xl">
+            <div className="flex items-center justify-center">
+              <p className="text-xl mx-2 py-1 font-bold text-white">13</p>
+            </div>
+            <FontAwesomeIcon
+              icon={faDroplet}
+              style={{ fontSize: 25 }}
+              className="text-black mx-0.2 p-3.5 items-center justify-center bg-white rounded-2xl"
+            />
+          </div>
+          <div className="flex-col py-2 mx-3 px-2.5 bg-gray-300 rounded-3xl">
+            <div className="flex items-center justify-center">
+              <p className="text-xl mx-2 py-1 font-bold text-white">14</p>
+            </div>
+            <FontAwesomeIcon
+              icon={faW}
+              style={{ fontSize: 25 }}
+              className="text-[#2563EB] mx-0.2 p-3.5 items-center justify-center bg-white rounded-2xl"
+            />
+          </div>
+          <div className="flex-col py-2 mx-3 px-2.5 bg-gray-300 rounded-3xl">
+            <div className="flex items-center justify-center">
+              <p className="text-xl mx-2 py-1 font-bold text-white">15</p>
+            </div>
+            <FontAwesomeIcon
+              icon={faT}
+              style={{ fontSize: 25 }}
+              className="text-[#2563EB] mx-0.2 p-3.5 items-center justify-center bg-white rounded-2xl"
+            />
           </div>
         </div>
       </div>
