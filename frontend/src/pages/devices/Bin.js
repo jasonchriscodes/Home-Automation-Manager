@@ -23,7 +23,7 @@ const Bin = () => {
           <Switch />
         </div>
         <div className="flex items-start flex-row justify-center p-3">
-          <h1>Set time for scrap collections</h1>
+          <h1 className="text-3xl font-bold">Set time for scrap collections</h1>
         </div>
       </div>
       <div className="flex-col">
