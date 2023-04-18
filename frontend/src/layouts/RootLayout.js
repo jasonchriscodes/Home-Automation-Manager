@@ -1,5 +1,5 @@
 import Sidebar from "./sidebar";
-import Header from "./header";
+import Header from "./header/Header";
 import Body from "./body";
 import { useLocation } from "react-router-dom";
 import { NAVBAR_TEXTS } from "./../constants";

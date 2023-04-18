@@ -1,17 +1,34 @@
-import React, { Fragment } from "react";
-import {
-  HiOutlineBell,
-  HiOutlineChatAlt,
-  HiOutlineSearch,
-} from "react-icons/hi";
+import React, { Fragment, useContext } from "react";
 import { Popover, Transition } from "@headlessui/react";
 import classNames from "classnames";
+import { ColorModeContext, tokens } from "../../theme";
+import { IconButton, useTheme } from "@mui/material";
+import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
+import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
+import MessageOutlinedIcon from "@mui/icons-material/MessageOutlined";
+import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined";
+import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
+import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 
-const index = ({ title }) => {
+const Header = ({ title }) => {
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
+  const colorMode = useContext(ColorModeContext);
+
   return (
-    <div className="bg-white h-20 px-4 flex justify-between items-center border-b border-gray-200">
+    <div
+      className="h-20 px-4 flex justify-between items-center border-b border-gray-200"
+      style={{ backgroundColor: `${colors.primary[400]}` }}
+    >
       <div className="max-w-5xl flex-1 mx-auto py-4">{title}</div>
       <div className="flex items-center gap-2 mr-2">
+        <IconButton onClick={colorMode.toggleColorMode}>
+          {theme.palette.mode === "dark" ? (
+            <DarkModeOutlinedIcon />
+          ) : (
+            <LightModeOutlinedIcon />
+          )}
+        </IconButton>
         <Popover className="relative">
           {({ open }) => (
             <>
@@ -21,7 +38,9 @@ const index = ({ title }) => {
                   "p-1.5 rounded-sm inline-flex items-center text-gray-700 hover:text-opacity-100 focus:outline-none active:bg-gray-100"
                 )}
               >
-                <HiOutlineChatAlt fontSize={24} />
+                <IconButton>
+                  <MessageOutlinedIcon />
+                </IconButton>
               </Popover.Button>
               <Transition
                 as={Fragment}
@@ -55,7 +74,9 @@ const index = ({ title }) => {
                   "p-1.5 rounded-sm inline-flex items-center text-gray-700 hover:text-opacity-100 focus:outline-none active:bg-gray-100"
                 )}
               >
-                <HiOutlineBell fontSize={24} />
+                <IconButton>
+                  <NotificationsOutlinedIcon />
+                </IconButton>
               </Popover.Button>
               <Transition
                 as={Fragment}
@@ -80,9 +101,15 @@ const index = ({ title }) => {
             </>
           )}
         </Popover>
+        <IconButton>
+          <SettingsOutlinedIcon />
+        </IconButton>
+        <IconButton>
+          <PersonOutlinedIcon />
+        </IconButton>
       </div>
     </div>
   );
 };
 
-export default index;
+export default Header;
