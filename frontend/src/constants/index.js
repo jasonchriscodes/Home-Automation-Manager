@@ -63,6 +63,7 @@ export const roomsData = {
         device: 0,
         totalDevices: 4,
       },
+      path: "livingroom",
       geometry: {
         type: "Polygon",
         coordinates: [
@@ -82,6 +83,7 @@ export const roomsData = {
         device: 3,
         totalDevices: 4,
       },
+      path: "kitchen",
       geometry: {
         type: "Polygon",
         coordinates: [
@@ -101,6 +103,7 @@ export const roomsData = {
         device: 4,
         totalDevices: 6,
       },
+      path: "bedroom",
       geometry: {
         type: "Polygon",
         coordinates: [
@@ -120,6 +123,7 @@ export const roomsData = {
         device: 2,
         totalDevices: 3,
       },
+      path: "office",
       geometry: {
         type: "Polygon",
         coordinates: [

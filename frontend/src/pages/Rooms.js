@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet, useNavigate } from "react-router-dom";
 
 import VectorMap, { Layer, Tooltip, Label } from "devextreme-react/vector-map";
 
@@ -11,6 +11,8 @@ const projection = {
 };
 
 const Rooms = () => {
+  const navigate = useNavigate();
+
   function customizeTooltip(arg) {
     if (arg.layer.name === "rooms") {
       return {
@@ -40,6 +42,8 @@ const Rooms = () => {
             name="rooms"
             borderWidth={1}
             color="transparent"
+            onClick={() => navigate(`http://localhost:3000/rooms/${roomsData}`)}
+            // how to take path property from constants
           >
             <Label enabled={true} dataField="name"></Label>
           </Layer>
