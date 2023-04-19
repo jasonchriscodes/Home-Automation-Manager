@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { motion } from "framer-motion";
 import { useMediaQuery } from "react-responsive";
 import { NavLink, useLocation } from "react-router-dom";
@@ -10,10 +10,27 @@ import { TbReportAnalytics } from "react-icons/tb";
 import { ImTable } from "react-icons/im";
 import { HiOutlineQuestionMarkCircle, HiOutlineLogout } from "react-icons/hi";
 import SubMenu from "./SubMenu";
+import { Box, IconButton, Typography, useTheme } from "@mui/material";
+import { ColorModeContext, tokens } from "../../theme";
+import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
+import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
+import ContactsOutlinedIcon from "@mui/icons-material/ContactsOutlined";
+import ReceiptOutlinedIcon from "@mui/icons-material/ReceiptOutlined";
+import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
+import CalendarTodayOutlinedIcon from "@mui/icons-material/CalendarTodayOutlined";
+import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
+import BarChartOutlinedIcon from "@mui/icons-material/BarChartOutlined";
+import PieChartOutlineOutlinedIcon from "@mui/icons-material/PieChartOutlineOutlined";
+import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
+import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
+import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
 
 const imageFolder = "/assets";
 
 const Sidebar = () => {
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
+  const colorMode = useContext(ColorModeContext);
   let isTab = useMediaQuery({ query: "(max-width: 768px)" });
   const { pathname } = useLocation();
 
@@ -96,13 +113,19 @@ const Sidebar = () => {
         variants={SidebarAnimation}
         initial={{ x: isTab ? -250 : 0 }}
         animate={isOpen ? "open" : "closed"}
-        className="bg-white text-gray shadow-xl z-[999] w-[16rem] max-w-[16rem] h-screen overflow-hidden md:relative fixed"
+        className="text-gray shadow-xl z-[999] w-[16rem] max-w-[16rem] h-screen overflow-hidden md:relative fixed"
+        style={{ backgroundColor: `${colors.primary[400]}` }}
       >
         {/* app logo */}
         <div className="flex items-center gap-2.5 font-medium border-b border-slate-300 py-3 mx-3">
           <img
+            onClick={colorMode.toggleColorMode}
             style={{ width: "55px", height: "auto" }}
-            src={`${imageFolder}/logo.png`}
+            src={
+              theme.palette.mode === "dark"
+                ? `${imageFolder}/logo-dark.png`
+                : `${imageFolder}/logo.png`
+            }
             alt="app-logo"
             width={45}
           />
