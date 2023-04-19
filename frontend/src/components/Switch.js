@@ -1,12 +1,11 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { useTheme } from "@mui/material";
-import { ColorModeContext, tokens } from "./../theme";
+import { tokens } from "./../theme";
 
 export default function Toggle() {
   const [enabled, setEnabled] = useState(false);
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const colorMode = useContext(ColorModeContext);
 
   return (
     <div className="relative flex flex-col items-center justify-center overflow-hidden">

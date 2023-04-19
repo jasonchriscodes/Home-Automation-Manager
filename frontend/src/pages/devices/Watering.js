@@ -97,7 +97,7 @@ const Watering = () => {
               <FontAwesomeIcon
                 icon={faDroplet}
                 style={{ fontSize: 18 }}
-                className="text-[#2563EB]"
+                className="text-[#868dfb]"
               />
               <p className="text-xl px-2 font-bold">10%</p>
             </div>
@@ -108,7 +108,7 @@ const Watering = () => {
               <FontAwesomeIcon
                 icon={faTemperatureHalf}
                 style={{ fontSize: 18 }}
-                className="text-[#2563EB]"
+                className="text-[#868dfb]"
               />
               <p className="text-xl px-2 font-bold">2°C</p>
             </div>
@@ -119,7 +119,7 @@ const Watering = () => {
               <FontAwesomeIcon
                 icon={faSun}
                 style={{ fontSize: 18 }}
-                className="text-[#2563EB]"
+                className="text-[#868dfb]"
               />
               <p className="text-xl px-2 font-bold">70%</p>
             </div>
@@ -160,7 +160,7 @@ const Watering = () => {
             <FontAwesomeIcon
               icon={faDroplet}
               style={{ fontSize: 25 }}
-              className="text-[#2563EB] mx-0.2 p-3.5 items-center justify-center bg-white rounded-2xl"
+              className="text-[#868dfb] mx-0.2 p-3.5 items-center justify-center bg-white rounded-2xl"
             />
           </div>
           <div className="flex-col py-2 mx-3 px-2.5 bg-gray-300 rounded-3xl">
@@ -170,7 +170,7 @@ const Watering = () => {
             <FontAwesomeIcon
               icon={faS}
               style={{ fontSize: 25 }}
-              className="text-[#2563EB] mx-0.2 p-3.5 items-center justify-center bg-white rounded-2xl"
+              className="text-[#868dfb] mx-0.2 p-3.5 items-center justify-center bg-white rounded-2xl"
             />
           </div>
           <div className="flex-col py-2 mx-3 px-2.5 bg-gray-300 rounded-3xl">
@@ -180,7 +180,7 @@ const Watering = () => {
             <FontAwesomeIcon
               icon={faM}
               style={{ fontSize: 25 }}
-              className="text-[#2563EB] mx-0.2 p-3.5 items-center justify-center bg-white rounded-2xl"
+              className="text-[#868dfb] mx-0.2 p-3.5 items-center justify-center bg-white rounded-2xl"
             />
           </div>
           <div className="flex-col py-2 mx-3 px-2.5 bg-black rounded-3xl">
@@ -200,7 +200,7 @@ const Watering = () => {
             <FontAwesomeIcon
               icon={faW}
               style={{ fontSize: 25 }}
-              className="text-[#2563EB] mx-0.2 p-3.5 items-center justify-center bg-white rounded-2xl"
+              className="text-[#868dfb] mx-0.2 p-3.5 items-center justify-center bg-white rounded-2xl"
             />
           </div>
           <div className="flex-col py-2 mx-3 px-2.5 bg-gray-300 rounded-3xl">
@@ -210,7 +210,7 @@ const Watering = () => {
             <FontAwesomeIcon
               icon={faT}
               style={{ fontSize: 25 }}
-              className="text-[#2563EB] mx-0.2 p-3.5 items-center justify-center bg-white rounded-2xl"
+              className="text-[#868dfb] mx-0.2 p-3.5 items-center justify-center bg-white rounded-2xl"
             />
           </div>
         </div>
