@@ -5,8 +5,9 @@ import { NavLink, useLocation } from "react-router-dom";
 import { IoIosArrowBack } from "react-icons/io";
 import { AiOutlineAppstore } from "react-icons/ai";
 import { SlSettings } from "react-icons/sl";
-import { MdDevicesOther, MdMenu } from "react-icons/md";
+import { MdOutlineBedroomParent, MdMenu } from "react-icons/md";
 import { TbReportAnalytics } from "react-icons/tb";
+import { ImTable } from "react-icons/im";
 import { HiOutlineQuestionMarkCircle, HiOutlineLogout } from "react-icons/hi";
 import SubMenu from "./SubMenu";
 
@@ -73,8 +74,13 @@ const Sidebar = () => {
   const subMenusList = [
     {
       name: "rooms",
-      icon: MdDevicesOther,
+      icon: MdOutlineBedroomParent,
       menus: ["bedroom", "kitchen", "livingroom", "office"],
+    },
+    {
+      name: "dashboard",
+      icon: ImTable,
+      menus: ["bar", "line", "pie"],
     },
   ];
 
