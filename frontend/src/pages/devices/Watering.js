@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Switch from "./../../components/Switch";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSync } from "@fortawesome/free-solid-svg-icons";
@@ -8,8 +8,12 @@ import { faSun } from "@fortawesome/free-solid-svg-icons";
 import { faS, faM, faW, faT } from "@fortawesome/free-solid-svg-icons";
 import { CircularProgressbarWithChildren } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
+import { useTheme } from "@mui/material";
+import { tokens } from "../../theme";
 
 const Watering = () => {
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
   const [isOpen, setIsOpen] = useState(false);
 
   const handleClick = () => {
@@ -50,7 +54,10 @@ const Watering = () => {
   }
 
   return (
-    <div className="p-4 shadow-md flex flex-wrap flex-col justify-between bg-white">
+    <div
+      className="p-4 shadow-md flex flex-wrap flex-col justify-between"
+      style={{ backgroundColor: `${colors.primary[400]}` }}
+    >
       <div className="flex-col">
         <div className="flex items-start flex-row justify-between p-3">
           <h1>Watering</h1>

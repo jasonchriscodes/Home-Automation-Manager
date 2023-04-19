@@ -1,10 +1,14 @@
 import React, { useState } from "react";
 import CurtainAnimation from "../../components/CurtainAnimation";
 import Switch from "./../../components/Switch";
+import { useTheme } from "@mui/material";
+import { tokens } from "../../theme";
 
 const imageFolder = "/assets";
 
 const Curtain = () => {
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
   const [positionLeft, setPositionLeft] = useState(10);
 
   const handlePositionLeftChange = (event) => {
@@ -17,7 +21,10 @@ const Curtain = () => {
   };
 
   return (
-    <div className="p-4 shadow-md flex flex-wrap flex-col justify-between bg-white">
+    <div
+      className="p-4 shadow-md flex flex-wrap flex-col justify-between"
+      style={{ backgroundColor: `${colors.primary[400]}` }}
+    >
       <div className="flex-col">
         <div className="flex items-start flex-row justify-between p-3">
           <h1>Curtain</h1>
@@ -35,7 +42,6 @@ const Curtain = () => {
                 style={{ width: "45px", height: "auto" }}
                 src={`${imageFolder}/curtain-left.png`}
                 alt="curtain-left"
-                width={45}
               />
               <input
                 type="range"
@@ -57,7 +63,6 @@ const Curtain = () => {
                 style={{ width: "45px", height: "auto" }}
                 src={`${imageFolder}/curtain-right.png`}
                 alt="curtain-right"
-                width={45}
               />
             </div>
           </div>

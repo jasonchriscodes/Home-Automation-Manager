@@ -4,10 +4,17 @@ import Switch from "./../../components/Switch";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTag } from "@fortawesome/free-solid-svg-icons";
 import { faCircle } from "@fortawesome/free-solid-svg-icons";
+import { useTheme } from "@mui/material";
+import { tokens } from "../../theme";
 
 const Door = () => {
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
   return (
-    <div className="p-4 shadow-md flex flex-wrap flex-col justify-start bg-white">
+    <div
+      className="p-4 shadow-md flex flex-wrap flex-col justify-start"
+      style={{ backgroundColor: `${colors.primary[400]}` }}
+    >
       <div className="flex flex-col">
         <div className="flex items-start flex-row justify-between p-3">
           <h1>Door</h1>

@@ -1,8 +1,12 @@
 import Switch from "./../../components/Switch";
 import Calendar from "../../components/Calendar";
 import { useState } from "react";
+import { useTheme } from "@mui/material";
+import { tokens } from "../../theme";
 
 const Bin = () => {
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
   const [isOpen, setIsOpen] = useState(false);
 
   const handleClick = () => {
@@ -16,7 +20,10 @@ const Bin = () => {
     ? "to-red-400 bg-pos-100"
     : "to-blue-400 bg-pos-100";
   return (
-    <div className="p-4 shadow-md flex flex-wrap flex-col justify-between bg-white">
+    <div
+      className="p-4 shadow-md flex flex-wrap flex-col justify-between"
+      style={{ backgroundColor: `${colors.primary[400]}` }}
+    >
       <div className="flex-col">
         <div className="flex items-start flex-row justify-between p-3">
           <h1>Bin</h1>
