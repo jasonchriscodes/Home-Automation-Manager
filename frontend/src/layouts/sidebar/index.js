@@ -96,7 +96,7 @@ const Sidebar = () => {
     },
     {
       name: "dashboard",
-      icon: ImTable,
+      icon: TbReportAnalytics,
       menus: ["bar", "line", "pie"],
     },
   ];
@@ -164,7 +164,7 @@ const Sidebar = () => {
 
             <li>
               <NavLink to="/analytics" className={"link"}>
-                <TbReportAnalytics size={23} className="min-w-max" />
+                <ImTable size={23} className="min-w-max" />
                 Analytics
               </NavLink>
             </li>
