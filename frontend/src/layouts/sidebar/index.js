@@ -163,6 +163,12 @@ const Sidebar = () => {
             )}
 
             <li>
+              <NavLink to="/calendar" className={"link"}>
+                <CalendarTodayOutlinedIcon size={23} className="min-w-max" />
+                Calendar
+              </NavLink>
+            </li>
+            <li>
               <NavLink to="/analytics" className={"link"}>
                 <ImTable size={23} className="min-w-max" />
                 Analytics

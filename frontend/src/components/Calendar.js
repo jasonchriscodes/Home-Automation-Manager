@@ -1,63 +1,129 @@
-import React, { useRef, useState } from "react";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { StaticDateTimePicker } from "@mui/x-date-pickers/StaticDateTimePicker";
-import dayjs from "dayjs";
-import { DayCalendarSkeleton } from "@mui/x-date-pickers";
-import { Badge } from "@mui/material";
-import { PickersDay } from "@mui/x-date-pickers/PickersDay";
-import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
-import { red } from "@mui/material/colors";
-import "./../App.css";
+import { useState } from "react";
+import FullCalendar from "@fullcalendar/react";
+import { formatDate } from "@fullcalendar/react";
+import dayGridPlugin from "@fullcalendar/daygrid";
+import timeGridPlugin from "@fullcalendar/timegrid";
+import interactionPlugin from "@fullcalendar/interaction";
+import listPlugin from "@fullcalendar/list";
+import {
+  Box,
+  List,
+  ListItem,
+  ListItemText,
+  Typography,
+  useTheme,
+} from "@mui/material";
+import { tokens } from "./../theme";
 
-export default function StaticDateTimePickerLandscape() {
-  const initialValue = dayjs("2022-04-17");
-  const [isLoading, setIsLoading] = useState(false);
-  const [highlightedDays, setHighlightedDays] = useState([1, 16]);
+const Calendar = () => {
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
+  const [currentEvents, setCurrentEvents] = useState([]);
 
-  function ServerDay(props) {
-    const { highlightedDays = [], day, outsideCurrentMonth, ...other } = props;
+  const handleDateClick = (selected) => {
+    const title = prompt("Please enter a new title for your event");
+    const calendarApi = selected.view.calendar;
+    calendarApi.unselect();
 
-    const isSelected =
-      !props.outsideCurrentMonth &&
-      highlightedDays.indexOf(props.day.date()) >= 0;
+    if (title) {
+      calendarApi.addEvent({
+        id: `${selected.dateStr}-${title}`,
+        title,
+        start: selected.startStr,
+        end: selected.endStr,
+        allDay: selected.allDay,
+      });
+    }
+  };
 
-    return (
-      <Badge
-        key={props.day.toString()}
-        overlap="circular"
-        badgeContent={
-          isSelected ? (
-            <FiberManualRecordIcon sx={{ color: red[500], fontSize: 16 }} />
-          ) : undefined
-        }
-      >
-        <PickersDay
-          {...other}
-          outsideCurrentMonth={outsideCurrentMonth}
-          day={day}
-        />
-      </Badge>
-    );
-  }
+  const handleEventClick = (selected) => {
+    if (
+      window.confirm(
+        `Are you sure you want to delete the event '${selected.event.title}'`
+      )
+    ) {
+      selected.event.remove();
+    }
+  };
 
   return (
-    <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <StaticDateTimePicker
-        className="shadow-md"
-        orientation="portrait"
-        defaultValue={initialValue}
-        loading={isLoading}
-        renderLoading={() => <DayCalendarSkeleton />}
-        slots={{
-          day: ServerDay,
-        }}
-        slotProps={{
-          day: {
-            highlightedDays,
-          },
-        }}
-      />
-    </LocalizationProvider>
+    <Box m="20px">
+      <Box display="flex" justifyContent="space-between">
+        {/* CALENDAR SIDEBAR */}
+        <Box
+          flex="1 1 20%"
+          backgroundColor={colors.primary[400]}
+          p="15px"
+          borderRadius="4px"
+        >
+          <Typography variant="h5">Events</Typography>
+          <List>
+            {currentEvents.map((event) => (
+              <ListItem
+                key={event.id}
+                sx={{
+                  backgroundColor: colors.greenAccent[500],
+                  margin: "10px 0",
+                  borderRadius: "2px",
+                }}
+              >
+                <ListItemText
+                  primary={event.title}
+                  secondary={
+                    <Typography>
+                      {formatDate(event.start, {
+                        year: "numeric",
+                        month: "short",
+                        day: "numeric",
+                      })}
+                    </Typography>
+                  }
+                />
+              </ListItem>
+            ))}
+          </List>
+        </Box>
+
+        {/* CALENDAR */}
+        <Box flex="1 1 100%" ml="15px">
+          <FullCalendar
+            height="75vh"
+            plugins={[
+              dayGridPlugin,
+              timeGridPlugin,
+              interactionPlugin,
+              listPlugin,
+            ]}
+            headerToolbar={{
+              left: "prev,next today",
+              center: "title",
+              right: "dayGridMonth,timeGridWeek,timeGridDay,listMonth",
+            }}
+            initialView="dayGridMonth"
+            editable={true}
+            selectable={true}
+            selectMirror={true}
+            dayMaxEvents={true}
+            select={handleDateClick}
+            eventClick={handleEventClick}
+            eventsSet={(events) => setCurrentEvents(events)}
+            initialEvents={[
+              {
+                id: "12315",
+                title: "All-day event",
+                date: "2022-09-14",
+              },
+              {
+                id: "5123",
+                title: "Timed event",
+                date: "2022-09-28",
+              },
+            ]}
+          />
+        </Box>
+      </Box>
+    </Box>
   );
-}
+};
+
+export default Calendar;

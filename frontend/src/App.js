@@ -19,6 +19,7 @@ import Dashboard from "./pages/Dashboard";
 import Pie from "./pages/dashboard/Pie";
 import Line from "./pages/dashboard/Line";
 import Bar from "./pages/dashboard/Bar";
+import Calendar from "./components/Calendar";
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -41,6 +42,7 @@ function App() {
                 <Route path="pie" element={<Pie />} />
                 <Route path="line" element={<Line />} />
               </Route>
+              <Route path="/calendar" element={<Calendar />} />
               <Route path="/analytics" element={<Analytics />} />
               <Route path="/settings" element={<Settings />} />
               <Route path="/helpandsupport" element={<HelpAndSupport />} />

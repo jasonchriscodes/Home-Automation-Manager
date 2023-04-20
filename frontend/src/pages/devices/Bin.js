@@ -1,5 +1,5 @@
 import Switch from "./../../components/Switch";
-import Calendar from "../../components/Calendar";
+import BinCalendar from "../../components/BinCalendar";
 import { useState } from "react";
 import { useTheme } from "@mui/material";
 import { tokens } from "../../theme";
@@ -35,7 +35,7 @@ const Bin = () => {
       </div>
       <div className="flex-col">
         <div className="flex items-start flex-row justify-center p-3 gap-12">
-          <Calendar />
+          <BinCalendar />
         </div>
         <div className="flex items-start flex-row justify-center p-3 gap-12">
           <button
