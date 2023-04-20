@@ -19,7 +19,7 @@ import Dashboard from "./pages/Dashboard";
 import Pie from "./pages/dashboard/Pie";
 import Line from "./pages/dashboard/Line";
 import Bar from "./pages/dashboard/Bar";
-import Calendar from "./components/Calendar";
+import Calendar from "./pages/Calendar";
 
 function App() {
   const [theme, colorMode] = useMode();
