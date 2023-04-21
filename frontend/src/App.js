@@ -16,10 +16,11 @@ import Rooms from "./pages/Rooms";
 import { ColorModeContext, useMode } from "./theme";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import Dashboard from "./pages/Dashboard";
-import Pie from "./pages/dashboard/Pie";
-import Line from "./pages/dashboard/Line";
-import Bar from "./pages/dashboard/Bar";
 import Calendar from "./pages/Calendar";
+import BarChart from "./pages/dashboard/BarChart";
+import LineChart from "./pages/dashboard/LineChart";
+import ProgressCircle from "./pages/dashboard/ProgressCircle";
+import StatBox from "./pages/dashboard/StatBox";
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -37,11 +38,7 @@ function App() {
                 <Route path="livingroom" element={<LivingRoom />} />
                 <Route path="office" element={<Office />} />
               </Route>
-              <Route path="/dashboard" element={<Dashboard />}>
-                <Route path="bar" element={<Bar />} />
-                <Route path="pie" element={<Pie />} />
-                <Route path="line" element={<Line />} />
-              </Route>
+              <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/calendar" element={<Calendar />} />
               <Route path="/analytics" element={<Analytics />} />
               <Route path="/settings" element={<Settings />} />

@@ -94,11 +94,6 @@ const Sidebar = () => {
       icon: MdOutlineBedroomParent,
       menus: ["bedroom", "kitchen", "livingroom", "office"],
     },
-    {
-      name: "dashboard",
-      icon: TbReportAnalytics,
-      menus: ["bar", "line", "pie"],
-    },
   ];
 
   return (
@@ -162,6 +157,12 @@ const Sidebar = () => {
               </div>
             )}
 
+            <li>
+              <NavLink to="/dashboard" className={"link"}>
+                <TbReportAnalytics size={23} className="min-w-max" />
+                Dashboard
+              </NavLink>
+            </li>
             <li>
               <NavLink to="/calendar" className={"link"}>
                 <CalendarTodayOutlinedIcon size={23} className="min-w-max" />
