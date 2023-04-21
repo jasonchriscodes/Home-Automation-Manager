@@ -1,9 +1,10 @@
 import React from "react";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
-
 import VectorMap, { Layer, Tooltip, Label } from "devextreme-react/vector-map";
-
 import { roomsData, buildingData } from "./../constants";
+import { Box } from "@mui/material";
+import { useTheme } from "@mui/material";
+import { tokens } from "./../theme";
 
 const projection = {
   to: ([l, lt]) => [l / 100, lt / 100],
@@ -12,7 +13,8 @@ const projection = {
 
 const Rooms = () => {
   const navigate = useNavigate();
-
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
   function customizeTooltip(arg) {
     if (arg.layer.name === "rooms") {
       return {
@@ -25,8 +27,16 @@ const Rooms = () => {
   }
 
   return (
-    <div className="h-screen mx-5">
-      <div className="flex justify-center">
+    <Box m="20px">
+      <Box
+        display="flex"
+        // display="grid"
+        // gridTemplateColumns="repeat(1, 1fr)"
+        // gridAutoRows="140px"
+        height="max-content"
+        width="max-content"
+        gap="20px"
+      >
         <VectorMap
           className="h-1/2 w-full"
           maxZoomFactor={4}
@@ -49,25 +59,33 @@ const Rooms = () => {
           </Layer>
           <Tooltip enabled={true} customizeTooltip={customizeTooltip}></Tooltip>
         </VectorMap>
-      </div>
-      <div className="flex justify-center gap-3 mx-3 p-5">
-        <NavLink className="hover:text-blue-400" to="bedroom">
+      </Box>
+      <Box
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        gap="20px"
+        marginY="20px"
+        style={{ backgroundColor: `${colors.primary[400]}` }}
+      >
+        <NavLink className="hover:text-[#3e4396] rounded-md p-2" to="bedroom">
           Bedroom
         </NavLink>
-        <NavLink className="hover:text-blue-400" to="kitchen">
+        <NavLink className="hover:text-[#3e4396] rounded-md p-2" to="kitchen">
           Kitchen
         </NavLink>
-        <NavLink className="hover:text-blue-400" to="livingroom">
+        <NavLink
+          className="hover:text-[#3e4396] rounded-md p-2"
+          to="livingroom"
+        >
           Livingroom
         </NavLink>
-        <NavLink className="hover:text-blue-400" to="office">
+        <NavLink className="hover:text-[#3e4396] rounded-md p-2" to="office">
           Office
         </NavLink>
-      </div>
-      <div className="flex-col">
-        <Outlet />
-      </div>
-    </div>
+      </Box>
+      <Outlet />
+    </Box>
   );
 };
 
