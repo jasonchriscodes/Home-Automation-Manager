@@ -5,6 +5,8 @@ import VectorMap, { Layer, Tooltip, Label } from "devextreme-react/vector-map";
 
 import { roomsData, buildingData } from "./../constants";
 
+import { Box } from "@mui/material";
+
 const projection = {
   to: ([l, lt]) => [l / 100, lt / 100],
   from: ([x, y]) => [x * 100, y * 100],
@@ -25,8 +27,16 @@ const Rooms = () => {
   }
 
   return (
-    <div className="h-screen mx-5">
-      <div className="flex justify-center">
+    <Box m="20px">
+      <Box
+        display="flex"
+        // display="grid"
+        // gridTemplateColumns="repeat(1, 1fr)"
+        // gridAutoRows="140px"
+        height="max-content"
+        width="max-content"
+        gap="20px"
+      >
         <VectorMap
           className="h-1/2 w-full"
           maxZoomFactor={4}
@@ -49,8 +59,13 @@ const Rooms = () => {
           </Layer>
           <Tooltip enabled={true} customizeTooltip={customizeTooltip}></Tooltip>
         </VectorMap>
-      </div>
-      <div className="flex justify-center gap-3 mx-3 p-5">
+      </Box>
+      <Box
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        gap="20px"
+      >
         <NavLink className="hover:text-blue-400" to="bedroom">
           Bedroom
         </NavLink>
@@ -63,11 +78,9 @@ const Rooms = () => {
         <NavLink className="hover:text-blue-400" to="office">
           Office
         </NavLink>
-      </div>
-      <div className="flex-col">
-        <Outlet />
-      </div>
-    </div>
+      </Box>
+      <Outlet />
+    </Box>
   );
 };
 
