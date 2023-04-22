@@ -1,6 +1,5 @@
 import { Box, Button, IconButton, Typography, useTheme } from "@mui/material";
 import { tokens } from "./../theme";
-import { mockTransactions } from "./../data/mockData";
 import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
 import LightbulbIcon from "@mui/icons-material/Lightbulb";
 import VerticalShadesIcon from "@mui/icons-material/VerticalShades";
@@ -10,7 +9,6 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import ElectricBoltIcon from "@mui/icons-material/ElectricBolt";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import LineChart from "./dashboard/LineChart";
-import BarChart from "./dashboard/BarChart";
 import StatBox from "./dashboard/StatBox";
 import ProgressCircle from "./dashboard/ProgressCircle";
 
