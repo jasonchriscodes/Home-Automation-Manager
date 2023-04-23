@@ -12,7 +12,16 @@ public class LightService {
     public LightService(LightRepository lightRepository)
     {
         this.lightRepository = lightRepository;
+        this.createLight();
     }
+
+    //------------------------------------------------------------------------------------------------------------------
+
+    public void createLight()
+    {
+        Light light1 = new Light("living room", "light");
+    }
+
 
     //------------------------------------------------------------------------------------------------------------------
 
