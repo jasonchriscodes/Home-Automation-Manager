@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLightbulb } from "@fortawesome/free-solid-svg-icons";
 import { useTheme } from "@mui/material";
 import { tokens } from "../../theme";
-import axios from "axios";
+import axios from "./../../axios/axios";
 
 const imageFolder = "/assets";
 
@@ -38,12 +38,14 @@ const Light = () => {
   const [isOn, setIsOn] = useState(false);
 
   const handleClick = async () => {
-    const requestBody = {
-      deviceId: "light",
-      turnOn: true,
-    };
-    await axios.post("/devices", requestBody);
-    setIsOn(!isOn);
+    axios
+      .put("/lights/living-room/on")
+      .then((response) => {
+        setIsOn(true);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   const buttonText = isOn ? "Close" : "Open";
