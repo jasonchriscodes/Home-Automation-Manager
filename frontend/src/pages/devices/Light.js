@@ -3,11 +3,10 @@ import Switch from "./../../components/Switch";
 import ColorPicker from "@radial-color-picker/react-color-picker";
 import "@radial-color-picker/react-color-picker/dist/react-color-picker.min.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMoon } from "@fortawesome/free-solid-svg-icons";
-import { faSun } from "@fortawesome/free-solid-svg-icons";
 import { faLightbulb } from "@fortawesome/free-solid-svg-icons";
 import { useTheme } from "@mui/material";
 import { tokens } from "../../theme";
+import axios from "axios";
 
 const imageFolder = "/assets";
 
@@ -35,6 +34,23 @@ const Light = () => {
   const handleBrightnessChange = (event) => {
     setBrightness(event.target.value);
   };
+
+  const [isOn, setIsOn] = useState(false);
+
+  const handleClick = async () => {
+    const requestBody = {
+      deviceId: "light",
+      turnOn: true,
+    };
+    await axios.post("/devices", requestBody);
+    setIsOn(!isOn);
+  };
+
+  const buttonText = isOn ? "Close" : "Open";
+  const gradientStart = isOn
+    ? "from-red-500 via-red-600 bg-pos-0"
+    : "from-blue-800 via-blue-600 bg-pos-0";
+  const gradientEnd = isOn ? "to-red-400 bg-pos-100" : "to-blue-400 bg-pos-100";
 
   return (
     <div
@@ -81,6 +97,19 @@ const Light = () => {
                 className="my-3 mx-3"
               />
             </div>
+          </div>
+        </div>
+        <div className="flex items-center flex-row justify-center p-3">
+          <div className="flex items-start flex-row justify-center p-3 gap-12">
+            <button
+              onClick={handleClick}
+              className={`bg-gradient-to-r ${gradientStart} ${gradientEnd} text-white px-12 py-5 rounded-md transition-all duration-500`}
+              style={{
+                transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
+              }}
+            >
+              {buttonText}
+            </button>
           </div>
         </div>
       </div>
