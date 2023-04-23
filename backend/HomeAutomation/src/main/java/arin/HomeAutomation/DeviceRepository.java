@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface DeviceRepository extends MongoRepository<Device, ObjectId> {
-  Optional<Device> findDevicebyDeviceId(String deviceId);
+  Optional<Device> findDeviceByDeviceId(String deviceId);
 }

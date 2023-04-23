@@ -26,7 +26,7 @@ public class DeviceController {
   }
 
   @GetMapping("/{deviceId}")
-  public ResponseEntity<Optional<Device>> geSingleDevice(
+  public ResponseEntity<Optional<Device>> getSingleDevice(
     @PathVariable String deviceId
   ) {
     return new ResponseEntity<Optional<Device>>(

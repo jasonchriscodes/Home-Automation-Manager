@@ -16,6 +16,6 @@ public class DeviceService {
   }
 
   public Optional<Device> singleDevice(String deviceId) {
-    return deviceRepository.findDevicebyDeviceId(deviceId);
+    return deviceRepository.findDeviceByDeviceId(deviceId);
   }
 }
