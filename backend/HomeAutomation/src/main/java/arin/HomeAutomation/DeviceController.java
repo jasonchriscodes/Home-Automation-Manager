@@ -1,37 +1,47 @@
 package arin.HomeAutomation;
 
 import java.util.List;
-import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
-@RequestMapping("/api/v1/devices")
+@RequestMapping("/api/v1")
 public class DeviceController {
 
   @Autowired
   private DeviceService deviceService;
 
-  @GetMapping
-  public ResponseEntity<List<Device>> getAllDevices() {
-    return new ResponseEntity<List<Device>>(
-      deviceService.allDevices(),
-      HttpStatus.OK
-    );
+  public DeviceController(DeviceService deviceService) {
+    this.deviceService = deviceService;
   }
 
-  @GetMapping("/{deviceId}")
-  public ResponseEntity<Optional<Device>> getSingleDevice(
-    @PathVariable String deviceId
-  ) {
-    return new ResponseEntity<Optional<Device>>(
-      deviceService.singleDevice(deviceId),
-      HttpStatus.OK
-    );
+  @GetMapping("/devices")
+  public List<Device> getAllDevices() {
+    return deviceService.allDevices();
   }
+
+  @GetMapping("/devices/{deviceId}")
+  public ResponseEntity<Device> getSingleDevice(@PathVariable String deviceId) {
+    Device device = null;
+    device = deviceService.singleDevice(deviceId);
+    return ResponseEntity.ok(device);
+  }
+  // @PutMapping("/{deviceId}")
+  // ResponseEntity<Device> updateDeviceStatus(
+  //   @PathVariable String deviceId,
+  //   @RequestBody Device device
+  // ) {
+  //   // device = deviceService.updateDeviceStatus(device, deviceId);
+  //   return new ResponseEntity<Device>(
+  //     deviceService.updateDeviceStatus(device, deviceId), HttpStatus.OK(employee);
+  // }
 }
