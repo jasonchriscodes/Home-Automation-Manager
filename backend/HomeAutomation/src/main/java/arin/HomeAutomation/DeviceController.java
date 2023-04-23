@@ -1,35 +1,37 @@
 package arin.HomeAutomation;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
+import java.util.Optional;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/devices")
+@RequestMapping("/api/v1/devices")
 public class DeviceController {
 
-    private final LightService lightService;
+  @Autowired
+  private DeviceService deviceService;
 
-    @Autowired
-    public DeviceController(LightService lightService) {
-        this.lightService = lightService;
-    }
+  @GetMapping
+  public ResponseEntity<List<Device>> getAllDevices() {
+    return new ResponseEntity<List<Device>>(
+      deviceService.allDevices(),
+      HttpStatus.OK
+    );
+  }
 
-    @GetMapping("/lights")
-    public List<Light> getAllLights() {
-        return this.lightService.getAllLights();
-    }
-
-    @PutMapping("/lights/{id}/on")
-    public Light turnLightOn(@PathVariable String id) {
-        this.lightService.turnLightOn(id);
-        return this.lightService.getLightID(id);
-    }
-
-    @PutMapping("/lights/{id}/off")
-    public Light turnLightOff(@PathVariable String id) {
-        this.lightService.turnLightOff(id);
-        return this.lightService.getLightID(id);
-    }
+  @GetMapping("/{deviceId}")
+  public ResponseEntity<Optional<Device>> geSingleDevice(
+    @PathVariable String deviceId
+  ) {
+    return new ResponseEntity<Optional<Device>>(
+      deviceService.singleDevice(deviceId),
+      HttpStatus.OK
+    );
+  }
 }

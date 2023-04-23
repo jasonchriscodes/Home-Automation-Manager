@@ -1,0 +1,32 @@
+[
+	{
+		"deviceId" : "1",
+		"room" : "bedroom",
+		"device" : "light",
+		"status" : true
+	},
+	{
+		"deviceId" : "2",
+		"room" : "kitchen",
+		"device" : "curtain",
+		"status" : true
+	},
+	{
+		"deviceId" : "3",
+		"room" : "office",
+		"device" : "watering",
+		"status" : true
+	},
+	{
+		"deviceId" : "4",
+		"room" : "livingroom",
+		"device" : "bin",
+		"status" : true
+	},
+	{
+		"deviceId" : "5",
+		"room" : "bedroom",
+		"device" : "light",
+		"status" : false
+	}
+]
