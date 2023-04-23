@@ -1,82 +1,74 @@
 package arin.HomeAutomation;
 
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "water bowls")
-public class WaterBowl {
+public abstract class Device {
 
-    private String room;
     @Id
-    private int id;
-    private int timesRefilled;
-    private boolean isEmpty;
+    private String id;
+    private String name;
+    private String type;
+    private String status;
 
-    public WaterBowl(String room, int id)
+    public Device(String id, String name, String type, String status)
     {
-        this.setRoom(room);
         this.setId(id);
-
-        this.timesRefilled = 0;
-        this.isEmpty = false;
+        this.setName(name);
+        this.setType(type);
+        this.setStatus(status);
     }
 
-    //------------------------------------------------------------------------------------------------------------------
-
-    private void setRoom(String room)
-    {
-        this.room = room;
-    }
-
-    //------------------------------------------------------------------------------------------------------------------
-
-    private void setId(int id)
+    private void setId(String id)
     {
         this.id = id;
     }
 
     //------------------------------------------------------------------------------------------------------------------
 
-    public String getRoom()
+    private void setName(String name)
     {
-        return this.room;
+        this.name = name;
     }
 
     //------------------------------------------------------------------------------------------------------------------
 
-    public int getId()
+    private void setType(String type)
+    {
+        this.type = type;
+    }
+
+    //------------------------------------------------------------------------------------------------------------------
+
+    public void setStatus(String status)
+    {
+        this.status = status;
+    }
+
+    //------------------------------------------------------------------------------------------------------------------
+
+    public String getId()
     {
         return this.id;
     }
 
     //------------------------------------------------------------------------------------------------------------------
 
-    public boolean getIsEmpty()
+    public String getName()
     {
-        return this.isEmpty;
+        return this.name;
     }
 
     //------------------------------------------------------------------------------------------------------------------
 
-    public void refill()
+    public String getType()
     {
-        this.isEmpty = true;
-        this.timesRefilled++;
+        return this.type;
     }
 
     //------------------------------------------------------------------------------------------------------------------
 
-    public void refillOff()
+    public String getStatus()
     {
-        this.isEmpty = false;
+        return this.status;
     }
-
-    //------------------------------------------------------------------------------------------------------------------
-
-    public int getTimesRefilled()
-    {
-        return this.timesRefilled;
-    }
-
-
 }
