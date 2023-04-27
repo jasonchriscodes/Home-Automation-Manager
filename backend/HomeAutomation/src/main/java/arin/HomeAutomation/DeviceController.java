@@ -26,22 +26,16 @@ public class DeviceController {
 
   @GetMapping("/devices")
   public List<Device> getAllDevices() {
-    return deviceService.allDevices();
+    return deviceService.findAll();
   }
 
   @GetMapping("/devices/{deviceId}")
-  public ResponseEntity<Device> getSingleDevice(@PathVariable String deviceId) {
-    Device device = null;
-    device = deviceService.singleDevice(deviceId);
-    return ResponseEntity.ok(device);
+  public Device getDeviceById(@PathVariable String deviceId) {
+    return deviceService.findById(deviceId);
   }
-  // @PutMapping("/{deviceId}")
-  // ResponseEntity<Device> updateDeviceStatus(
-  //   @PathVariable String deviceId,
-  //   @RequestBody Device device
-  // ) {
-  //   // device = deviceService.updateDeviceStatus(device, deviceId);
-  //   return new ResponseEntity<Device>(
-  //     deviceService.updateDeviceStatus(device, deviceId), HttpStatus.OK(employee);
-  // }
+
+  @PutMapping("/update")
+  public Device updateDeviceStatus(@RequestBody Device device) {
+    return deviceService.updateDeviceStatus(device);
+  }
 }

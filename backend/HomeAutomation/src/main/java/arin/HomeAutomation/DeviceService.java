@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface DeviceService {
-  List<Device> allDevices();
-  Device singleDevice(String deviceId);
+  List<Device> findAll();
+  Device findById(String deviceId);
+  Device updateDeviceStatus(Device device);
 }
