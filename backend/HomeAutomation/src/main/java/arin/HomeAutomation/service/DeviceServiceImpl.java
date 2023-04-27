@@ -12,38 +12,38 @@ import org.springframework.stereotype.Service;
 public class DeviceServiceImpl implements DeviceService {
 
   @Autowired
-  private DeviceRepository blogRepository;
+  private DeviceRepository deviceRepository;
 
   @Override
-  public Device create(Device blog) {
-    return blogRepository.save(blog);
+  public Device create(Device device) {
+    return deviceRepository.save(device);
   }
 
   @Override
-  public List<Device> findByTitle(String title) {
-    log.info("####### FIND BY TITLE {} ", title);
-    List<Device> blogList = blogRepository.findByTitle(title);
-    log.info("####### FIND BY blogList {} ", blogList);
-    return blogList;
+  public List<Device> findByName(String deviceName) {
+    log.info("####### FIND BY NAME {} ", deviceName);
+    List<Device> deviceList = deviceRepository.findByName(deviceName);
+    log.info("####### FIND BY deviceList {} ", deviceList);
+    return deviceList;
   }
 
   @Override
   public List<Device> findAll() {
-    return blogRepository.findAll();
+    return deviceRepository.findAll();
   }
 
   @Override
   public void delete(String id) {
-    blogRepository.deleteById(id);
+    deviceRepository.deleteById(id);
   }
 
   @Override
-  public Device update(Device blog) {
-    return blogRepository.save(blog);
+  public Device update(Device device) {
+    return deviceRepository.save(device);
   }
 
   @Override
   public Device findById(String id) {
-    return blogRepository.findById(id).get();
+    return deviceRepository.findById(id).get();
   }
 }

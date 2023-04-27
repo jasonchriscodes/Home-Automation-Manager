@@ -11,12 +11,14 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-@Document(collection = "blogs")
+@Document(collection = "devices")
 public class Device {
 
   @Id
-  private String blogId;
+  private String deviceId;
 
-  private String title;
-  private String content;
+  private String deviceName;
+  private String room;
+  private String device;
+  private boolean status;
 }

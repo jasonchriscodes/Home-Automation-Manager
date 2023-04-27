@@ -10,41 +10,41 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/api/v1")
+@RequestMapping("/api/v1/devices")
 public class DeviceController {
 
   @Autowired
-  private DeviceService blogService;
+  private DeviceService deviceService;
 
   @GetMapping("/all")
-  public List<Device> getAllBlogs() {
-    return blogService.findAll();
+  public List<Device> getAllDevices() {
+    return deviceService.findAll();
   }
 
-  @GetMapping("/title/{title}")
-  public List<Device> getBlogsByTitle(@PathVariable String title) {
-    return blogService.findByTitle(title);
+  @GetMapping("/name/{deviceName}")
+  public List<Device> getDeviceByTitle(@PathVariable String deviceName) {
+    return deviceService.findByName(deviceName);
   }
 
   @GetMapping("/id/{id}")
-  public Device getBlogsById(@PathVariable String id) {
-    return blogService.findById(id);
+  public Device getDeviceById(@PathVariable String id) {
+    return deviceService.findById(id);
   }
 
   @PostMapping("/create")
-  public Device create(@RequestBody Device blog) {
-    blog.setBlogId(UUID.randomUUID().toString());
-    return blogService.create(blog);
+  public Device create(@RequestBody Device device) {
+    device.setDeviceId(UUID.randomUUID().toString());
+    return deviceService.create(device);
   }
 
   @PutMapping("/update")
-  public Device update(@RequestBody Device blog) {
-    return blogService.update(blog);
+  public Device update(@RequestBody Device device) {
+    return deviceService.update(device);
   }
 
   @DeleteMapping("/delete/{id}")
   @ResponseStatus(HttpStatus.OK)
   public void deleteById(@PathVariable String id) {
-    blogService.delete(id);
+    deviceService.delete(id);
   }
 }
