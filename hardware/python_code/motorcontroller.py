@@ -46,8 +46,6 @@ def motor2_backward():
 while True:
     # Rotate motor 1 forward
 
-
-
     motor1_forward()
     GPIO.output(MOTOR2_PIN1, GPIO.LOW)  # B1-A
     GPIO.output(MOTOR2_PIN2, GPIO.LOW)  # B1-B
