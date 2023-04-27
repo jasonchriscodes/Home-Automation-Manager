@@ -1,7 +1,7 @@
 package arin.HomeAutomation.service;
 
-import arin.HomeAutomation.model.Blog;
-import arin.HomeAutomation.repository.BlogRepository;
+import arin.HomeAutomation.model.Device;
+import arin.HomeAutomation.repository.DeviceRepository;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,26 +9,26 @@ import org.springframework.stereotype.Service;
 
 @Service
 @Slf4j
-public class BlogService implements IBlogService {
+public class DeviceServiceImpl implements DeviceService {
 
   @Autowired
-  private BlogRepository blogRepository;
+  private DeviceRepository blogRepository;
 
   @Override
-  public Blog create(Blog blog) {
+  public Device create(Device blog) {
     return blogRepository.save(blog);
   }
 
   @Override
-  public List<Blog> findByTitle(String title) {
+  public List<Device> findByTitle(String title) {
     log.info("####### FIND BY TITLE {} ", title);
-    List<Blog> blogList = blogRepository.findByTitle(title);
+    List<Device> blogList = blogRepository.findByTitle(title);
     log.info("####### FIND BY blogList {} ", blogList);
     return blogList;
   }
 
   @Override
-  public List<Blog> findAll() {
+  public List<Device> findAll() {
     return blogRepository.findAll();
   }
 
@@ -38,12 +38,12 @@ public class BlogService implements IBlogService {
   }
 
   @Override
-  public Blog update(Blog blog) {
+  public Device update(Device blog) {
     return blogRepository.save(blog);
   }
 
   @Override
-  public Blog findById(String id) {
+  public Device findById(String id) {
     return blogRepository.findById(id).get();
   }
 }

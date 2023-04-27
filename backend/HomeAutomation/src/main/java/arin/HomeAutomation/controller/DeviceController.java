@@ -1,7 +1,7 @@
 package arin.HomeAutomation.controller;
 
-import arin.HomeAutomation.model.Blog;
-import arin.HomeAutomation.service.IBlogService;
+import arin.HomeAutomation.model.Device;
+import arin.HomeAutomation.service.DeviceService;
 import java.util.List;
 import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,34 +10,35 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin
-public class BlogController {
+@RequestMapping("/api/v1")
+public class DeviceController {
 
   @Autowired
-  private IBlogService blogService;
+  private DeviceService blogService;
 
   @GetMapping("/all")
-  public List<Blog> getAllBlogs() {
+  public List<Device> getAllBlogs() {
     return blogService.findAll();
   }
 
   @GetMapping("/title/{title}")
-  public List<Blog> getBlogsByTitle(@PathVariable String title) {
+  public List<Device> getBlogsByTitle(@PathVariable String title) {
     return blogService.findByTitle(title);
   }
 
   @GetMapping("/id/{id}")
-  public Blog getBlogsById(@PathVariable String id) {
+  public Device getBlogsById(@PathVariable String id) {
     return blogService.findById(id);
   }
 
   @PostMapping("/create")
-  public Blog create(@RequestBody Blog blog) {
+  public Device create(@RequestBody Device blog) {
     blog.setBlogId(UUID.randomUUID().toString());
     return blogService.create(blog);
   }
 
   @PutMapping("/update")
-  public Blog update(@RequestBody Blog blog) {
+  public Device update(@RequestBody Device blog) {
     return blogService.update(blog);
   }
 

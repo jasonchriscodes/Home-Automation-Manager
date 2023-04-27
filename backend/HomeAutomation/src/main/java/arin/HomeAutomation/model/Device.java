@@ -12,7 +12,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @NoArgsConstructor
 @ToString
 @Document(collection = "blogs")
-public class Blog {
+public class Device {
 
   @Id
   private String blogId;
