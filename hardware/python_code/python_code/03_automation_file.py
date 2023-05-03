@@ -14,6 +14,13 @@ KITCHEN_LED = 25
 OFFICE_LED = 12
 
 
+MOTOR1_EN = 26 #curtain motor control
+MOTOR1_PIN1 = 19
+MOTOR1_PIN2 = 13
+MOTOR2_EN = 6
+MOTOR2_PIN1 = 21
+MOTOR2_PIN2 = 20
+
 uri = "mongodb+srv://Home_Automation_AUT:Home_Automation_AUT@cluster0.9awkbpi.mongodb.net/?retryWrites=true&w=majority"
 
 def update_document(my_device, status):
@@ -49,6 +56,55 @@ def monitor_database():
 
         time.sleep(1)
 
+
+def curtain_motor_control(motor_en, motor_pin1, motor_pin2, direction):
+    GPIO.output(motor_en, GPIO.HIGH)
+    if direction == "forward":
+        GPIO.output(motor_pin1, GPIO.HIGH)
+        GPIO.output(motor_pin2, GPIO.LOW)
+    else:
+        GPIO.output(motor_pin1, GPIO.LOW)
+        GPIO.output(motor_pin2, GPIO.HIGH)
+    time.sleep(10)
+    GPIO.output(motor_en, GPIO.LOW)
+
+def curtain_control(status):
+    if status == "on":
+        curtain_motor_control(MOTOR1_EN, MOTOR1_PIN1, MOTOR1_PIN2, "forward")
+    else:
+        curtain_motor_control(MOTOR2_EN, MOTOR2_PIN1, MOTOR2_PIN2, "backward")
+
+def monitor_database():
+    client = MongoClient(uri)
+    db = client['Home_Automation_DB']
+    collection = db['devices']
+
+    device_led_map = {
+        "livingroom-light": LIVINGROOM_LED,
+        "kitchen-light": KITCHEN_LED,
+        "office-light": OFFICE_LED,
+    }
+
+    previous_curtain_status = None
+
+    while True:
+        for device_name, led_pin in device_led_map.items():
+            document = collection.find_one({"deviceName": device_name})
+            status = document['status']
+
+            if status == 'on':
+                GPIO.output(led_pin, GPIO.HIGH)
+            else:
+                GPIO.output(led_pin, GPIO.LOW)
+
+        # Check for kitchen-curtain status change
+        curtain_document = collection.find_one({"deviceName": "kitchen-curtain"})
+        curtain_status = curtain_document['status']
+        if curtain_status != previous_curtain_status:
+            previous_curtain_status = curtain_status
+            curtain_control(curtain_status)
+
+        time.sleep(1)
 
 #FUNCTIONS
 def sensor_callback(channel):
@@ -94,6 +150,13 @@ GPIO.setup(LED_PIN_IR, GPIO.OUT)
 GPIO.add_event_detect(SENSOR_PIN, GPIO.BOTH, callback=sensor_callback, bouncetime=300)
 GPIO.add_event_detect(REED_PIN, GPIO.BOTH, callback=reed_callback, bouncetime=300)
 GPIO.add_event_detect(IRO_PIN, GPIO.BOTH, callback=ir_callback, bouncetime=300)
+
+GPIO.setup(MOTOR1_EN, GPIO.OUT)
+GPIO.setup(MOTOR1_PIN1, GPIO.OUT)
+GPIO.setup(MOTOR1_PIN2, GPIO.OUT)
+GPIO.setup(MOTOR2_EN, GPIO.OUT)
+GPIO.setup(MOTOR2_PIN1, GPIO.OUT)
+GPIO.setup(MOTOR2_PIN2, GPIO.OUT)
 
 # Start the database monitor thread
 db_monitor_thread = threading.Thread(target=monitor_database)
