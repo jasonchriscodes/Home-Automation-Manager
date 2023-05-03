@@ -1,6 +1,17 @@
 import RPi.GPIO as GPIO
 import time
 
+from pymongo import MongoClient
+
+def update_document(my_device, status):
+    uri = "mongodb+srv://Home_Automation_AUT:Home_Automation_AUT@cluster0.9awkbpi.mongodb.net/?retryWrites=true&w=majority"
+    client = MongoClient(uri)
+    db = client['Home_Automation_DB']
+
+    collection = db['devices']
+    collection.update_one({"deviceName": my_device }, {"$set": {"status":f'{status}'}})
+    print("Update Complete")
+
 SENSOR_PIN = 17
 RELAY_PIN = 18
 REED_PIN = 22
@@ -25,6 +36,7 @@ try:
 
         if sensor_value == GPIO.HIGH:
             GPIO.output(RELAY_PIN, GPIO.LOW)
+            update_document("office-watering")
         else:
             GPIO.output(RELAY_PIN, GPIO.HIGH)
 
