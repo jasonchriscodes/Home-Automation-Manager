@@ -1,2 +1,86 @@
+# .gitignore for Python, C, and Raspberry Pi projects
+
+# Python
+__pycache__/
 *.pyc
-a.out
+*.pyo
+*.pyd
+*.pyc
+.Python
+env/
+venv/
+build/
+dist/
+*.egg-info/
+*.egg
+.ipynb_checkpoints
+
+# C
+*.o
+*.obj
+*.exe
+*.dll
+*.so
+*.a
+*.lib
+*.dylib
+*.out
+*.elf
+*.bin
+*.hex
+*.lss
+*.map
+*.d
+*.dep
+*.list
+*.srec
+*.s
+*.lst
+*.sym
+*.lss
+*.map
+
+# Build directories
+Debug/
+Release/
+
+# Build artifacts
+*.ilk
+*.pdb
+*.aps
+*.ncb
+*.sdf
+*.suo
+*.user
+*.bak
+*.cache
+*.ilk
+*.pdb
+
+# IDEs and editors
+.vscode/
+.vs/
+*.swp
+*.swo
+*.swn
+*.bak
+*.tmp
+
+# Raspberry Pi
+*.log
+*.bak
+.cap
+.data
+.local
+.lock
+.rsc
+.temp
+.tmp
+.raspberry-pi-sdimg
+*.img
+*.tar
+*.tar.gz
+*.tar.xz
+*.tar.bz2
+*.zip
+
