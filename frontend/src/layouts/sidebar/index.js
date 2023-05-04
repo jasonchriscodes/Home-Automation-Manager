@@ -8,6 +8,7 @@ import { SlSettings } from "react-icons/sl";
 import { MdOutlineBedroomParent, MdMenu } from "react-icons/md";
 import { TbReportAnalytics } from "react-icons/tb";
 import { ImTable } from "react-icons/im";
+import { AiFillDatabase } from "react-icons/ai";
 import { HiOutlineQuestionMarkCircle, HiOutlineLogout } from "react-icons/hi";
 import SubMenu from "./SubMenu";
 import { useTheme } from "@mui/material";
@@ -162,6 +163,12 @@ const Sidebar = () => {
               <NavLink to="/analytics" className={"link"}>
                 <ImTable size={23} className="min-w-max" />
                 Analytics
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/database" className={"link"}>
+                <AiFillDatabase size={23} className="min-w-max" />
+                Database
               </NavLink>
             </li>
             <li>
