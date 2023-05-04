@@ -11,7 +11,7 @@ import ToggleOnIcon from "@mui/icons-material/ToggleOn";
 import ToggleOffIcon from "@mui/icons-material/ToggleOff";
 import { Card, CardBody, CardText, CardTitle, Container } from "reactstrap";
 
-const DeviceTable = ({ devices, update }) => {
+const DeviceTable = ({ device, update }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [data, setData] = useState([]);
@@ -61,7 +61,7 @@ const DeviceTable = ({ devices, update }) => {
           <Fab
             color="danger"
             onClick={() => {
-              deleteDevice(devices.deviceId);
+              deleteDevice(device.deviceId);
             }}
           >
             Delete
@@ -113,18 +113,18 @@ const DeviceTable = ({ devices, update }) => {
   }, []);
 
   const deleteDevice = (deviceId) => {
-    console.log("deleteDevice", deviceId);
-    axios.delete(`${base_url}/delete/${deviceId}`).then(
-      (response) => {
-        console.log("!! Device " + deviceId + " Deleted Successfuly !!");
-        update(deviceId);
-      },
-      (error) => {
-        console.log(
-          "!! Something went wrong on Server. We are looking at it. !!"
-        );
-      }
-    );
+    alert(deviceId);
+    // axios.delete(`${base_url}/delete/${deviceId}`).then(
+    //   (response) => {
+    //     console.log("!! Device " + deviceId + " Deleted Successfuly !!");
+    //     update(deviceId);
+    //   },
+    //   (error) => {
+    //     console.log(
+    //       "!! Something went wrong on Server. We are looking at it. !!"
+    //     );
+    //   }
+    // );
   };
 
   return (
