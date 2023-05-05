@@ -3,10 +3,14 @@ import Switch from "./../../components/Switch";
 import ColorPicker from "@radial-color-picker/react-color-picker";
 import "@radial-color-picker/react-color-picker/dist/react-color-picker.min.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLightbulb } from "@fortawesome/free-solid-svg-icons";
+import {
+  faClosedCaptioning,
+  faLightbulb,
+} from "@fortawesome/free-solid-svg-icons";
 import { useTheme } from "@mui/material";
 import { tokens } from "../../theme";
-import axios from "./../../axios/axios";
+import { useParams } from "react-router-dom";
+import DeviceService from "./../../services/DeviceService";
 
 const imageFolder = "/assets";
 
@@ -37,14 +41,18 @@ const Light = () => {
 
   const [isOn, setIsOn] = useState(false);
 
-  const handleClick = async () => {
-    axios
-      .put("/lights/living-room/on")
+  const handleClick = (e) => {
+    e.preventDefault();
+    DeviceService.updateEmployee(device, deviceId)
       .then((response) => {
         setIsOn(true);
+        setDevice((prevDevice) => ({
+          ...prevDevice,
+          status: true,
+        }));
       })
       .catch((error) => {
-        console.error(error);
+        console.log(error);
       });
   };
 
@@ -53,6 +61,19 @@ const Light = () => {
     ? "from-red-500 via-red-600 bg-pos-0"
     : "from-blue-800 via-blue-600 bg-pos-0";
   const gradientEnd = isOn ? "to-red-400 bg-pos-100" : "to-blue-400 bg-pos-100";
+
+  const { deviceId } = useParams();
+  const [device, setDevice] = useState({
+    deviceId: deviceId,
+    room: "",
+    device: "",
+    status: false,
+  });
+
+  const handleChange = (e) => {
+    const value = e.target.value;
+    setDevice({ ...device, [e.target.name]: value });
+  };
 
   return (
     <div
@@ -105,6 +126,7 @@ const Light = () => {
           <div className="flex items-start flex-row justify-center p-3 gap-12">
             <button
               onClick={handleClick}
+              onChange={(e) => handleChange(e)}
               className={`bg-gradient-to-r ${gradientStart} ${gradientEnd} text-white px-12 py-5 rounded-md transition-all duration-500`}
               style={{
                 transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",

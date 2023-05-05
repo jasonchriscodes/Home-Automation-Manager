@@ -21,6 +21,7 @@ import BarChart from "./pages/dashboard/BarChart";
 import LineChart from "./pages/dashboard/LineChart";
 import ProgressCircle from "./pages/dashboard/ProgressCircle";
 import StatBox from "./pages/dashboard/StatBox";
+import Database from "./pages/Database";
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -41,6 +42,7 @@ function App() {
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/calendar" element={<Calendar />} />
               <Route path="/analytics" element={<Analytics />} />
+              <Route path="/database" element={<Database />} />
               <Route path="/settings" element={<Settings />} />
               <Route path="/helpandsupport" element={<HelpAndSupport />} />
               <Route path="/logout" element={<Logout />} />

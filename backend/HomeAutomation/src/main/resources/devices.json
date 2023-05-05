@@ -1,0 +1,50 @@
+[{
+  "_id": "878955a1-ba45-49bd-b907-e76ab2f10902",
+  "deviceName": "livingroom-bin",
+  "room": "livingroom",
+  "device": "bin",
+  "status": false,
+  "_class": "arin.HomeAutomation.model.Device"
+},{
+  "_id": "df9375ad-3641-4b89-8028-bafb663ceff1",
+  "deviceName": "livingroom-bin",
+  "room": "livingroom",
+  "device": "bin",
+  "status": true,
+  "_class": "arin.HomeAutomation.model.Device"
+},{
+  "_id": "6e4c6db6-c477-4133-8494-32524f6370a1",
+  "deviceName": "kitchen-curtain",
+  "room": "kitchen",
+  "device": "curtain",
+  "status": false,
+  "_class": "arin.HomeAutomation.model.Device"
+},{
+  "_id": "caa2fc68-6a11-4af5-834b-f632ceee197c",
+  "deviceName": "office-watering",
+  "room": "office",
+  "device": "watering",
+  "status": true,
+  "_class": "arin.HomeAutomation.model.Device"
+},{
+  "_id": "82b0da84-3b24-4aee-a789-5d389cb7f534",
+  "deviceName": "bed-light",
+  "room": "bedroom",
+  "device": "light",
+  "status": true,
+  "_class": "arin.HomeAutomation.model.Device"
+},{
+  "_id": "2537f659-274f-4980-983f-b5a4e8e2d430",
+  "deviceName": "bed-curtain",
+  "room": "bedroom",
+  "device": "curtain",
+  "status": false,
+  "_class": "arin.HomeAutomation.model.Device"
+},{
+  "_id": "0526fc8c-0a40-46e9-b99f-3b4c45422068",
+  "deviceName": "test-delete",
+  "room": "bedroom",
+  "device": "curtain",
+  "status": false,
+  "_class": "arin.HomeAutomation.model.Device"
+}]
