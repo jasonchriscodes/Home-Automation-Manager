@@ -1,9 +1,9 @@
 import pymongo
 import threading
 import time
+
 # Set up the URI
 uri = "mongodb+srv://Home_Automation_AUT:Home_Automation_AUT@cluster0.9awkbpi.mongodb.net/?retryWrites=true&w=majority"
-
 # Create a client object to connect to the database
 client = pymongo.MongoClient(uri)
 
@@ -33,7 +33,6 @@ def watch_changes():
         for change in change_stream:
             on_change(change)
 
-
 def main():
     # Start a separate thread to watch for changes
     change_thread = threading.Thread(target=watch_changes)
@@ -44,9 +43,9 @@ def main():
     print("Testing changes with multi-threading")
     # Call the update_document metho    d on the main thread
     
-    my_device = "study-light"
+    my_device = "livingroom-bin"
     #Change the status to 'off' or 'on' to test the DB change detection
-    status = 'on'
+    status = False
     update_document(my_device, status)
 
     # Wait for the change thread to finish
