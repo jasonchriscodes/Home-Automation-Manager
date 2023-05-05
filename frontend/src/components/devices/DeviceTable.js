@@ -114,17 +114,17 @@ const DeviceTable = ({ device, update }) => {
 
   const deleteDevice = (deviceId) => {
     alert(deviceId);
-    // axios.delete(`${base_url}/delete/${deviceId}`).then(
-    //   (response) => {
-    //     console.log("!! Device " + deviceId + " Deleted Successfuly !!");
-    //     update(deviceId);
-    //   },
-    //   (error) => {
-    //     console.log(
-    //       "!! Something went wrong on Server. We are looking at it. !!"
-    //     );
-    //   }
-    // );
+    axios.delete(`${base_url}/delete/${deviceId}`).then(
+      (response) => {
+        console.log("!! Device " + deviceId + " Deleted Successfuly !!");
+        update(deviceId);
+      },
+      (error) => {
+        console.log(
+          "!! Something went wrong on Server. We are looking at it. !!"
+        );
+      }
+    );
   };
 
   return (
