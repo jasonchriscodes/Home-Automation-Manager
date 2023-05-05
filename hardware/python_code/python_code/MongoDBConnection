@@ -1,32 +1,37 @@
-from dotenv import dotenv, find_dotenv 
-import os 
-import pprint 
-from pymongo import MonogoClient
+import unittest
+from pymongo import MongoClient
 
-load_dotenv(find_dotenv())
+class TestMongoDB(unittest.TestCase):
 
-password = os.environ.get("MONGO_PWD")  
-conection_string = f"mongodb://homeautomation:{password}x%23%40INRJKad123231@localhost:27017/?authMechanism=DEFAULT"
+    @classmethod
+    def setUpClass(cls):
+        # Set up the database connection
+        uri = "mongodb+srv://Home_Automation_AUT:Home_Automation_AUT@cluster0.9awkbpi.mongodb.net/?retryWrites=true&w=majority"
+        cls.client = MongoClient(uri)
+        cls.db = cls.client.test_database
+        cls.collection = cls.db.test_collection
 
-client = MonogoClient(conection_string)
+    @classmethod
+    def tearDownClass(cls):
+        # Clean up after the test
+        cls.client.close()
 
-dbs = client.list_database_names()
+    def test_connection(self):
+        # Test if the database connection is successful
+        self.assertTrue(self.client is not None)
+        self.assertTrue(self.db is not None)
 
-print(dbs)
-test_db = client.test
-collections =test_db.list_collection_names()
-print(collections)
+    def test_insert_and_retrieve(self):
+        # Test if a document can be inserted and retrieved
+        data = {"name": "BOB", "age": 25}
+        result = self.collection.insert_one(data)
+        self.assertTrue(result.acknowledged)
 
+        retrieved_data = self.collection.find_one({"name": "John"})
+        self.assertIsNotNone(retrieved_data)
+        self.assertEqual(retrieved_data["age"], 30)
 
-#Set up retrieval of boolean flags in the DB and return to the raspberry PI. 
-#The retrieval needs to be multi-threaded. 
-#Running a multi
+        self.collection.delete_one({"name": "John"})
 
-
-def create_device_state( device_name,  number_of_Devices):
-    state ={"Light: ON",}
-
-
-
-def find_all_states ():
-    state = state_collection.find()
+if __name__ == '__main__':
+    unittest.main()
