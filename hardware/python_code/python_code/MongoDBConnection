@@ -23,15 +23,21 @@ class TestMongoDB(unittest.TestCase):
 
     def test_insert_and_retrieve(self):
         # Test if a document can be inserted and retrieved
-        data = {"name": "BOB", "age": 25}
+        data = {"object_name": "light_fitting", "is_on": True}
         result = self.collection.insert_one(data)
         self.assertTrue(result.acknowledged)
 
-        retrieved_data = self.collection.find_one({"name": "John"})
+        retrieved_data = self.collection.find_one({"object_name": "light_fitting"})
         self.assertIsNotNone(retrieved_data)
-        self.assertEqual(retrieved_data["age"], 30)
+        self.assertEqual(retrieved_data["is_on"], True)
 
-        self.collection.delete_one({"name": "John"})
+        self.collection.delete_one({"object_name": "light_fitting"})
 
 if __name__ == '__main__':
-    unittest.main()
+    # Run the test suite
+    test_suite = unittest.TestLoader().loadTestsFromTestCase(TestMongoDB)
+    test_result = unittest.TextTestRunner(verbosity=2).run(test_suite)
+    if test_result.wasSuccessful():
+        print("All tests passed!")
+    else:
+        print("Some tests failed.") 
