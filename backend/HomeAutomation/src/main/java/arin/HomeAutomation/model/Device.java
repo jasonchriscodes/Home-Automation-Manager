@@ -20,5 +20,5 @@ public class Device {
   private String deviceName;
   private String room;
   private String device;
-  private boolean status;
+  private String status;
 }

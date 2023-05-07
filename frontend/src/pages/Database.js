@@ -2,7 +2,6 @@ import React from "react";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import base_url from "../services/DeviceService";
-import { toast } from "react-toastify";
 import DeviceTable from "../components/devices/DeviceTable";
 import { CardTitle } from "reactstrap";
 
@@ -24,12 +23,12 @@ const Database = () => {
       (response) => {
         setDevices(response.data);
         console.log(response);
-        toast.info("!! All Devices loaded from Server !!", {
+        console.log("!! All Devices loaded from Server !!", {
           position: "top-center",
         });
       },
       (error) => {
-        toast.error(
+        console.log(
           "!! Something went wrong on Server. We are looking at it. !!"
         );
       }
