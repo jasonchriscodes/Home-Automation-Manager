@@ -26,7 +26,7 @@ public class DeviceRespositoryTest {
     device.setDeviceName("junit-livingroom-curtain");
     device.setRoom("livingroom");
     device.setDevice("curtain");
-    device.setStatus(false);
+    device.setStatus("False");
     //Act
     Device newDevice = deviceRepository.save(device);
     //Assert
@@ -45,7 +45,7 @@ public class DeviceRespositoryTest {
     device1.setDeviceName("junit-office-light");
     device1.setRoom("office");
     device1.setDevice("light");
-    device1.setStatus(true);
+    device1.setStatus("True");
     deviceRepository.save(device1);
 
     // Device device2 = new Device();
@@ -66,7 +66,7 @@ public class DeviceRespositoryTest {
     device.setDeviceName("junit-bed-light");
     device.setRoom("bed");
     device.setDevice("light");
-    device.setStatus(false);
+    device.setStatus("False");
     deviceRepository.save(device);
 
     Device existingDevice = deviceRepository
@@ -85,7 +85,7 @@ public class DeviceRespositoryTest {
     device.setDeviceName("junit-bed-watering");
     device.setRoom("bed");
     device.setDevice("watering");
-    device.setStatus(true);
+    device.setStatus("True");
     deviceRepository.save(device);
 
     Device existingDevice = deviceRepository
@@ -106,7 +106,7 @@ public class DeviceRespositoryTest {
     device.setDeviceName("junit-bed-watering-delete");
     device.setRoom("bed");
     device.setDevice("watering");
-    device.setStatus(true);
+    device.setStatus("True");
     deviceRepository.save(device);
     String id = device.getDeviceId();
 
@@ -114,7 +114,7 @@ public class DeviceRespositoryTest {
     device2.setDeviceName("junit-bed-watering-not-delete");
     device2.setRoom("bed");
     device2.setDevice("watering");
-    device2.setStatus(true);
+    device2.setStatus("True");
     deviceRepository.save(device2);
 
     deviceRepository.delete(device);
