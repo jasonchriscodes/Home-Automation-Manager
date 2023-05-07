@@ -61,7 +61,7 @@ const DeviceTable = ({ device, update }) => {
           <Fab
             color="danger"
             onClick={() => {
-              deleteDevice(device.deviceId);
+              deleteDevice(params);
             }}
           >
             Delete
@@ -112,12 +112,15 @@ const DeviceTable = ({ device, update }) => {
     getDeviceData();
   }, []);
 
-  const deleteDevice = (deviceId) => {
-    alert(deviceId);
-    axios.delete(`${base_url}/delete/${deviceId}`).then(
+  const deleteDevice = (params) => {
+    console.log("params: ", params.row.deviceId);
+    alert("params: ", params.row.deviceId);
+    axios.delete(`${base_url}/delete/${params.row.deviceId}`).then(
       (response) => {
-        console.log("!! Device " + deviceId + " Deleted Successfuly !!");
-        update(deviceId);
+        console.log(
+          "!! Device " + params.row.deviceId + " Deleted Successfuly !!"
+        );
+        update(params.row.deviceId);
       },
       (error) => {
         console.log(
