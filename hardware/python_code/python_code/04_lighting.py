@@ -15,6 +15,7 @@ def monitor_database():
     device_led_map = {
         "bed-light": LIVINGROOM_LED,
         "office-watering": OFFICE_LED,
+        "kitchen-curtain": KITCHEN_LED,
     }
 
     # Continuously monitor the database for changes
@@ -23,12 +24,22 @@ def monitor_database():
         for device_name, led_pin in device_led_map.items():
             document = collection.find_one({"deviceName": device_name})
             status = document['status']
-            print("device name", device_name,"status", status)
+            print("device name", device_name,"status", status, led_pin)
+            
+            # BED LIGHT(23) MUST GO LOW TO TURN ON ( might have something to do with the wiring.)
+            # Everything else is normal.
 
-            if status == 'on':
-                GPIO.output(led_pin, GPIO.HIGH)
+            if led_pin == 23:
+                if status == 'True':
+                    GPIO.output(led_pin, GPIO.LOW)
+                else:
+                    GPIO.output(led_pin, GPIO.HIGH)
             else:
-                GPIO.output(led_pin, GPIO.LOW)
+                if status == 'True':
+                    GPIO.output(led_pin, GPIO.HIGH)
+                else:
+                    GPIO.output(led_pin, GPIO.LOW)
+
 
         time.sleep(1)
 
