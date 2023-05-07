@@ -48,11 +48,16 @@ def main():
     # my_deviceBED = "office-watering"
     # #Change the status to 'off' or 'on' to test the DB change detection
     statusT = True
-    # statusF = False
+    statusF = False
 
     # update_document(my_deviceKITCH, statusF)
     # update_document(my_deviceBED, statusF)
-    update_document("bed-curtain", statusT)
+    update_document("bed-light-on", statusT)
+    time.sleep(2)
+    update_document("kitchen-light-on", statusT)
+    time.sleep(2)
+    update_document("office-light-on", statusT)
+
 
 
    
