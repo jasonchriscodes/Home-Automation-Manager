@@ -44,10 +44,25 @@ def main():
     print("Testing changes with multi-threading")
     # Call the update_document metho    d on the main thread
     
-    my_device = "study-light"
-    #Change the status to 'off' or 'on' to test the DB change detection
-    status = 'on'
-    update_document(my_device, status)
+    # my_deviceKITCH = "bed-light"
+    # my_deviceBED = "office-watering"
+    # #Change the status to 'off' or 'on' to test the DB change detection
+    statusT = True
+    statusF = False
+
+    # update_document(my_deviceKITCH, statusF)
+    # update_document(my_deviceBED, statusF)
+    update_document("bed-light-on", statusT)
+    time.sleep(2)
+    update_document("kitchen-light-on", statusT)
+    time.sleep(2)
+    update_document("office-light-on", statusT)
+
+
+
+   
+
+
 
     # Wait for the change thread to finish
     change_thread.join()
