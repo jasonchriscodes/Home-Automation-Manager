@@ -34,15 +34,7 @@ const DeviceTable = ({ device, update }) => {
       {
         field: "status",
         headerName: "Status",
-        type: "boolean",
         editable: true,
-        renderCell: (params) => {
-          return params.value ? (
-            <ToggleOnIcon style={{ fill: "green" }} />
-          ) : (
-            <ToggleOffIcon style={{ fill: "red" }} />
-          );
-        },
       },
       {
         field: "actions",
