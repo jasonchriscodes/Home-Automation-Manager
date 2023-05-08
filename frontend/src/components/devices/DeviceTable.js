@@ -164,6 +164,11 @@ const DeviceTable = ({ device, update }) => {
           },
         }}
       >
+        <Link to="/add">
+          <Button sx={{ backgroundColor: colors.blueAccent[900] }}>
+            Add New Device
+          </Button>
+        </Link>
         <DataGrid
           getRowId={(row) => row.deviceId}
           rows={data}

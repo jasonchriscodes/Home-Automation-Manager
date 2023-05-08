@@ -1,6 +1,7 @@
 export const NAVBAR_TEXTS = [
   { page: "/", text: "Home Page" },
   { page: "/dashboard", text: "Dashboard Page" },
+  { page: "/add", text: "Add Device Page" },
   { page: "/calendar", text: "Calendar Page" },
   { page: "/analytics", text: "Analytics Page" },
   { page: "/settings", text: "Settings Page" },
