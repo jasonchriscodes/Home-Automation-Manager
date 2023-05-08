@@ -19,6 +19,7 @@ import Dashboard from "./pages/Dashboard";
 import Calendar from "./pages/Calendar";
 import Database from "./pages/Database";
 import AddDevice from "./components/devices/AddDevice";
+import UpdateDevice from "./components/devices/UpdateDevice";
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -41,6 +42,7 @@ function App() {
               <Route path="/analytics" element={<Analytics />} />
               <Route path="/database" element={<Database />} />
               <Route path="/add" element={<AddDevice />} />
+              <Route path="/update" element={<UpdateDevice />} />
               <Route path="/settings" element={<Settings />} />
               <Route path="/helpandsupport" element={<HelpAndSupport />} />
               <Route path="/logout" element={<Logout />} />
