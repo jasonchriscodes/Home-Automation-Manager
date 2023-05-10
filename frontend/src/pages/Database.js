@@ -37,15 +37,15 @@ const Database = () => {
   return (
     <div className>
       <CardTitle className="display-3">All Devices</CardTitle>
-      {devices.length > 0
-        ? devices.map((device) => (
-            <DeviceTable
-              key={devices.deviceId}
-              update={updateDevices}
-              device={device}
-            />
-          ))
-        : "No Devices Available to Show"}
+      {devices.length > 0 ? (
+        <DeviceTable
+          key={devices.deviceId}
+          update={updateDevices}
+          device={devices}
+        />
+      ) : (
+        "No Devices Available to Show"
+      )}
     </div>
   );
 };

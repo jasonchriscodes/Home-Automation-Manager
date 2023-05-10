@@ -1,50 +1,50 @@
 [{
-  "_id": "878955a1-ba45-49bd-b907-e76ab2f10902",
-  "deviceName": "livingroom-bin",
-  "room": "livingroom",
-  "device": "bin",
-  "status": false,
-  "_class": "arin.HomeAutomation.model.Device"
-},{
-  "_id": "df9375ad-3641-4b89-8028-bafb663ceff1",
-  "deviceName": "livingroom-bin",
-  "room": "livingroom",
-  "device": "bin",
-  "status": true,
-  "_class": "arin.HomeAutomation.model.Device"
-},{
-  "_id": "6e4c6db6-c477-4133-8494-32524f6370a1",
-  "deviceName": "kitchen-curtain",
+  "_id": "d8c0837b-ec8a-4276-8d4a-bed704d286d6",
+  "deviceName": "kitchen-light-on",
   "room": "kitchen",
   "device": "curtain",
-  "status": false,
+  "status": "True",
   "_class": "arin.HomeAutomation.model.Device"
 },{
-  "_id": "caa2fc68-6a11-4af5-834b-f632ceee197c",
-  "deviceName": "office-watering",
+  "_id": "920acd4b-1116-4798-9f7e-9ce452cee6fc",
+  "deviceName": "kitchen-light-on",
+  "room": "kitchen",
+  "device": "curtain",
+  "status": "True",
+  "_class": "arin.HomeAutomation.model.Device"
+},{
+  "_id": "a2a8d50e-a375-4061-8841-6cc340a6d4c4",
+  "deviceName": "office-light-on",
   "room": "office",
   "device": "watering",
-  "status": true,
+  "status": "True",
   "_class": "arin.HomeAutomation.model.Device"
 },{
-  "_id": "82b0da84-3b24-4aee-a789-5d389cb7f534",
-  "deviceName": "bed-light",
+  "_id": "5f0019aa-cf65-4671-8d5b-52797c114606",
+  "deviceName": "bed-light-on",
   "room": "bedroom",
   "device": "light",
-  "status": true,
+  "status": "True",
   "_class": "arin.HomeAutomation.model.Device"
 },{
-  "_id": "2537f659-274f-4980-983f-b5a4e8e2d430",
-  "deviceName": "bed-curtain",
+  "_id": "20cae265-af56-43fe-8f7f-f8dee8b2d974",
+  "deviceName": "bed-curtain-open",
   "room": "bedroom",
   "device": "curtain",
-  "status": false,
+  "status": "True",
   "_class": "arin.HomeAutomation.model.Device"
 },{
-  "_id": "0526fc8c-0a40-46e9-b99f-3b4c45422068",
-  "deviceName": "test-delete",
+  "_id": "a31db6fc-9049-4a68-a0c9-e3df4a5fe3a2",
+  "deviceName": "front-door-open",
   "room": "bedroom",
   "device": "curtain",
-  "status": false,
+  "status": "False",
+  "_class": "arin.HomeAutomation.model.Device"
+},{
+  "_id": "73118392-f489-4400-831a-59e75fd1a366",
+  "deviceName": "bed-bin-full",
+  "room": "livingroom",
+  "device": "bin",
+  "status": "False",
   "_class": "arin.HomeAutomation.model.Device"
 }]

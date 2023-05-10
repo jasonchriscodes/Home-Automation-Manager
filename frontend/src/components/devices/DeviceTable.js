@@ -34,15 +34,7 @@ const DeviceTable = ({ device, update }) => {
       {
         field: "status",
         headerName: "Status",
-        type: "boolean",
         editable: true,
-        renderCell: (params) => {
-          return params.value ? (
-            <ToggleOnIcon style={{ fill: "green" }} />
-          ) : (
-            <ToggleOffIcon style={{ fill: "red" }} />
-          );
-        },
       },
       {
         field: "actions",
@@ -61,40 +53,31 @@ const DeviceTable = ({ device, update }) => {
           <Fab
             color="danger"
             onClick={() => {
-              deleteDevice(device.deviceId);
+              deleteDevice(params);
             }}
           >
             Delete
           </Fab>
-          // <Button>Delete<Button/>
         ),
       },
-      // {
-      //   field: "actions",
-      //   headerName: "Actions",
-      //   width: 400,
-      //   renderCell: (params) => {
-      //     return (
-      //       <div>
-      //         <Link
-      //           className="btn btn-primary"
-      //           to={{ pathname: "/update", param: device.deviceId }}
-      //           style={{ marginRight: 15 + "px" }}
-      //         >
-      //           Edit
-      //         </Link>
-      //         <Button
-      //           color="danger"
-      //           onClick={() => {
-      //             deleteDevice(device.deviceId);
-      //           }}
-      //         >
-      //           Delete
-      //         </Button>
-      //       </div>
-      //     );
-      //   },
-      // },
+      {
+        field: "editActions",
+        headerName: "Actions",
+        type: "actions",
+        renderCell: (params) => (
+          // <DeviceActions {...{ params, rowId, setRowId }} />
+          <Fab color="warning">
+            <Link
+              onClick={() => {
+                updateDevice(params);
+              }}
+              to={{ pathname: "/update", param: params.row.deviceId }}
+            >
+              Edit
+            </Link>
+          </Fab>
+        ),
+      },
     ],
     [rowId]
   );
@@ -112,12 +95,14 @@ const DeviceTable = ({ device, update }) => {
     getDeviceData();
   }, []);
 
-  const deleteDevice = (deviceId) => {
-    alert(deviceId);
-    axios.delete(`${base_url}/delete/${deviceId}`).then(
+  const deleteDevice = (params) => {
+    // console.log("params: ", params.row.deviceId);
+    axios.delete(`${base_url}/delete/${params.row.deviceId}`).then(
       (response) => {
-        console.log("!! Device " + deviceId + " Deleted Successfuly !!");
-        update(deviceId);
+        console.log(
+          "!! Device " + params.row.deviceId + " Deleted Successfuly !!"
+        );
+        update(params.row.deviceId);
       },
       (error) => {
         console.log(
@@ -125,6 +110,9 @@ const DeviceTable = ({ device, update }) => {
         );
       }
     );
+  };
+  const updateDevice = (params) => {
+    console.log("update Device params: ", params.row.deviceId);
   };
 
   return (
@@ -161,6 +149,11 @@ const DeviceTable = ({ device, update }) => {
           },
         }}
       >
+        <Link to="/add">
+          <Button sx={{ backgroundColor: colors.blueAccent[900] }}>
+            Add New Device
+          </Button>
+        </Link>
         <DataGrid
           getRowId={(row) => row.deviceId}
           rows={data}
@@ -176,38 +169,6 @@ const DeviceTable = ({ device, update }) => {
           onCellEditCommit={(params) => setRowId(params.id)}
         />
       </Box>
-      {/* <h1>test</h1>
-      {data.map((item) => {
-        return <p>{item.deviceName}</p>;
-      })} */}
-      {/* <Card body inverse color="info">
-        <CardBody>
-          <CardTitle className="font-weight-bold">
-            {device.deviceName}
-          </CardTitle>
-          <CardText>{device.room}</CardText>
-          <CardText>{device.device}</CardText>
-          <CardText>{device.status}</CardText>
-          <Container>
-            <Link
-              className="btn btn-primary"
-              to={{ pathname: "/update", param: device.deviceId }}
-              style={{ marginRight: 15 + "px" }}
-            >
-              Edit
-            </Link>
-
-            <Button
-              color="danger"
-              onClick={() => {
-                deleteDevice(device.deviceId);
-              }}
-            >
-              Delete
-            </Button>
-          </Container>
-        </CardBody>
-      </Card> */}
     </Box>
   );
 };
