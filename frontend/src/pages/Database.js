@@ -15,7 +15,7 @@ const Database = () => {
 
   const updateDevices = (deviceId) => {
     console.log("updateDevices: ", deviceId);
-    setDevices(devices.filter((device) => device.deviceId !== deviceId)); //
+    // setDevices(devices.filter((device) => device.deviceId !== deviceId)); //
   };
 
   const getAllDevicesFromServer = () => {

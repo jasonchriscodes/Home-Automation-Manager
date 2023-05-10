@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import {
   Card,
   CardBody,
@@ -11,15 +12,16 @@ import {
 import base_url from "./../../services/DeviceService";
 
 const UpdateDevice = (props) => {
+  const location = useLocation();
   const [device, setDevice] = useState({});
   //-------------- Load data from server by Id
   const getDeviceFromServerById = () => {
     // console.log("id: ", props.param);
-    axios.get(`${base_url}/id/${props.location.param}`).then(
+    axios.get(`${base_url}/id/${location.state.deviceId}`).then(
       (response) => {
         setDevice(response.data);
         console.log("!! Device Updated Successfully");
-        console.log(`${props.location.param}`);
+        console.log(`${location.state.deviceId}`);
       },
       (error) => {
         console.log(
@@ -30,6 +32,8 @@ const UpdateDevice = (props) => {
   };
 
   useEffect(() => {
+    console.log("props : ", props.location);
+    console.log("location: ", location);
     getDeviceFromServerById();
   }, []);
 

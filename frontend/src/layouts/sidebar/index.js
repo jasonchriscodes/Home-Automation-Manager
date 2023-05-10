@@ -114,7 +114,7 @@ const Sidebar = () => {
             alt="app-logo"
             width={45}
           />
-          <span className="text-xl whitespace-pre"> Auto Home</span>
+          <span className="text-xl whitespace-pre"> Home Automation</span>
         </div>
 
         {/* menus */}
