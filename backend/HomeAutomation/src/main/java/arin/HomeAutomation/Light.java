@@ -9,12 +9,4 @@ public class Light extends Device{
         super(id, name, type, status);
     }
 
-    //------------------------------------------------------------------------------------------------------------------
-
-    public void setStatus(String status)
-    {
-        this.status = status;
-    }
-
-
 }
