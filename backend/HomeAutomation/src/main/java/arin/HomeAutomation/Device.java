@@ -41,7 +41,7 @@ public abstract class Device {
 
     public void setStatus(String status)
     {
-        this.status = status;
+        this.checkType(status);
     }
 
     //------------------------------------------------------------------------------------------------------------------
@@ -67,8 +67,65 @@ public abstract class Device {
 
     //------------------------------------------------------------------------------------------------------------------
 
-    public String getStatus()
+    private void checkType(String status)
     {
-        return this.status;
+        if(this.type.equalsIgnoreCase("light"))
+        {
+            this.setLightStatus(status);
+        }
+
+        if(this.type.equalsIgnoreCase("curtain"))
+        {
+            this.setCurtainStatus(status);
+        }
+
+        if(this.type.equalsIgnoreCase("plantWaterer"))
+        {
+            this.setPlantWatererStatus(status);
+        }
     }
+
+    //------------------------------------------------------------------------------------------------------------------
+
+    private void setLightStatus(String status)
+    {
+        if(this.status.equalsIgnoreCase("on"))
+        {
+            this.status =  "off";
+        }
+        else
+        {
+            this.status = "on";
+        }
+    }
+
+    //------------------------------------------------------------------------------------------------------------------
+
+    private void setCurtainStatus(String status)
+    {
+        if(this.status.equalsIgnoreCase("on"))
+        {
+            this.status = "off";
+        }
+        else
+        {
+            this.status = "on";
+        }
+    }
+
+    //------------------------------------------------------------------------------------------------------------------
+
+    private void setPlantWatererStatus(String status)
+    {
+        if(this.status.equalsIgnoreCase("on"))
+        {
+            this.status = "off";
+        }
+        else
+        {
+            this.status = "on";
+        }
+    }
+
+
 }
