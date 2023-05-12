@@ -1,8 +1,7 @@
 package arin.HomeAutomation;
 
-public class Light extends Device{
 
-    private String status;
+public class Light extends Device{
 
     public Light(String id, String name, String type, String status)
     {

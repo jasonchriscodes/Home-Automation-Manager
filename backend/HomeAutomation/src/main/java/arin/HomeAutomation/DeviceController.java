@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/devices")
@@ -22,22 +23,27 @@ public class DeviceController {
     //------------------------------------------------------------------------------------------------------------------
 
     @GetMapping("/{id}")
-    public Device getDeviceById(@PathVariable String id)
+    public Optional<Device> getDeviceById(@PathVariable String id)
     {
         return deviceService.getDeviceById(id);
     }
 
     //------------------------------------------------------------------------------------------------------------------
 
+//    @PutMapping("/{id}/status")
+//    public ResponseEntity<String> updateDeviceStatus(@PathVariable String id, @RequestBody String status)
+//    {
+//        Device updatedDevice = deviceService.updateDeviceStatus(id, status);
+//        if(updatedDevice != null)
+//        {
+//            return ResponseEntity.ok("Device Status Updated");
+//        }
+//        return ResponseEntity.notFound().build();
+//    }
+
     @PutMapping("/{id}/status")
-    public ResponseEntity<String> updateDeviceStatus(@PathVariable String id, @RequestBody String status)
-    {
-        Device updatedDevice = deviceService.updateDeviceStatus(id, status);
-        if(updatedDevice != null)
-        {
-            return ResponseEntity.ok("Device Status Updated");
-        }
-        return ResponseEntity.notFound().build();
+    public Device updateDeviceStatus(@PathVariable String id, @RequestBody String status) {
+        return deviceService.updateDeviceStatus(id, status);
     }
 
 

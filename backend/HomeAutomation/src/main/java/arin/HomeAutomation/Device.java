@@ -1,13 +1,17 @@
 package arin.HomeAutomation;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
-public abstract class Device {
+@Document(collection = "devices")
+public class Device {
 
     @Id
     private String id;
     private String name;
     private String type;
+    @Field("status")
     private String status;
 
     public Device(String id, String name, String type, String status)
@@ -39,9 +43,9 @@ public abstract class Device {
 
     //------------------------------------------------------------------------------------------------------------------
 
-    public void setStatus(String status)
+    private void setStatus(String status)
     {
-        this.checkType(status);
+        this.status = status;
     }
 
     //------------------------------------------------------------------------------------------------------------------
@@ -63,6 +67,13 @@ public abstract class Device {
     public String getType()
     {
         return this.type;
+    }
+
+    //------------------------------------------------------------------------------------------------------------------
+
+    public void setNewStatus(String status)
+    {
+        this.checkType(status);
     }
 
     //------------------------------------------------------------------------------------------------------------------
@@ -103,13 +114,13 @@ public abstract class Device {
 
     private void setCurtainStatus(String status)
     {
-        if(this.status.equalsIgnoreCase("on"))
+        if(this.status.equalsIgnoreCase("open"))
         {
-            this.status = "off";
+            this.status = "close";
         }
         else
         {
-            this.status = "on";
+            this.status = "open";
         }
     }
 

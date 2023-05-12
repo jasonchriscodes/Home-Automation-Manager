@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class DeviceService {
@@ -18,18 +19,22 @@ public class DeviceService {
 
     //------------------------------------------------------------------------------------------------------------------
 
-    public Device getDeviceById(String id)
+    public Optional<Device> getDeviceById(String id)
     {
-        return deviceRepository.findById(id).orElse(null);
+        return deviceRepository.findById(id);
     }
 
     //------------------------------------------------------------------------------------------------------------------
 
-    public Device updateDeviceStatus(String id, String status)
-    {
-        Device device = deviceRepository.findById(id).orElseThrow();
-        device.setStatus(status);
-        return deviceRepository.save(device);
+    public Device updateDeviceStatus(String id, String status) {
+        Optional<Device> optionalDevice = deviceRepository.findById(id);
+        if (optionalDevice.isPresent()) {
+            Device device = optionalDevice.get();
+            device.setNewStatus(status);
+            return deviceRepository.save(device);
+        } else {
+            throw new IllegalArgumentException("No device with ID " + id);
+        }
     }
 
 }
