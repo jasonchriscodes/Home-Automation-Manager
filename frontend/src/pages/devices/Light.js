@@ -41,20 +41,7 @@ const Light = () => {
 
   const [isOn, setIsOn] = useState(false);
 
-  const handleClick = (e) => {
-    e.preventDefault();
-    DeviceService.updateEmployee(device, deviceId)
-      .then((response) => {
-        setIsOn(true);
-        setDevice((prevDevice) => ({
-          ...prevDevice,
-          status: true,
-        }));
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+  const handleClick = (e) => {};
 
   const buttonText = isOn ? "Close" : "Open";
   const gradientStart = isOn
