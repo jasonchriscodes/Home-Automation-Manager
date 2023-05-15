@@ -38,7 +38,7 @@ const DeviceTable = ({ device, update }) => {
       },
       {
         field: "actions",
-        headerName: "Actions",
+        headerName: "Save",
         type: "actions",
         renderCell: (params) => (
           <DeviceActions {...{ params, rowId, setRowId }} />
@@ -46,7 +46,7 @@ const DeviceTable = ({ device, update }) => {
       },
       {
         field: "deleteActions",
-        headerName: "Actions",
+        headerName: "Delete",
         type: "actions",
         renderCell: (params) => (
           // <DeviceActions {...{ params, rowId, setRowId }} />
@@ -62,7 +62,7 @@ const DeviceTable = ({ device, update }) => {
       },
       {
         field: "editActions",
-        headerName: "Actions",
+        headerName: "Edit",
         type: "actions",
         renderCell: (params) => (
           // <DeviceActions {...{ params, rowId, setRowId }} />
@@ -75,6 +75,24 @@ const DeviceTable = ({ device, update }) => {
               state={{ deviceId: params.row.deviceId }}
             >
               Edit
+            </Link>
+          </Fab>
+        ),
+      },
+      {
+        field: "detailActions",
+        headerName: "Detail",
+        type: "actions",
+        renderCell: (params) => (
+          <Fab color="warning">
+            <Link
+              onClick={() => {
+                updateDevice(params);
+              }}
+              to={{ pathname: `../rooms/${params.row.room}` }}
+              state={{ deviceId: params.row.deviceId }}
+            >
+              Detail
             </Link>
           </Fab>
         ),
