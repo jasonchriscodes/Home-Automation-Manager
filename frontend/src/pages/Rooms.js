@@ -1,10 +1,12 @@
-import React from "react";
-import { NavLink, Outlet, useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
 import VectorMap, { Layer, Tooltip, Label } from "devextreme-react/vector-map";
 import { roomsData, buildingData } from "./../constants";
 import { Box } from "@mui/material";
 import { useTheme } from "@mui/material";
 import { tokens } from "./../theme";
+import axios from "axios";
+import base_url from "./../services/DeviceService";
 
 const projection = {
   to: ([l, lt]) => [l / 100, lt / 100],
@@ -25,6 +27,30 @@ const Rooms = () => {
     }
     return null;
   }
+
+  const location = useLocation();
+  const [device, setDevice] = useState({});
+  //-------------- Load data from server by Id
+  const getDeviceFromServerById = () => {
+    console.log("id in room: ", location.state.deviceId);
+    axios.get(`${base_url}/id/${location.state.deviceId}`).then(
+      (response) => {
+        setDevice(response.data);
+        console.log("!! Device Updated Successfully");
+        console.log(`${location.state.deviceId}`);
+        console.log("response: ", response);
+      },
+      (error) => {
+        console.log(
+          "!! Something went wrong on Server. We are looking at it. !!"
+        );
+      }
+    );
+  };
+
+  useEffect(() => {
+    getDeviceFromServerById();
+  }, []);
 
   return (
     <Box m="20px">
