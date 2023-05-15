@@ -9,7 +9,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useTheme } from "@mui/material";
 import { tokens } from "../../theme";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import DeviceService from "./../../services/DeviceService";
 
 const imageFolder = "/assets";
@@ -17,6 +17,7 @@ const imageFolder = "/assets";
 const Light = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  const location = useLocation();
   const [color, setColor] = useState({
     hue: 90,
     saturation: 100,
@@ -50,7 +51,7 @@ const Light = () => {
   const gradientEnd = isOn ? "to-red-400 bg-pos-100" : "to-blue-400 bg-pos-100";
 
   const { deviceId } = useParams();
-  const [device, setDevice] = useState({
+  const [deviceButton, setDeviceButton] = useState({
     deviceId: deviceId,
     room: "",
     device: "",
@@ -59,7 +60,7 @@ const Light = () => {
 
   const handleChange = (e) => {
     const value = e.target.value;
-    setDevice({ ...device, [e.target.name]: value });
+    setDeviceButton({ ...deviceButton, [e.target.name]: value });
   };
 
   return (
@@ -70,7 +71,7 @@ const Light = () => {
       <div className="flex-col">
         <div className="flex items-start flex-row justify-between p-3">
           <h1>Lights</h1>
-          <Switch />
+          <Switch status={location.state.status} />
         </div>
         <div className="flex items-start flex-row justify-between p-3">
           <ColorPicker {...color} onInput={onInput} />
