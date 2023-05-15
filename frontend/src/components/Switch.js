@@ -1,11 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTheme } from "@mui/material";
 import { tokens } from "./../theme";
 
-export default function Toggle() {
+export default function Switch(props) {
   const [enabled, setEnabled] = useState(false);
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+
+  useEffect(() => {
+    console.log("params: ", props);
+  }, []);
 
   return (
     <div className="relative flex flex-col items-center justify-center overflow-hidden">
@@ -14,6 +18,7 @@ export default function Toggle() {
           <span
             className="ml-2 text-sm font-medium"
             style={{ color: `${colors.redAccent[400]}` }}
+            props="False"
           >
             OFF
           </span>
@@ -34,6 +39,7 @@ export default function Toggle() {
           <span
             className="ml-2 text-sm font-medium"
             style={{ color: `${colors.greenAccent[400]}` }}
+            props="True"
           >
             ON
           </span>

@@ -1,12 +1,11 @@
+import { Box, useTheme } from "@mui/material";
+import axios from "axios";
+import VectorMap, { Label, Layer, Tooltip } from "devextreme-react/vector-map";
 import React, { useEffect, useState } from "react";
 import { NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
-import VectorMap, { Layer, Tooltip, Label } from "devextreme-react/vector-map";
-import { roomsData, buildingData } from "./../constants";
-import { Box } from "@mui/material";
-import { useTheme } from "@mui/material";
-import { tokens } from "./../theme";
-import axios from "axios";
+import { buildingData, roomsData } from "./../constants";
 import base_url from "./../services/DeviceService";
+import { tokens } from "./../theme";
 
 const projection = {
   to: ([l, lt]) => [l / 100, lt / 100],
@@ -17,6 +16,8 @@ const Rooms = () => {
   const navigate = useNavigate();
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  const location = useLocation();
+  const [device, setDevice] = useState({});
   function customizeTooltip(arg) {
     if (arg.layer.name === "rooms") {
       return {
@@ -28,8 +29,6 @@ const Rooms = () => {
     return null;
   }
 
-  const location = useLocation();
-  const [device, setDevice] = useState({});
   //-------------- Load data from server by Id
   const getDeviceFromServerById = () => {
     console.log("id in room: ", location.state.deviceId);
@@ -37,8 +36,10 @@ const Rooms = () => {
       (response) => {
         setDevice(response.data);
         console.log("!! Device Updated Successfully");
-        console.log(`${location.state.deviceId}`);
         console.log("response: ", response);
+        console.log("response data: ", response.data);
+        console.log("device in room: ", device);
+        console.log("device status in room: ", device.status);
       },
       (error) => {
         console.log(
@@ -94,19 +95,32 @@ const Rooms = () => {
         marginY="20px"
         style={{ backgroundColor: `${colors.primary[400]}` }}
       >
-        <NavLink className="hover:text-[#3e4396] rounded-md p-2" to="bedroom">
+        <NavLink
+          className="hover:text-[#3e4396] rounded-md p-2"
+          to="bedroom"
+          state={{ status: device.status }}
+        >
           Bedroom
         </NavLink>
-        <NavLink className="hover:text-[#3e4396] rounded-md p-2" to="kitchen">
+        <NavLink
+          className="hover:text-[#3e4396] rounded-md p-2"
+          to="kitchen"
+          state={{ status: device.status }}
+        >
           Kitchen
         </NavLink>
         <NavLink
           className="hover:text-[#3e4396] rounded-md p-2"
           to="livingroom"
+          state={{ status: device.status }}
         >
           Livingroom
         </NavLink>
-        <NavLink className="hover:text-[#3e4396] rounded-md p-2" to="office">
+        <NavLink
+          className="hover:text-[#3e4396] rounded-md p-2"
+          to="office"
+          state={{ status: device.status }}
+        >
           Office
         </NavLink>
       </Box>
