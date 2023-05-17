@@ -1,16 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Switch from "./../../components/Switch";
 import ColorPicker from "@radial-color-picker/react-color-picker";
 import "@radial-color-picker/react-color-picker/dist/react-color-picker.min.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faClosedCaptioning,
-  faLightbulb,
-} from "@fortawesome/free-solid-svg-icons";
+import { faLightbulb } from "@fortawesome/free-solid-svg-icons";
 import { useTheme } from "@mui/material";
 import { tokens } from "../../theme";
 import { useLocation, useParams } from "react-router-dom";
-import DeviceService from "./../../services/DeviceService";
 
 const imageFolder = "/assets";
 
@@ -63,6 +59,10 @@ const Light = () => {
     setDeviceButton({ ...deviceButton, [e.target.name]: value });
   };
 
+  useEffect(() => {
+    // console.log("status in light: ", location.state);
+  }, []);
+
   return (
     <div
       className="p-4 shadow-md flex flex-wrap flex-col justify-around"
@@ -71,7 +71,7 @@ const Light = () => {
       <div className="flex-col">
         <div className="flex items-start flex-row justify-between p-3">
           <h1>Lights</h1>
-          <Switch status={location.state.status} />
+          <Switch status={location?.state?.status} />
         </div>
         <div className="flex items-start flex-row justify-between p-3">
           <ColorPicker {...color} onInput={onInput} />

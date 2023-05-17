@@ -15,9 +15,10 @@ const projection = {
 const Rooms = () => {
   const navigate = useNavigate();
   const theme = useTheme();
+
   const colors = tokens(theme.palette.mode);
   const location = useLocation();
-  const [device, setDevice] = useState({});
+  const [device, setDevice] = useState(null);
   function customizeTooltip(arg) {
     if (arg.layer.name === "rooms") {
       return {
@@ -31,15 +32,12 @@ const Rooms = () => {
 
   //-------------- Load data from server by Id
   const getDeviceFromServerById = () => {
-    console.log("id in room: ", location.state.deviceId);
-    axios.get(`${base_url}/id/${location.state.deviceId}`).then(
+    // console.log("deviceId in Room.js: ", location.state.deviceId);
+    const searchParams = new URLSearchParams(location.search);
+
+    axios.get(`${base_url}/id/${searchParams.get("deviceId")}`).then(
       (response) => {
         setDevice(response.data);
-        console.log("!! Device Updated Successfully");
-        console.log("response: ", response);
-        console.log("response data: ", response.data);
-        console.log("device in room: ", device);
-        console.log("device status in room: ", device.status);
       },
       (error) => {
         console.log(
@@ -51,6 +49,7 @@ const Rooms = () => {
 
   useEffect(() => {
     getDeviceFromServerById();
+    console.log("Device in Room.js: ", device);
   }, []);
 
   return (
@@ -97,29 +96,43 @@ const Rooms = () => {
       >
         <NavLink
           className="hover:text-[#3e4396] rounded-md p-2"
-          to="bedroom"
-          state={{ status: device.status }}
+          to={{
+            pathname: `bedroom`,
+            search: `${device?.deviceId}`,
+          }}
+          state={{ status: device?.status }}
         >
           Bedroom
         </NavLink>
         <NavLink
           className="hover:text-[#3e4396] rounded-md p-2"
-          to="kitchen"
-          state={{ status: device.status }}
+          to={{
+            pathname: `kitchen`,
+            search: `${device?.deviceId}`,
+          }}
+          state={{ status: device?.status }}
         >
           Kitchen
         </NavLink>
         <NavLink
           className="hover:text-[#3e4396] rounded-md p-2"
-          to="livingroom"
-          state={{ status: device.status }}
+          //to={`livingroom/?${device?.deviceId}`}
+          //state={{ status: device?.status }}
+          to={{
+            pathname: `livingroom`,
+            search: `${device?.deviceId}`,
+          }}
+          state={{ status: device?.status }}
         >
           Livingroom
         </NavLink>
         <NavLink
           className="hover:text-[#3e4396] rounded-md p-2"
-          to="office"
-          state={{ status: device.status }}
+          to={{
+            pathname: `office`,
+            search: `${device?.deviceId}`,
+          }}
+          state={{ status: device?.status }}
         >
           Office
         </NavLink>

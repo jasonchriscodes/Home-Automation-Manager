@@ -41,6 +41,22 @@ public class DeviceController {
     return deviceService.update(device);
   }
 
+  // @PutMapping("/update/{id}")
+  // public Device updateDeviceById(
+  //   @PathVariable String id,
+  //   @RequestBody String status
+  // ) {
+
+  //   Device device = deviceService.findById(id);
+
+  //     // Update the fields of the existing entity with the new values
+  //     device.setStatus(status);
+
+  //     // Save the updated entity
+  //     return deviceService.save(device);
+
+  // }
+
   @DeleteMapping("/delete/{id}")
   @ResponseStatus(HttpStatus.OK)
   public void deleteById(@PathVariable String id) {

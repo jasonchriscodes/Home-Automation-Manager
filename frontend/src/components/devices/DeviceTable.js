@@ -89,8 +89,8 @@ const DeviceTable = ({ device, update }) => {
               onClick={() => {
                 updateDevice(params);
               }}
-              to={{ pathname: `../rooms/${params.row.room}` }}
-              state={{ deviceId: params.row.deviceId }}
+              to={`/rooms/${params.row.room}/?deviceId=${params.row.deviceId}`}
+              state={{ status: params.row.status }}
             >
               Detail
             </Link>
