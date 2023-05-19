@@ -41,21 +41,19 @@ public class DeviceController {
     return deviceService.update(device);
   }
 
-  // @PutMapping("/update/{id}")
-  // public Device updateDeviceById(
-  //   @PathVariable String id,
-  //   @RequestBody String status
-  // ) {
+  @PutMapping("/update/{id}")
+  public Device updateDeviceById(
+    @PathVariable String id,
+    @RequestBody String status
+  ) {
+    Device device = deviceService.findById(id);
 
-  //   Device device = deviceService.findById(id);
+    // Update the fields of the existing entity with the new values
+    device.setStatus(status);
 
-  //     // Update the fields of the existing entity with the new values
-  //     device.setStatus(status);
-
-  //     // Save the updated entity
-  //     return deviceService.save(device);
-
-  // }
+    // Save the updated entity
+    return deviceService.update(device);
+  }
 
   @DeleteMapping("/delete/{id}")
   @ResponseStatus(HttpStatus.OK)

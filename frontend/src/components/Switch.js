@@ -18,20 +18,13 @@ export default function Switch(props) {
 
     // console.log("id: ", props.param);
     axios
-      .put(`${base_url}/update/${searchParams.get("deviceId")}`, {
-        status: newStatus,
+      .put(`${base_url}/update/${searchParams.get("deviceId")}`, newStatus, {
+        headers: {
+          "Content-Type": "text/plain",
+        },
       })
       .then(
         (response) => {
-          // setDevice(response.data);
-          // setDeviceStatus(response.data.status);
-          // console.log("!! Device Updated Successfully in Light.js");
-          // console.log(
-          //   `location deviceid in Light.js: ${location.state.deviceId}`
-          // );
-          // console.log(`Response in Light.js: ${response}`);
-          // console.log(`Response data in Light.js: ${response.data}`);
-          // console.log(`Response status in Light.js: ${response.data.status}`);
           setEnabled(!enabled);
         },
         (error) => {
@@ -40,9 +33,6 @@ export default function Switch(props) {
           );
         }
       );
-    // console.log(`Device in Light.js: ${device}`);
-    // console.log(`Device status in Light.js: ${device.status}`);
-    // console.log(`DeviceStatus in Light.js: ${deviceStatus}`);
   };
 
   useEffect(() => {
