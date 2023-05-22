@@ -1,0 +1,64 @@
+[{
+  "_id": {
+    "$oid": "645c480e781e46b6e35c4fe3"
+  },
+  "name": "Bedroom Light",
+  "status": "off",
+  "countOn": "0",
+  "turnOff": "null",
+  "turnOn": "null"
+},{
+  "_id": {
+    "$oid": "645c4856781e46b6e35c4fe4"
+  },
+  "name": "Living Room Light",
+  "status": "off",
+  "countOn": "0",
+  "turnOff": "null",
+  "turnOn": "null"
+},{
+  "_id": {
+    "$oid": "645c48a4781e46b6e35c4fe5"
+  },
+  "name": "Office Light",
+  "status": "on",
+  "countOn": "1",
+  "turnOff": "null",
+  "turnOn": "null"
+},{
+  "_id": {
+    "$oid": "645c48d6781e46b6e35c4fe6"
+  },
+  "name": "Curtain",
+  "status": "close",
+  "countOn": "1",
+  "turnOff": "null",
+  "turnOn": "null"
+},{
+  "_id": {
+    "$oid": "645c4916781e46b6e35c4fe7"
+  },
+  "name": "Plant Watering System",
+  "status": "on",
+  "countOn": "0",
+  "turnOff": "null",
+  "turnOn": "null"
+},{
+  "_id": {
+    "$oid": "6469d4bb077d45277bce9e50"
+  },
+  "name": "Door",
+  "status": "open",
+  "turnOn": "null",
+  "turnOff": "null",
+  "countOn": "3"
+},{
+  "_id": {
+    "$oid": "6469d505077d45277bce9e51"
+  },
+  "name": "Bin",
+  "status": "empty",
+  "turnOn": "null",
+  "turnOff": "null",
+  "countOn": "7"
+}]

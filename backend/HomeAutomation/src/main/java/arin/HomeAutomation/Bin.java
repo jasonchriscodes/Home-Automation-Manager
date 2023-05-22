@@ -1,8 +1,8 @@
 package arin.HomeAutomation;
 
-public class Curtain extends Device {
+public class Bin extends Device {
 
-  public Curtain(
+  public Bin(
     String id,
     String name,
     String type,
