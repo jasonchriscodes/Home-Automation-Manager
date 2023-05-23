@@ -17,9 +17,10 @@ import { ColorModeContext, useMode } from "./theme";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import Dashboard from "./pages/Dashboard";
 import Calendar from "./pages/Calendar";
-import Database from "./pages/Database";
-import AddDevice from "./components/devices/AddDevice";
-import UpdateDevice from "./components/devices/UpdateDevice";
+import BarChart from "./pages/dashboard/BarChart";
+import LineChart from "./pages/dashboard/LineChart";
+import ProgressCircle from "./pages/dashboard/ProgressCircle";
+import StatBox from "./pages/dashboard/StatBox";
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -33,16 +34,13 @@ function App() {
               <Route index element={<Home />} />
               <Route path="/rooms" element={<Rooms />}>
                 <Route path="bedroom" element={<Bedroom />} />
-                <Route path="kitchen" index element={<Kitchen />} />
+                <Route path="kitchen" element={<Kitchen />} />
                 <Route path="livingroom" element={<LivingRoom />} />
                 <Route path="office" element={<Office />} />
               </Route>
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/calendar" element={<Calendar />} />
               <Route path="/analytics" element={<Analytics />} />
-              <Route path="/database" element={<Database />} />
-              <Route path="/add" element={<AddDevice />} />
-              <Route path="/update" element={<UpdateDevice />} />
               <Route path="/settings" element={<Settings />} />
               <Route path="/helpandsupport" element={<HelpAndSupport />} />
               <Route path="/logout" element={<Logout />} />

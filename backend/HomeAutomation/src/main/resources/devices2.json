@@ -1,0 +1,83 @@
+[{
+  "_id": "7b463d96-c484-49b4-9a36-d4d9dd1d1ba4",
+  "deviceName": "kitchen-light-on",
+  "room": "kitchen",
+  "device": "curtain",
+  "status": "False",
+  "_class": "arin.HomeAutomation.model.Device"
+},{
+  "_id": "24e9cdd6-e0a0-48fa-9d1f-21cbd352a21b",
+  "deviceName": "office-light-on",
+  "room": "office",
+  "device": "watering",
+  "status": "False",
+  "_class": "arin.HomeAutomation.model.Device"
+},{
+  "_id": "4536c7fa-03cc-459d-989a-c7713f1b80d8",
+  "deviceName": "bed-light-on",
+  "room": "bedroom",
+  "device": "light",
+  "status": "True",
+  "_class": "arin.HomeAutomation.model.Device"
+},{
+  "_id": "32c9ebe9-d064-4ec8-bb5e-42ff12626031",
+  "deviceName": "bed-curtain-open",
+  "room": "bedroom",
+  "device": "curtain",
+  "status": "False",
+  "_class": "arin.HomeAutomation.model.Device"
+},{
+  "_id": "bf0186e8-2ba9-4897-af01-45846a6c6ae1",
+  "deviceName": "front-door-open",
+  "room": "bedroom",
+  "device": "curtain",
+  "status": "True",
+  "_class": "arin.HomeAutomation.model.Device"
+},{
+  "_id": "4bacb177-77d3-4970-b2dd-8dd57ccae0f8",
+  "deviceName": "bed-bin-full",
+  "room": "livingroom",
+  "device": "bin",
+  "status": "False",
+  "_class": "arin.HomeAutomation.model.Device"
+},{
+  "_id": {
+    "$oid": "645c480e781e46b6e35c4fe3"
+  },
+  "name": "Bedroom Light",
+  "type": "Light",
+  "status": "off",
+  "_class": "arin.HomeAutomation.Device"
+},{
+  "_id": {
+    "$oid": "645c4856781e46b6e35c4fe4"
+  },
+  "name": "Living Room Light",
+  "type": "Light",
+  "status": "off",
+  "_class": "arin.HomeAutomation.Device"
+},{
+  "_id": {
+    "$oid": "645c48a4781e46b6e35c4fe5"
+  },
+  "name": "Office Light",
+  "type": "Light",
+  "status": "off",
+  "_class": "arin.HomeAutomation.Device"
+},{
+  "_id": {
+    "$oid": "645c48d6781e46b6e35c4fe6"
+  },
+  "name": "Curtain",
+  "type": "Curtain",
+  "status": "open",
+  "_class": "arin.HomeAutomation.Device"
+},{
+  "_id": {
+    "$oid": "645c4916781e46b6e35c4fe7"
+  },
+  "name": "Plant Watering System",
+  "type": "PlantWaterer",
+  "status": "on",
+  "_class": "arin.HomeAutomation.Device"
+}]

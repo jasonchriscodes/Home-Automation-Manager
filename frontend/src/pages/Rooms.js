@@ -1,10 +1,9 @@
-import { Box, useTheme } from "@mui/material";
-import axios from "axios";
-import VectorMap, { Label, Layer, Tooltip } from "devextreme-react/vector-map";
-import React, { useEffect, useState } from "react";
-import { NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
-import { buildingData, roomsData } from "./../constants";
-import base_url from "./../services/DeviceService";
+import React from "react";
+import { NavLink, Outlet, useNavigate } from "react-router-dom";
+import VectorMap, { Layer, Tooltip, Label } from "devextreme-react/vector-map";
+import { roomsData, buildingData } from "./../constants";
+import { Box } from "@mui/material";
+import { useTheme } from "@mui/material";
 import { tokens } from "./../theme";
 
 const projection = {
@@ -15,10 +14,7 @@ const projection = {
 const Rooms = () => {
   const navigate = useNavigate();
   const theme = useTheme();
-
   const colors = tokens(theme.palette.mode);
-  const location = useLocation();
-  const [device, setDevice] = useState(null);
   function customizeTooltip(arg) {
     if (arg.layer.name === "rooms") {
       return {
@@ -29,28 +25,6 @@ const Rooms = () => {
     }
     return null;
   }
-
-  //-------------- Load data from server by Id
-  const getDeviceFromServerById = () => {
-    // console.log("deviceId in Room.js: ", location.state.deviceId);
-    const searchParams = new URLSearchParams(location.search);
-
-    axios.get(`${base_url}/id/${searchParams.get("deviceId")}`).then(
-      (response) => {
-        setDevice(response.data);
-      },
-      (error) => {
-        console.log(
-          "!! Something went wrong on Server. We are looking at it. !!"
-        );
-      }
-    );
-  };
-
-  useEffect(() => {
-    getDeviceFromServerById();
-    console.log("Device in Room.js: ", device);
-  }, []);
 
   return (
     <Box m="20px">
@@ -94,46 +68,19 @@ const Rooms = () => {
         marginY="20px"
         style={{ backgroundColor: `${colors.primary[400]}` }}
       >
-        <NavLink
-          className="hover:text-[#3e4396] rounded-md p-2"
-          to={{
-            pathname: `bedroom`,
-            search: `${device?.deviceId}`,
-          }}
-          state={{ status: device?.status }}
-        >
+        <NavLink className="hover:text-[#3e4396] rounded-md p-2" to="bedroom">
           Bedroom
         </NavLink>
-        <NavLink
-          className="hover:text-[#3e4396] rounded-md p-2"
-          to={{
-            pathname: `kitchen`,
-            search: `${device?.deviceId}`,
-          }}
-          state={{ status: device?.status }}
-        >
+        <NavLink className="hover:text-[#3e4396] rounded-md p-2" to="kitchen">
           Kitchen
         </NavLink>
         <NavLink
           className="hover:text-[#3e4396] rounded-md p-2"
-          //to={`livingroom/?${device?.deviceId}`}
-          //state={{ status: device?.status }}
-          to={{
-            pathname: `livingroom`,
-            search: `${device?.deviceId}`,
-          }}
-          state={{ status: device?.status }}
+          to="livingroom"
         >
           Livingroom
         </NavLink>
-        <NavLink
-          className="hover:text-[#3e4396] rounded-md p-2"
-          to={{
-            pathname: `office`,
-            search: `${device?.deviceId}`,
-          }}
-          state={{ status: device?.status }}
-        >
+        <NavLink className="hover:text-[#3e4396] rounded-md p-2" to="office">
           Office
         </NavLink>
       </Box>
