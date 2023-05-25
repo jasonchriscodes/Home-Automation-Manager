@@ -1,16 +1,12 @@
 import React from "react";
-import Bin from "../devices/Bin";
-import Curtain from "../devices/Curtain";
 import Door from "../devices/Door";
-import Watering from "../devices/Watering";
+import Light from "../devices/Light";
 
 const Livingroom = () => {
   return (
     <div className="h-full grid grid-cols-1 xs:grid-cols-1 lg:grid-cols-2 pb-20">
-      <Watering />
+      <Light id="645c4856781e46b6e35c4fe4" />
       <Door />
-      <Bin />
-      <Curtain />
     </div>
   );
 };

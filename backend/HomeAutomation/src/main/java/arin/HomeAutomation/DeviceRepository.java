@@ -1,4 +1,4 @@
-package arin.homeautomationproject;
+package arin.HomeAutomation;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
@@ -14,7 +14,7 @@ public interface DeviceRepository extends MongoRepository<Device, String> {
     List<Device> findAll();
 
     //Retrieve Device by Id
-    @Query(value = "{ '_id' : ?0 }")
+    @Query("{ '_id' : ?0 }")
     Optional<Device> findById(String id);
 
     //Retrieve devices by Type
