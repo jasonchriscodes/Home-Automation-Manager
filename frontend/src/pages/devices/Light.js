@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Switch from "./../../components/Switch";
+import Switch from "../../components/Switch";
 import ColorPicker from "@radial-color-picker/react-color-picker";
 import "@radial-color-picker/react-color-picker/dist/react-color-picker.min.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -12,7 +12,7 @@ import axios from "axios";
 
 const imageFolder = "/assets";
 
-const Light = () => {
+const Light = ({id = 0}) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [color, setColor] = useState({
@@ -45,7 +45,7 @@ const Light = () => {
   }, [])
   
   const fetchLightDevice = async () => {
-    const response = await fetch('http://localhost:8080/devices/645c480e781e46b6e35c4fe3');
+    const response = await fetch('http://localhost:8080/devices/' + id);
     const responseData = await response.json();
 
     setLightStatus(responseData.status === 'on' ? true : false);
@@ -56,7 +56,7 @@ const Light = () => {
     setLoading(true);
 
     // Fetch the API to toggle the Switch
-    const response = await fetch('http://localhost:8080/devices/645c480e781e46b6e35c4fe3/status', {
+    const response = await fetch(`http://localhost:8080/devices/${id}/status`, {
       method: "PUT",
       body: value ? "on" : "off"
     });
@@ -66,7 +66,6 @@ const Light = () => {
     setLightStatus(responseData.status === 'on' ? true : false);
 
     setLoading(false);
-    console.log(response);
 
   }
 
