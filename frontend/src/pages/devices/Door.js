@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import LockButton from "../../components/LockButton";
 import Switch from "./../../components/Switch";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -10,6 +10,41 @@ import { tokens } from "../../theme";
 const Door = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  const [doorStatus, setDoorStatus] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    fetchDoorDevice();
+  }, []);
+
+  const fetchDoorDevice = async () => {
+    const response = await fetch(
+      "http://localhost:8080/devices/6469d4bb077d45277bce9e50"
+    );
+    const responseData = await response.json();
+
+    setDoorStatus(responseData.status === "on" ? true : false);
+  };
+
+  const handleSwitchToggle = async (value) => {
+    console.log(value);
+
+    setLoading(true);
+    // Fetch the API to toggle the Switch
+    const response = await fetch(
+      "http://localhost:8080/devices/6469d4bb077d45277bce9e50/status",
+      {
+        method: "PUT",
+        body: value ? "on" : "off",
+      }
+    );
+
+    const responseData = await response.json();
+
+    setDoorStatus(responseData.status === "on" ? true : false);
+
+    setLoading(false);
+  };
   return (
     <div
       className="p-4 shadow-md flex flex-wrap flex-col justify-start"
@@ -18,7 +53,11 @@ const Door = () => {
       <div className="flex flex-col">
         <div className="flex items-start flex-row justify-between p-3">
           <h1>Door</h1>
-          <Switch />
+          <Switch
+            loading={loading}
+            defaultValue={doorStatus}
+            toggleSwitch={handleSwitchToggle}
+          />
         </div>
       </div>
       <div className="flex flex-col">
