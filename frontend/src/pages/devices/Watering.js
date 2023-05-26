@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Switch from "./../../components/Switch";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSync } from "@fortawesome/free-solid-svg-icons";
@@ -15,6 +15,41 @@ const Watering = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [isOpen, setIsOpen] = useState(false);
+  const [wateringStatus, setWateringStatus] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    fetchWateringDevice();
+  }, []);
+
+  const fetchWateringDevice = async () => {
+    const response = await fetch(
+      "http://localhost:8080/devices/645c4916781e46b6e35c4fe7"
+    );
+    const responseData = await response.json();
+
+    setWateringStatus(responseData.status === "on" ? true : false);
+  };
+
+  const handleSwitchToggle = async (value) => {
+    console.log(value);
+
+    setLoading(true);
+    // Fetch the API to toggle the Switch
+    const response = await fetch(
+      "http://localhost:8080/devices/645c4916781e46b6e35c4fe7/status",
+      {
+        method: "PUT",
+        body: value ? "on" : "off",
+      }
+    );
+
+    const responseData = await response.json();
+
+    setWateringStatus(responseData.status === "on" ? true : false);
+
+    setLoading(false);
+  };
 
   const handleClick = () => {
     setIsOpen(!isOpen);
@@ -61,7 +96,11 @@ const Watering = () => {
       <div className="flex-col">
         <div className="flex items-start flex-row justify-between p-3">
           <h1>Watering</h1>
-          <Switch />
+          <Switch
+            loading={loading}
+            defaultValue={wateringStatus}
+            toggleSwitch={handleSwitchToggle}
+          />
         </div>
       </div>
       <div

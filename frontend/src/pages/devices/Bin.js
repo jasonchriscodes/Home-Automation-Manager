@@ -1,6 +1,6 @@
 import Switch from "./../../components/Switch";
 import BinCalendar from "../../components/BinCalendar";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTheme } from "@mui/material";
 import { tokens } from "../../theme";
 
@@ -8,6 +8,41 @@ const Bin = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [isOpen, setIsOpen] = useState(false);
+  const [binStatus, setBinStatus] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    fetchBinDevice();
+  }, []);
+
+  const fetchBinDevice = async () => {
+    const response = await fetch(
+      "http://localhost:8080/devices/6469d505077d45277bce9e51"
+    );
+    const responseData = await response.json();
+
+    setBinStatus(responseData.status === "on" ? true : false);
+  };
+
+  const handleSwitchToggle = async (value) => {
+    console.log(value);
+
+    setLoading(true);
+    // Fetch the API to toggle the Switch
+    const response = await fetch(
+      "http://localhost:8080/devices/6469d505077d45277bce9e51/status",
+      {
+        method: "PUT",
+        body: value ? "on" : "off",
+      }
+    );
+
+    const responseData = await response.json();
+
+    setBinStatus(responseData.status === "on" ? true : false);
+
+    setLoading(false);
+  };
 
   const handleClick = () => {
     setIsOpen(!isOpen);
@@ -27,7 +62,11 @@ const Bin = () => {
       <div className="flex-col">
         <div className="flex items-start flex-row justify-between p-3">
           <h1>Bin</h1>
-          <Switch />
+          <Switch
+            loading={loading}
+            defaultValue={binStatus}
+            toggleSwitch={handleSwitchToggle}
+          />
         </div>
         <div className="flex items-start flex-row justify-center p-3">
           <h1 className="text-3xl font-bold">Set time for scrap collections</h1>
