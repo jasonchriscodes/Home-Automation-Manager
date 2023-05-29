@@ -5,6 +5,13 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "type": "java",
+            "name": "HomeAutomationApplication",
+            "request": "launch",
+            "mainClass": "arin.HomeAutomation.HomeAutomationApplication",
+            "projectName": "HomeAutomationProject"
+        },
+        {
             "type": "chrome",
             "request": "launch",
             "name": "Launch Chrome against localhost",
