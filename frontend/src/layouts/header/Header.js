@@ -1,4 +1,4 @@
-import React, { Fragment, useContext } from "react";
+import React, { Fragment, useContext, useEffect, useState } from "react";
 import { Popover, Transition } from "@headlessui/react";
 import classNames from "classnames";
 import { ColorModeContext, tokens } from "../../theme";
@@ -9,11 +9,53 @@ import MessageOutlinedIcon from "@mui/icons-material/MessageOutlined";
 import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Header = ({ title }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const colorMode = useContext(ColorModeContext);
+  const [doorStatus, setDoorStatus] = useState(false);
+
+  useEffect(() => {
+    fetchDoorDevice();
+  }, []);
+
+  const fetchDoorDevice = async () => {
+    const response = await fetch(
+      "http://localhost:8080/devices/6469d4bb077d45277bce9e50"
+    );
+    const responseData = await response.json();
+
+    setDoorStatus(responseData.status === "on" ? "open" : "close");
+  };
+
+  const alert = () => {
+    if (doorStatus === "open") {
+      toast.error("The door is " + doorStatus, {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    } else {
+      toast.success("The door is " + doorStatus, {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    }
+  };
 
   return (
     <div
@@ -69,6 +111,7 @@ const Header = ({ title }) => {
           {({ open }) => (
             <>
               <Popover.Button
+                onClick={alert}
                 className={classNames(
                   open && "bg-gray-100",
                   "p-1.5 rounded-sm inline-flex items-center text-gray-700 hover:text-opacity-100 focus:outline-none active:bg-gray-100"
@@ -78,6 +121,18 @@ const Header = ({ title }) => {
                   <NotificationsOutlinedIcon />
                 </IconButton>
               </Popover.Button>
+              <ToastContainer
+                position="bottom-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+              />
               <Transition
                 as={Fragment}
                 enter="transition ease-out duration-200"

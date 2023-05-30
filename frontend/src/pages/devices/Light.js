@@ -12,7 +12,7 @@ import axios from "axios";
 
 const imageFolder = "/assets";
 
-const Light = ({id = 0}) => {
+const Light = ({ id = 0 }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [color, setColor] = useState({
@@ -42,45 +42,47 @@ const Light = ({id = 0}) => {
 
   useEffect(() => {
     fetchLightDevice();
-  }, [])
-  
+  }, []);
+
   const fetchLightDevice = async () => {
-    const response = await fetch('http://localhost:8080/devices/' + id);
+    const response = await fetch("http://localhost:8080/devices/" + id);
     const responseData = await response.json();
 
-    setLightStatus(responseData.status === 'on' ? true : false);
-  }
+    setLightStatus(responseData.status === "on" ? true : false);
+  };
 
   const handleSwitchToggle = async (value) => {
-
     setLoading(true);
 
     // Fetch the API to toggle the Switch
     const response = await fetch(`http://localhost:8080/devices/${id}/status`, {
       method: "PUT",
-      body: value ? "on" : "off"
+      body: value ? "on" : "off",
     });
 
     const responseData = await response.json();
 
-    setLightStatus(responseData.status === 'on' ? true : false);
+    setLightStatus(responseData.status === "on" ? true : false);
 
     setLoading(false);
-
-  }
+  };
 
   return (
     <div
       className="p-4 shadow-md flex flex-wrap flex-col justify-around"
       style={{ backgroundColor: `${colors.primary[400]}` }}
     >
-      <div className={"flex-col" + (loading ? 'cursor-wait': '')}>
+      <div className={"flex-col" + (loading ? "cursor-wait" : "")}>
         <div className="flex items-start flex-row justify-between p-3">
           <h1>Lights</h1>
-          <Switch loading={loading} defaultValue={lighStatus} toggleSwitch={handleSwitchToggle} />
+          <Switch
+            loading={loading}
+            defaultValue={lighStatus}
+            toggleSwitch={handleSwitchToggle}
+          />
         </div>
-        <div className="flex items-start flex-row justify-between p-3">
-          <ColorPicker {...color} onInput={onInput} />
+        <div className="flex items-start flex-row justify-center p-3">
+          {/* <ColorPicker {...color} onInput={onInput} /> */}
           <FontAwesomeIcon
             icon={faLightbulb}
             fontSize={275}
@@ -90,7 +92,7 @@ const Light = ({id = 0}) => {
             }}
           />
         </div>
-        <div className="flex items-center flex-row justify-center p-3">
+        {/* <div className="flex items-center flex-row justify-center p-3">
           <div class="slider-container my-4">
             <div class="slider-brightness-box">
               <img
@@ -115,7 +117,7 @@ const Light = ({id = 0}) => {
               />
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );
