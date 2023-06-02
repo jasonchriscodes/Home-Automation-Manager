@@ -17,6 +17,7 @@
     "@fullcalendar/react": "^5.11.2",
     "@fullcalendar/timegrid": "^5.11.3",
     "@headlessui/react": "^1.7.13",
+    "@kommunicate/kommunicate-chatbot-plugin": "^0.0.6",
     "@material-ui/core": "^4.12.4",
     "@mui/icons-material": "^5.11.16",
     "@mui/material": "^5.12.0",
