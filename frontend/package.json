@@ -34,6 +34,7 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.4.0",
     "classnames": "^2.3.2",
+    "concurrently": "^8.1.0",
     "date-fns": "^2.29.3",
     "dayjs": "^1.11.7",
     "devexpress-diagram": "^2.1.57",
@@ -59,6 +60,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "dev": "concurrently \"set PORT=3001 && react-scripts start\" \"mvn -f ../backend/HomeAutomation/pom.xml spring-boot:run\" \"cd .. && cd backend/Webhook/jovo3-test && jovo3 run\"",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
