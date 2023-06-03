@@ -104,7 +104,7 @@ const Header = ({ title }) => {
     fetchDoorDevice();
   };
 
-  useInterval(pollFunction, 2000);
+  useInterval(pollFunction, 180000);
 
   const alert = () => {
     if (doorStatus === "open") {
@@ -119,16 +119,16 @@ const Header = ({ title }) => {
         theme: "light",
       });
     } else {
-      toast.success("The door is " + doorStatus, {
-        position: "bottom-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
+      // toast.success("The door is " + doorStatus, {
+      //   position: "bottom-right",
+      //   autoClose: 5000,
+      //   hideProgressBar: false,
+      //   closeOnClick: true,
+      //   pauseOnHover: true,
+      //   draggable: true,
+      //   progress: undefined,
+      //   theme: "light",
+      // });
     }
   };
 
