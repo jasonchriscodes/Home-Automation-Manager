@@ -1,4 +1,10 @@
-import React, { Fragment, useContext, useEffect, useState } from "react";
+import React, {
+  Fragment,
+  useContext,
+  useEffect,
+  useState,
+  useRef,
+} from "react";
 import { Popover, Transition } from "@headlessui/react";
 import classNames from "classnames";
 import { ColorModeContext, tokens } from "../../theme";
@@ -18,49 +24,78 @@ const Header = ({ title }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const colorMode = useContext(ColorModeContext);
-  const [doorStatus, setDoorStatus] = useState("close");
-  const [notifications, setNotifications] = useState([
-    { id: Date.now(), state: "close" },
-  ]);
+  const [doorStatus, setDoorStatus] = useState(false);
+  const [notifications, setNotifications] = useState([]);
+  let prevDoorStatus = useRef(false);
 
   useEffect(() => {
-    // fetchDoorDevice(); // for test
+    fetchDoorDevice();
   }, []);
 
   useEffect(() => {
-    // console.log(notifications);
-    if (doorStatus == "open" || doorStatus == "close") {
-      setNotifications([
-        ...notifications,
-        { id: Date.now(), state: doorStatus },
-      ]);
+    if (notifications.length > 0) {
+      if (prevDoorStatus.current != doorStatus) {
+        if (doorStatus == "open" || doorStatus == "close") {
+          alert();
 
-      if (notifications.length >= 5) {
-        const slicedNotifications = notifications.slice(-5);
-        setNotifications(slicedNotifications);
+          if (notifications.length >= 5) {
+            const notifications_ = [
+              ...notifications,
+              { id: Date.now(), state: doorStatus },
+            ].slice(-5);
+            setNotifications(notifications_);
+          } else {
+            setNotifications([
+              ...notifications,
+              { id: Date.now(), state: doorStatus },
+            ]);
+          }
+        }
+      } else {
+        // console.log("Already notified");
       }
-      alert();
+    } else {
+      if (doorStatus == "open" || doorStatus == "close") {
+        alert();
+
+        setNotifications([
+          ...notifications,
+          { id: Date.now(), state: doorStatus },
+        ]);
+      }
     }
+
+    prevDoorStatus.current = doorStatus;
+
+    // console.log(notifications);
   }, [doorStatus]);
 
-  // method to test
   const fetchDoorDevice = async () => {
-    const response = await fetch(
-      "http://localhost:8080/devices/6469d4bb077d45277bce9e50"
-    );
-    const responseData = await response.json();
+    try {
+      const response = await fetch(
+        "http://localhost:8080/devices/6469d4bb077d45277bce9e50"
+      );
+      const responseData = await response.json();
 
-    setDoorStatus(responseData.status === "on" ? "open" : "close");
+      setDoorStatus(responseData.status === "on" ? "open" : "close");
+    } catch (error) {
+      console.log("fetchDoorDevice Error", error);
+    }
 
     // ----------------------- Test Function -------------------------------
-    // --> Comment this when using
-    // if (Math.random() > 0.7) {
-    //   if (doorStatus == "open") {
-    //     setDoorStatus("close");
+    // Generates Random door status
+    // Note :- Comment this when using
+    //----------------------------------------------------------------------
+
+    // if(Math.random() > 0.7){
+
+    //   if (doorStatus == 'open') {
+    //     setDoorStatus('close');
     //   } else {
-    //     setDoorStatus("open");
+    //     setDoorStatus('open');
     //   }
     // }
+
     // ---------------------------------------------------------------------
   };
 
@@ -192,7 +227,7 @@ const Header = ({ title }) => {
                       Notification
                     </strong>
 
-                    {notifications.map((item) => (
+                    {[...notifications].reverse().map((item) => (
                       <div>
                         <div
                           key={item.id}
@@ -218,6 +253,14 @@ const Header = ({ title }) => {
                         </h5>
                       </div>
                     ))}
+
+                    {notifications.length == 0 ? (
+                      <div className="mt-2 py-1 text-sm">
+                        No new notifications
+                      </div>
+                    ) : (
+                      <a></a>
+                    )}
                   </div>
                 </Popover.Panel>
               </Transition>
