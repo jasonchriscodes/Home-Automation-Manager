@@ -3,7 +3,7 @@ import Header from "./header/Header";
 import Body from "./body";
 import { useLocation } from "react-router-dom";
 import { NAVBAR_TEXTS } from "./../constants";
-import Chatbot from "./../components/Chatbot";
+// import Chatbot from "./../components/Chatbot";
 
 function RootLayout({ children }) {
   const location = useLocation();
@@ -14,7 +14,7 @@ function RootLayout({ children }) {
       <div className="flex-1">
         <Header title={title} />
         <Body children={children} />
-        <Chatbot />
+        {/* <Chatbot /> */}
       </div>
     </div>
   );

@@ -11,17 +11,39 @@ import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import useInterval from "../../hooks/useInterval";
+import NotificationsActiveOutlinedIcon from "@mui/icons-material/NotificationsActiveOutlined";
 
 const Header = ({ title }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const colorMode = useContext(ColorModeContext);
-  const [doorStatus, setDoorStatus] = useState(false);
+  const [doorStatus, setDoorStatus] = useState("close");
+  const [notifications, setNotifications] = useState([
+    { id: Date.now(), state: "close" },
+  ]);
 
   useEffect(() => {
-    fetchDoorDevice();
+    // fetchDoorDevice(); // for test
   }, []);
 
+  useEffect(() => {
+    // console.log(notifications);
+    if (doorStatus == "open" || doorStatus == "close") {
+      setNotifications([
+        ...notifications,
+        { id: Date.now(), state: doorStatus },
+      ]);
+
+      if (notifications.length >= 5) {
+        const slicedNotifications = notifications.slice(-5);
+        setNotifications(slicedNotifications);
+      }
+      alert();
+    }
+  }, [doorStatus]);
+
+  // method to test
   const fetchDoorDevice = async () => {
     const response = await fetch(
       "http://localhost:8080/devices/6469d4bb077d45277bce9e50"
@@ -29,7 +51,25 @@ const Header = ({ title }) => {
     const responseData = await response.json();
 
     setDoorStatus(responseData.status === "on" ? "open" : "close");
+
+    // ----------------------- Test Function -------------------------------
+    // --> Comment this when using
+    // if (Math.random() > 0.7) {
+    //   if (doorStatus == "open") {
+    //     setDoorStatus("close");
+    //   } else {
+    //     setDoorStatus("open");
+    //   }
+    // }
+    // ---------------------------------------------------------------------
   };
+
+  const pollFunction = async () => {
+    // console.log(Date.now().toFixed(5) + " PollFunction");
+    fetchDoorDevice();
+  };
+
+  useInterval(pollFunction, 2000);
 
   const alert = () => {
     if (doorStatus === "open") {
@@ -111,14 +151,18 @@ const Header = ({ title }) => {
           {({ open }) => (
             <>
               <Popover.Button
-                onClick={alert}
+                // onClick={alert}
                 className={classNames(
                   open && "bg-gray-100",
                   "p-1.5 rounded-sm inline-flex items-center text-gray-700 hover:text-opacity-100 focus:outline-none active:bg-gray-100"
                 )}
               >
                 <IconButton>
-                  <NotificationsOutlinedIcon />
+                  {notifications.length > 0 ? (
+                    <NotificationsActiveOutlinedIcon />
+                  ) : (
+                    <NotificationsOutlinedIcon />
+                  )}
                 </IconButton>
               </Popover.Button>
               <ToastContainer
@@ -147,9 +191,33 @@ const Header = ({ title }) => {
                     <strong className="text-gray-700 font-medium">
                       Notification
                     </strong>
-                    <div className="mt-2 py-1 text-sm">
-                      This is notification panel.
-                    </div>
+
+                    {notifications.map((item) => (
+                      <div>
+                        <div
+                          key={item.id}
+                          className="d-flex justify-content-between"
+                        >
+                          <a className="p-2"> Door is {item.state} </a>
+                          <button
+                            onClick={() => {
+                              // console.log(item.id);
+                              const filteredNotifications =
+                                notifications.filter((i) => i.id != item.id);
+                              setNotifications(filteredNotifications);
+                            }}
+                            className="btn-close p-2 text-red-700"
+                          >
+                            X
+                          </button>
+                        </div>
+                        <h5 className="text-xs p-2">
+                          {" "}
+                          - {Math.round((Date.now() - item.id) / 1000)} Seconds
+                          Ago{" "}
+                        </h5>
+                      </div>
+                    ))}
                   </div>
                 </Popover.Panel>
               </Transition>
