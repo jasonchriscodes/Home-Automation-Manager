@@ -4,28 +4,31 @@ import threading
 from pymongo import MongoClient
 from config import MOTOR1_PIN1, MOTOR1_PIN2, uri
 
-motor_speed = 30  # Set the motor speed (0-100%, lower the number to slow down the motor)
+motor_speed = 50  # Motor speed (0-100%, lower the number to slow down the motor)
 
 def curtain_motor_control(motor_direction):
     if motor_direction == "forward":
-        pwm_pin1.start(motor_speed)
-        pwm_pin2.start(0)
-    else:
-        pwm_pin1.start(0)
-        pwm_pin2.start(motor_speed)
+        pwm_pin1.ChangeDutyCycle(motor_speed)
+        pwm_pin2.ChangeDutyCycle(0)
+        time.sleep(5)  # Forward for 6 seconds
+    elif motor_direction == "backward":
+        pwm_pin1.ChangeDutyCycle(0)
+        pwm_pin2.ChangeDutyCycle(motor_speed)
+        time.sleep(4)  # Backward for 4 seconds
 
-    time.sleep(2)
-    pwm_pin1.start(0)  # Stop the motor after 10 seconds
-    pwm_pin2.start(0)  # Stop the motor after 10 seconds
+    pwm_pin1.ChangeDutyCycle(0)
+    pwm_pin2.ChangeDutyCycle(0) 
 
 def check_database_and_control_curtain():
     client = MongoClient(uri)
     db = client['Home_Automation_DB']
     collection = db['device']
 
-    previous_status = None
+    previous_status = 'False'
+    start_up = True
 
     while True:
+        print('working')
         document = collection.find_one({"deviceName": "bed-curtain-open"})
         current_status = document['status']
 
@@ -34,7 +37,8 @@ def check_database_and_control_curtain():
 
             if current_status == 'True':
                 curtain_motor_control("forward")
-            else:
+                start_up = False
+            elif current_status == 'False' and start_up == False:
                 curtain_motor_control("backward")
 
         time.sleep(1)
@@ -44,7 +48,10 @@ GPIO.setup(MOTOR1_PIN1, GPIO.OUT)
 GPIO.setup(MOTOR1_PIN2, GPIO.OUT)
 
 pwm_pin1 = GPIO.PWM(MOTOR1_PIN1, 100)  # Create a PWM instance with 100Hz frequency
-pwm_pin2 = GPIO.PWM(MOTOR1_PIN2, 100)  # Create a PWM instance with 100Hz frequency
+pwm_pin2 = GPIO.PWM(MOTOR1_PIN2, 100)
+
+pwm_pin1.start(0)  # Start the PWM instance with 0% duty cycle
+pwm_pin2.start(0)  # Start the PWM instance with 0% duty cycle
 
 db_monitor_thread = threading.Thread(target=check_database_and_control_curtain)
 db_monitor_thread.start()

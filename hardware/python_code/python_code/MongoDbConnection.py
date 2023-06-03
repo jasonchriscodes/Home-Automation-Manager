@@ -58,7 +58,7 @@ def main():
     update_document("kitchen-light-on", status)
     time.sleep(1)
     update_document("office-light-on", status)
-    update_document("bed-curtain-open", statusT)
+    update_document("bed-curtain-open", statusF)
    
 
 
