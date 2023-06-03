@@ -11,7 +11,7 @@ client = pymongo.MongoClient(uri)
 db = client["Home_Automation_DB"]
 
 # Access the collection in the database
-collection = db["devices"]
+collection = db["device"]
 
 
 def update_document(my_device, status):
@@ -49,17 +49,16 @@ def main():
     # #Change the status to 'off' or 'on' to test the DB change detection
     statusT = True
     statusF = False
+    status = False
 
     # update_document(my_deviceKITCH, statusF)
     # update_document(my_deviceBED, statusF)
-    update_document("bed-light-on", statusT)
-    time.sleep(2)
-    update_document("kitchen-light-on", statusT)
-    time.sleep(2)
-    update_document("office-light-on", statusT)
-
-
-
+    update_document("bed-light-on", status)
+    time.sleep(1)
+    update_document("kitchen-light-on", status)
+    time.sleep(1)
+    update_document("office-light-on", status)
+    update_document("bed-curtain-open", statusT)
    
 
 

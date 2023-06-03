@@ -24,11 +24,11 @@ def reed_callback():
         if reed_value != previous_reed_value:
             previous_reed_value = reed_value
             if reed_value == GPIO.HIGH:
-                update_document("front-door","True")
+                update_document("front-door-open","True")
                 print("door is open")
                 
             else:
-                update_document("front-door","False")
+                update_document("front-door-open","False")
                 print("door is closed")
 
         time.sleep(1)
