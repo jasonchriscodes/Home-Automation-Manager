@@ -11,8 +11,8 @@ def update_database(bin_full):
     db = client['Home_Automation_DB']
     collection = db['devices']
 
-    status = 'False' if bin_full else 'True'
-    collection.update_one({"deviceName": "bed-bin-full"}, {"$set": {"status": status}})
+    status = 'off' if bin_full else 'on'
+    collection.update_one({"name": "Bin"}, {"$set": {"status": status}})
     print("Update Complete")
 
 def monitor_bin_full():
