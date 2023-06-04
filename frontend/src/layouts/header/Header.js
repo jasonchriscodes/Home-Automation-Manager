@@ -179,7 +179,7 @@ const Header = ({ title }) => {
   const alertDoor = async () => {
     if (doorStatus === "open") {
       await delay(180000);
-      toast.error("The door is " + doorStatus, {
+      toast.error("Warning! The front door has been left open", {
         position: "bottom-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -205,7 +205,7 @@ const Header = ({ title }) => {
   const alertGas = () => {
     if (gasStatus === "open") {
       delay(1000);
-      toast.error("The gas is " + gasStatus, {
+      toast.error("Warning! There is high level of gas in your house!", {
         position: "bottom-right",
         autoClose: 5000,
         hideProgressBar: false,
