@@ -13,7 +13,7 @@ def update_database(bin_full):
 
     status = 'off' if bin_full else 'on'
     collection.update_one({"name": "Bin"}, {"$set": {"status": status}})
-    print("Update Complete")
+    
 
 def monitor_bin_full():
     previous_state = None

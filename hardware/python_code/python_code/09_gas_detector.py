@@ -38,7 +38,7 @@ def gas_callback():
     while True:
 
         gas_value = read_gas_level() # baseline is about 57, spray in cup can make 80ish max
-        print(gas_value)
+        # print(gas_value)
     
         if gas_value > 75:
             update_document("Gas","on")

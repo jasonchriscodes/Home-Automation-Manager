@@ -28,7 +28,7 @@ def check_database_and_control_curtain():
     start_up = True
 
     while True:
-        print('working')
+        
         document = collection.find_one({"name": "Curtain"})
         current_status = document['status']
 
