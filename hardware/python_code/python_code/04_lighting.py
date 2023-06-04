@@ -13,16 +13,16 @@ def monitor_database():
 
     # Map the device names to their corresponding GPIO pins
     device_led_map = {
-        "bed-light-on": LIVINGROOM_LED,
-        "office-light-on": OFFICE_LED,
-        "kitchen-light-on": KITCHEN_LED,
+        "Bedroom Light": LIVINGROOM_LED,
+        "Office Light": OFFICE_LED,
+        "Kitchen Light": KITCHEN_LED,
     }
 
     # Continuously monitor the database for changes
     while True:
         # Check the status of the lights and control them accordingly
         for device_name, led_pin in device_led_map.items():
-            document = collection.find_one({"deviceName": device_name})
+            document = collection.find_one({"name": device_name})
             status = document['status']
             # print("device name", device_name,"status", status, led_pin)
             
@@ -30,12 +30,12 @@ def monitor_database():
             # Everything else is normal.
 
             if led_pin == 23:
-                if status == 'True':
+                if status == 'on':
                     GPIO.output(led_pin, GPIO.LOW)
                 else:
                     GPIO.output(led_pin, GPIO.HIGH)
             else:
-                if status == 'True':
+                if status == 'on':
                     GPIO.output(led_pin, GPIO.HIGH)
                 else:
                     GPIO.output(led_pin, GPIO.LOW)
