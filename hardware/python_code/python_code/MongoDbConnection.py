@@ -62,12 +62,12 @@ def main():
     # update_document("office-light-on", status)
     # update_document("bed-curtain-open", statusF)
 
-    update_document("Bedroom Light", f)
-    # time.sleep(1)
-    update_document("Kitchen Light", f)
-    # time.sleep(1)
-    update_document("Office Light", f)
-    update_document("Curtain", f) # o is clockwise
+    # update_document("Bedroom Light", f)
+    # # time.sleep(1)
+    # update_document("Kitchen Light", f)
+    # # time.sleep(1)
+    # update_document("Office Light", f)
+    # update_document("Curtain", f) # o is clockwise
 
 
 

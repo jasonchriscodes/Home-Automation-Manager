@@ -41,7 +41,7 @@ def monitor_database():
                     GPIO.output(led_pin, GPIO.LOW)
 
 
-        time.sleep(1)
+        time.sleep(0.5)
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(LIVINGROOM_LED, GPIO.OUT)

@@ -8,42 +8,56 @@ from adafruit_pcf8591.analog_in import AnalogIn
 import busio
 import board
 
+
 def read_light_intensity():
     i2c_bus = busio.I2C(board.SCL, board.SDA)
     pcf = PCF8591(i2c_bus)
-    analog_in = AnalogIn(pcf, PCF8591.P0)
-    light_intensity = analog_in.value / 65535.0 * 100
 
-    if light_intensity < 50:
-        # return 'dark'
-        print('dark')
-    else:
-        print('bright')
+    light_intensity = ((pcf.read(0) / 255) * 100)
+    print(light_intensity)
 
-# def check_database_and_control_curtain():
-#     client = MongoClient(uri)
-#     db = client['Home_Automation_DB']
-#     collection = db['devices']
+    return light_intensity
+    
 
-#     previous_status = None
-#     start_up = True
+def monitor_database():
+    # connect to the MongoDB database
+    client = MongoClient(uri)
+    db = client['Home_Automation_DB']
+    collection = db ['devices']
 
-#     while True:
-#         print('working')
-#         document = collection.find_one({"name": "Light Detection"})
-#         current_status = document['status']
-#         if current_status == 'on':
-#             if current_status != previous_status:
-#                 previous_status = current_status
+    while True:
+        document = collection.find_one({"name": "Lightdetector"})
+        current_status = document['status']
 
-#                 if current_status == 'on':
-#                     curtain_motor_control("forward")
-#                     start_up = False
-#                 elif current_status == 'off' and start_up == False:
-#                     curtain_motor_control("backward")
+        if current_status == 'on':
+            light_intensity = read_light_intensity()
+            if light_intensity > 40:  # Check if it's dark
+                print('it is dark')
+                update_document("Curtain", "off")
+                update_document("Bedroom Light","on")
+                update_document("Office Light", "on")
+                update_document("Kitchen Light", "on")
+            else:  # It's bright
+                print('it is bright')
+                update_document("Curtain", "on")
+                update_document("Bedroom Light", "off")
+                update_document("Office Light", "off")
+                update_document("Kitchen Light", "off")
 
-        
-#         time.sleep(1)
+        time.sleep(0.5)
+        print('Automation mode')
 
-light_monitor_thread = threading.Thread(target=read_light_intensity)
+
+def update_document(my_device, status):
+    #Lukes code for the connection 
+    
+    client = MongoClient(uri)
+    db = client['Home_Automation_DB']
+
+    collection = db['devices']
+    collection.update_one({"name": my_device }, {"$set": {"status":f'{status}'}})
+    # print("Update Complete")
+
+
+light_monitor_thread = threading.Thread(target=monitor_database)
 light_monitor_thread.start()
