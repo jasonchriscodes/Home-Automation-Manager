@@ -25,28 +25,32 @@ const Header = ({ title }) => {
   const colors = tokens(theme.palette.mode);
   const colorMode = useContext(ColorModeContext);
   const [doorStatus, setDoorStatus] = useState(false);
-  const [notifications, setNotifications] = useState([]);
+  const [gasStatus, setGasStatus] = useState(false);
+  const [doorNotifications, setDoorNotifications] = useState([]);
+  const [gasNotifications, setGasNotifications] = useState([]);
   let prevDoorStatus = useRef(false);
+  let prevGasStatus = useRef(false);
 
   useEffect(() => {
     fetchDoorDevice();
+    fetchGasDevice();
   }, []);
 
   useEffect(() => {
-    if (notifications.length > 0) {
+    if (doorNotifications.length > 0) {
       if (prevDoorStatus.current != doorStatus) {
         if (doorStatus == "open" || doorStatus == "close") {
-          alert();
+          alertDoor();
 
-          if (notifications.length >= 5) {
+          if (doorNotifications.length >= 5) {
             const notifications_ = [
-              ...notifications,
+              ...doorNotifications,
               { id: Date.now(), state: doorStatus },
             ].slice(-5);
-            setNotifications(notifications_);
+            setDoorNotifications(notifications_);
           } else {
-            setNotifications([
-              ...notifications,
+            setDoorNotifications([
+              ...doorNotifications,
               { id: Date.now(), state: doorStatus },
             ]);
           }
@@ -54,21 +58,55 @@ const Header = ({ title }) => {
       } else {
         // console.log("Already notified");
       }
-    } else {
-      if (doorStatus == "open" || doorStatus == "close") {
-        alert();
+    }
+    if (gasNotifications.length > 0) {
+      if (prevGasStatus.current != gasStatus) {
+        if (gasStatus == "open" || gasStatus == "close") {
+          alertGas();
 
-        setNotifications([
-          ...notifications,
+          if (gasNotifications.length >= 5) {
+            const notifications_ = [
+              ...gasNotifications,
+              { id: Date.now(), state: gasStatus },
+            ].slice(-5);
+            setGasNotifications(notifications_);
+          } else {
+            setGasNotifications([
+              ...gasNotifications,
+              { id: Date.now(), state: gasStatus },
+            ]);
+          }
+        }
+      } else {
+        // console.log("Already notified");
+      }
+    }
+    if (doorNotifications.length <= 0) {
+      if (doorStatus == "open" || doorStatus == "close") {
+        alertDoor();
+
+        setDoorNotifications([
+          ...doorNotifications,
           { id: Date.now(), state: doorStatus },
+        ]);
+      }
+    }
+    if (gasNotifications.length <= 0) {
+      if (gasStatus == "open" || gasStatus == "close") {
+        alertGas();
+
+        setGasNotifications([
+          ...gasNotifications,
+          { id: Date.now(), state: gasStatus },
         ]);
       }
     }
 
     prevDoorStatus.current = doorStatus;
+    prevGasStatus.current = gasStatus;
 
     // console.log(notifications);
-  }, [doorStatus]);
+  }, [doorStatus, gasStatus]);
 
   const fetchDoorDevice = async () => {
     try {
@@ -99,15 +137,48 @@ const Header = ({ title }) => {
     // ---------------------------------------------------------------------
   };
 
+  const fetchGasDevice = async () => {
+    try {
+      const response = await fetch(
+        "http://localhost:8080/devices/647bc059c9bca3e7d6fa3737"
+      );
+      const responseData = await response.json();
+
+      setGasStatus(responseData.status === "on" ? "open" : "close");
+    } catch (error) {
+      console.log("fetchGasDevice Error", error);
+    }
+
+    // ----------------------- Test Function -------------------------------
+    // Generates Random door status
+    // Note :- Comment this when using
+    //----------------------------------------------------------------------
+
+    // if(Math.random() > 0.7){
+
+    //   if (gasStatus == 'open') {
+    //     setGasStatus('close');
+    //   } else {
+    //     setGasStatus('open');
+    //   }
+    // }
+
+    // ---------------------------------------------------------------------
+  };
+
   const pollFunction = async () => {
     // console.log(Date.now().toFixed(5) + " PollFunction");
     fetchDoorDevice();
+    fetchGasDevice();
   };
 
-  useInterval(pollFunction, 180000);
+  useInterval(pollFunction, 1000);
 
-  const alert = () => {
+  const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+  const alertDoor = async () => {
     if (doorStatus === "open") {
+      await delay(180000);
       toast.error("The door is " + doorStatus, {
         position: "bottom-right",
         autoClose: 5000,
@@ -120,6 +191,32 @@ const Header = ({ title }) => {
       });
     } else {
       // toast.success("The door is " + doorStatus, {
+      //   position: "bottom-right",
+      //   autoClose: 5000,
+      //   hideProgressBar: false,
+      //   closeOnClick: true,
+      //   pauseOnHover: true,
+      //   draggable: true,
+      //   progress: undefined,
+      //   theme: "light",
+      // });
+    }
+  };
+  const alertGas = () => {
+    if (gasStatus === "open") {
+      delay(1000);
+      toast.error("The gas is " + gasStatus, {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    } else {
+      // toast.success("The gas is " + gasStatus, {
       //   position: "bottom-right",
       //   autoClose: 5000,
       //   hideProgressBar: false,
@@ -193,7 +290,7 @@ const Header = ({ title }) => {
                 )}
               >
                 <IconButton>
-                  {notifications.length > 0 ? (
+                  {doorNotifications.length || gasNotifications.length > 0 ? (
                     <NotificationsActiveOutlinedIcon />
                   ) : (
                     <NotificationsOutlinedIcon />
@@ -227,7 +324,7 @@ const Header = ({ title }) => {
                       Notification
                     </strong>
 
-                    {[...notifications].reverse().map((item) => (
+                    {[...doorNotifications].reverse().map((item) => (
                       <div>
                         <div
                           key={item.id}
@@ -238,8 +335,10 @@ const Header = ({ title }) => {
                             onClick={() => {
                               // console.log(item.id);
                               const filteredNotifications =
-                                notifications.filter((i) => i.id != item.id);
-                              setNotifications(filteredNotifications);
+                                doorNotifications.filter(
+                                  (i) => i.id != item.id
+                                );
+                              setDoorNotifications(filteredNotifications);
                             }}
                             className="btn-close p-2 text-red-700"
                           >
@@ -254,7 +353,35 @@ const Header = ({ title }) => {
                       </div>
                     ))}
 
-                    {notifications.length == 0 ? (
+                    {[...gasNotifications].reverse().map((item) => (
+                      <div>
+                        <div
+                          key={item.id}
+                          className="d-flex justify-content-between"
+                        >
+                          <a className="p-2"> Gas is {item.state} </a>
+                          <button
+                            onClick={() => {
+                              // console.log(item.id);
+                              const filteredNotifications =
+                                gasNotifications.filter((i) => i.id != item.id);
+                              setGasNotifications(filteredNotifications);
+                            }}
+                            className="btn-close p-2 text-red-700"
+                          >
+                            X
+                          </button>
+                        </div>
+                        <h5 className="text-xs p-2">
+                          {" "}
+                          - {Math.round((Date.now() - item.id) / 1000)} Seconds
+                          Ago{" "}
+                        </h5>
+                      </div>
+                    ))}
+
+                    {doorNotifications.length &&
+                    gasNotifications.length == 0 ? (
                       <div className="mt-2 py-1 text-sm">
                         No new notifications
                       </div>

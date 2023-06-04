@@ -50,6 +50,8 @@ public class DeviceService {
       name = "Door";
     } else if (name.equals("bin")) {
       name = "Bin";
+    } else if (name.equals("gas")) {
+      name = "Gas";
     }
     System.out.println(name);
     Device device = deviceRepository.findByName(name);

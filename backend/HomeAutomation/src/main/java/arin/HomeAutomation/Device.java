@@ -96,6 +96,9 @@ public class Device {
     if (this.type.equalsIgnoreCase("bin")) {
       this.setBinStatus(status);
     }
+    if (this.type.equalsIgnoreCase("gas")) {
+      this.setGasStatus(status);
+    }
   }
 
   // ------------------------------------------------------------------------------------------------------------------
@@ -141,6 +144,16 @@ public class Device {
   // ------------------------------------------------------------------------------------------------------------------
 
   private void setDoorStatus(String status) {
+    if (this.status.equalsIgnoreCase("on")) {
+      this.status = "off";
+    } else {
+      this.status = "on";
+    }
+  }
+
+  // ------------------------------------------------------------------------------------------------------------------
+
+  private void setGasStatus(String status) {
     if (this.status.equalsIgnoreCase("on")) {
       this.status = "off";
     } else {
