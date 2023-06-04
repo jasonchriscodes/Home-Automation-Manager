@@ -67,7 +67,7 @@ def main():
     update_document("Kitchen Light", f)
     # time.sleep(1)
     update_document("Office Light", f)
-    update_document("Curtain", f)
+    update_document("Curtain", f) # o is clockwise
 
 
 

@@ -4,17 +4,17 @@ import threading
 from pymongo import MongoClient
 from config import MOTOR1_PIN1, MOTOR1_PIN2, uri
 
-motor_speed = 50  # Motor speed (0-100%, lower the number to slow down the motor)
-
+motor_speed = 100  # Motor speed (0-100%, lower the number to slow down the motor)
+motor_speed_reverse = 80
 def curtain_motor_control(motor_direction):
     if motor_direction == "forward":
         pwm_pin1.ChangeDutyCycle(motor_speed)
         pwm_pin2.ChangeDutyCycle(0)
-        time.sleep(5)  # Forward for 6 seconds
+        time.sleep(3)  # Forward for 5 seconds
     elif motor_direction == "backward":
         pwm_pin1.ChangeDutyCycle(0)
-        pwm_pin2.ChangeDutyCycle(motor_speed)
-        time.sleep(4)  # Backward for 4 seconds
+        pwm_pin2.ChangeDutyCycle(motor_speed_reverse)
+        time.sleep(3)  # Backward for 4 seconds
 
     pwm_pin1.ChangeDutyCycle(0)
     pwm_pin2.ChangeDutyCycle(0) 
@@ -22,23 +22,23 @@ def curtain_motor_control(motor_direction):
 def check_database_and_control_curtain():
     client = MongoClient(uri)
     db = client['Home_Automation_DB']
-    collection = db['device']
+    collection = db['devices']
 
-    previous_status = 'False'
+    previous_status = 'off'
     start_up = True
 
     while True:
         print('working')
-        document = collection.find_one({"deviceName": "bed-curtain-open"})
+        document = collection.find_one({"name": "Curtain"})
         current_status = document['status']
 
         if current_status != previous_status:
             previous_status = current_status
 
-            if current_status == 'True':
+            if current_status == 'on':
                 curtain_motor_control("forward")
                 start_up = False
-            elif current_status == 'False' and start_up == False:
+            elif current_status == 'off' and start_up == False:
                 curtain_motor_control("backward")
 
         time.sleep(1)
