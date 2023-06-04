@@ -14,7 +14,7 @@ def curtain_motor_control(motor_direction):
     elif motor_direction == "backward":
         pwm_pin1.ChangeDutyCycle(0)
         pwm_pin2.ChangeDutyCycle(motor_speed_reverse)
-        time.sleep(3)  # Backward for 4 seconds
+        time.sleep(4)  # Backward for 4 seconds
 
     pwm_pin1.ChangeDutyCycle(0)
     pwm_pin2.ChangeDutyCycle(0) 
