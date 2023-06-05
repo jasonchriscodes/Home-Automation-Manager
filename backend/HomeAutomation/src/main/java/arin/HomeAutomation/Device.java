@@ -99,6 +99,9 @@ public class Device {
     if (this.type.equalsIgnoreCase("gas")) {
       this.setGasStatus(status);
     }
+    if (this.type.equalsIgnoreCase("lightdetector")) {
+      this.setLightDetector(status);
+    }
   }
 
   // ------------------------------------------------------------------------------------------------------------------
@@ -154,6 +157,16 @@ public class Device {
   // ------------------------------------------------------------------------------------------------------------------
 
   private void setGasStatus(String status) {
+    if (this.status.equalsIgnoreCase("on")) {
+      this.status = "off";
+    } else {
+      this.status = "on";
+    }
+  }
+
+  // ------------------------------------------------------------------------------------------------------------------
+
+  private void setLightDetector(String status) {
     if (this.status.equalsIgnoreCase("on")) {
       this.status = "off";
     } else {

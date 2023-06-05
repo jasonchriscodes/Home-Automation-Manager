@@ -16,6 +16,7 @@ const Door = () => {
 
   useEffect(() => {
     fetchGasDevice();
+    console.log("gas: ", gasStatus);
   }, []);
 
   const fetchGasDevice = async () => {
@@ -28,8 +29,6 @@ const Door = () => {
   };
 
   const handleSwitchToggle = async (value) => {
-    console.log(value);
-
     setLoading(true);
     // Fetch the API to toggle the Switch
     const response = await fetch(

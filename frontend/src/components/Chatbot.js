@@ -6,6 +6,9 @@ class Chatbot extends Component {
       var kommunicateSettings = {
         appId: "9f08bf80ee62045baca9c9b8bbed2508",
         popupWidget: true,
+        voiceInput: true,
+        voiceOutput: true,
+        language: "en-US",
         automaticChatOpenOnNavigation: true,
       };
       var s = document.createElement("script");

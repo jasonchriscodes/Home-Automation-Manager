@@ -2,6 +2,7 @@ import React from "react";
 import Door from "../devices/Door";
 import Light from "../devices/Light";
 import Gas from "../devices/Gas";
+import LightDetector from "../devices/LightDetector";
 
 const Livingroom = () => {
   return (
@@ -9,6 +10,7 @@ const Livingroom = () => {
       <Light id="645c4856781e46b6e35c4fe4" />
       <Door />
       <Gas />
+      <LightDetector />
     </div>
   );
 };
