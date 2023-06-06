@@ -16,7 +16,7 @@ collection = db["devices"]
 
 def update_document(my_device, status):
     # Method to update a value in the database
-    collection.update_one({"deviceName": my_device }, {"$set": {"status": f'{status}'}})
+    collection.update_one({"name": my_device }, {"$set": {"status": f'{status}'}})
     print("Update Completed")
 
 
@@ -49,18 +49,25 @@ def main():
     # #Change the status to 'off' or 'on' to test the DB change detection
     statusT = True
     statusF = False
+    status = False
+    o = "on"
+    f = "off"
 
     # update_document(my_deviceKITCH, statusF)
     # update_document(my_deviceBED, statusF)
-    update_document("bed-light-on", statusT)
-    time.sleep(2)
-    update_document("kitchen-light-on", statusT)
-    time.sleep(2)
-    update_document("office-light-on", statusT)
+    # update_document("bed-light-on", status)
+    # time.sleep(1)
+    # update_document("kitchen-light-on", status)
+    # time.sleep(1)
+    # update_document("office-light-on", status)
+    # update_document("bed-curtain-open", statusF)
 
-
-
-   
+    # update_document("Bedroom Light", f)
+    # # time.sleep(1)
+    # update_document("Kitchen Light", f)
+    # # time.sleep(1)
+    # update_document("Office Light", f)
+    # update_document("Curtain", f) # o is clockwise
 
 
 
