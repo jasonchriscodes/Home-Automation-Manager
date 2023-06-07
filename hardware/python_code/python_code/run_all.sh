@@ -16,4 +16,4 @@ python3 04_lighting.py &
 python3 05_door_security.py &
 python3 07_bin_full_detector.py &
 python3 06_curtain_code.py &
-python3 09_gas_sensor.py &
+python3 09_gas_detector.py &
