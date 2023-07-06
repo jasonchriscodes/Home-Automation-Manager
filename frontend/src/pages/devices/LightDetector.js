@@ -68,7 +68,6 @@ const Door = () => {
                 <CheckBox
                   defaultValue={lightdetectorStatus}
                   toggleSwitch={handleCheckboxChange}
-                  label="Light Detector"
                   color="primary"
                 />
               }

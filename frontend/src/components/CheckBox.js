@@ -1,7 +1,7 @@
 import { Checkbox } from "@mui/material";
 import { useEffect, useState } from "react";
 
-export default function CheckBox({ defaultValue, toggleSwitch, label }) {
+export default function CheckBox({ defaultValue, toggleSwitch }) {
   const handleCheckboxChange = (event) => {
     toggleSwitch(event.target.checked);
   };
@@ -15,7 +15,6 @@ export default function CheckBox({ defaultValue, toggleSwitch, label }) {
           checked={defaultValue}
           onChange={handleCheckboxChange}
         />
-        {label}
       </label>
     </div>
   );
