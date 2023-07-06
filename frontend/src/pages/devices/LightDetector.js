@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from "react";
-import LockButton from "../../components/LockButton";
 import CheckBox from "./../../components/CheckBox";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTag } from "@fortawesome/free-solid-svg-icons";
-import { faCircle } from "@fortawesome/free-solid-svg-icons";
 import { FormControlLabel, useTheme } from "@mui/material";
 import { tokens } from "../../theme";
 import { faGear } from "@fortawesome/free-solid-svg-icons";
@@ -28,18 +25,25 @@ const Door = () => {
     console.log("light status: ", lightdetectorStatus);
   };
 
-  const handleSwitchToggle = async (value) => {
-    // Fetch the API to toggle the Switch
-    const response = await fetch(
-      "http://localhost:8080/devices/647c3e36c9bca3e7d6fa3739/status",
-      {
-        method: "PUT",
-        body: value ? "on" : "off",
-      }
-    );
+  const handleCheckboxChange = async (isChecked) => {
+    try {
+      // Update the local state immediately
+      setLigtdetectorStatus(isChecked);
 
-    const responseData = response.json();
-    setLigtdetectorStatus(responseData.status === "on" ? true : false);
+      // Make an API call to update the light detector status
+      await fetch(
+        "http://localhost:8080/devices/647c3e36c9bca3e7d6fa3739/status",
+        {
+          method: "PUT",
+          body: isChecked ? "on" : "off",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+    } catch (error) {
+      console.error("Error updating light detector status:", error);
+    }
   };
 
   return (
@@ -63,7 +67,8 @@ const Door = () => {
               control={
                 <CheckBox
                   defaultValue={lightdetectorStatus}
-                  toggleSwitch={handleSwitchToggle}
+                  toggleSwitch={handleCheckboxChange}
+                  label="Light Detector"
                   color="primary"
                 />
               }
