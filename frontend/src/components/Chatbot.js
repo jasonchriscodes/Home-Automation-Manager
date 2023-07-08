@@ -4,7 +4,7 @@ class Chatbot extends Component {
   componentDidMount() {
     (function (d, m) {
       var kommunicateSettings = {
-        appId: "9f08bf80ee62045baca9c9b8bbed2508",
+        appId: "1eb2e7248fdfb64e5011b7dbf02904c71",
         popupWidget: true,
         voiceInput: true,
         voiceOutput: true,
