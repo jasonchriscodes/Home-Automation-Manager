@@ -26,14 +26,18 @@ const Header = ({ title }) => {
   const colorMode = useContext(ColorModeContext);
   const [doorStatus, setDoorStatus] = useState(false);
   const [gasStatus, setGasStatus] = useState(false);
+  const [binStatus, setBinStatus] = useState(false);
   const [doorNotifications, setDoorNotifications] = useState([]);
   const [gasNotifications, setGasNotifications] = useState([]);
+  const [binNotifications, setBinNotification] = useState([]);
   let prevDoorStatus = useRef(false);
   let prevGasStatus = useRef(false);
+  let prevBinStatus = useRef(false);
 
   useEffect(() => {
     fetchDoorDevice();
     fetchGasDevice();
+    fetchBinDevice();
   }, []);
 
   useEffect(() => {
@@ -81,6 +85,28 @@ const Header = ({ title }) => {
         // console.log("Already notified");
       }
     }
+    if (binNotifications.length > 0) {
+      if (prevBinStatus.current != binStatus) {
+        if (binStatus == "open" || binStatus == "close") {
+          alertBin();
+
+          if (binNotifications.length >= 5) {
+            const notifications_ = [
+              ...binNotifications,
+              { id: Date.now(), state: binStatus },
+            ].slice(-5);
+            setBinNotification(notifications_);
+          } else {
+            setBinNotification([
+              ...binNotifications,
+              { id: Date.now(), state: binStatus },
+            ]);
+          }
+        }
+      } else {
+        // console.log("Already notified");
+      }
+    }
     if (doorNotifications.length <= 0) {
       if (doorStatus == "open" || doorStatus == "close") {
         alertDoor();
@@ -101,12 +127,23 @@ const Header = ({ title }) => {
         ]);
       }
     }
+    if (binNotifications.length <= 0) {
+      if (binStatus == "open" || binStatus == "close") {
+        alertBin();
+
+        setBinNotification([
+          ...binNotifications,
+          { id: Date.now(), state: binStatus },
+        ]);
+      }
+    }
 
     prevDoorStatus.current = doorStatus;
     prevGasStatus.current = gasStatus;
+    prevBinStatus.current = binStatus;
 
     // console.log(notifications);
-  }, [doorStatus, gasStatus]);
+  }, [doorStatus, gasStatus, binStatus]);
 
   const fetchDoorDevice = async () => {
     try {
@@ -165,11 +202,40 @@ const Header = ({ title }) => {
 
     // ---------------------------------------------------------------------
   };
+  const fetchBinDevice = async () => {
+    try {
+      const response = await fetch(
+        "http://localhost:8080/devices/6469d505077d45277bce9e51"
+      );
+      const responseData = await response.json();
+
+      setBinStatus(responseData.status === "on" ? "open" : "close");
+    } catch (error) {
+      console.log("fetchGasDevice Error", error);
+    }
+
+    // ----------------------- Test Function -------------------------------
+    // Generates Random door status
+    // Note :- Comment this when using
+    //----------------------------------------------------------------------
+
+    // if(Math.random() > 0.7){
+
+    //   if (gasStatus == 'open') {
+    //     setGasStatus('close');
+    //   } else {
+    //     setGasStatus('open');
+    //   }
+    // }
+
+    // ---------------------------------------------------------------------
+  };
 
   const pollFunction = async () => {
     // console.log(Date.now().toFixed(5) + " PollFunction");
     fetchDoorDevice();
     fetchGasDevice();
+    fetchBinDevice();
   };
 
   useInterval(pollFunction, 1000);
@@ -178,10 +244,10 @@ const Header = ({ title }) => {
 
   const alertDoor = async () => {
     if (doorStatus === "open") {
-      await delay(180000);
+      await delay(5000);
       toast.error("Warning! The front door has been left open", {
         position: "bottom-right",
-        autoClose: 5000,
+        autoClose: 300000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -207,7 +273,33 @@ const Header = ({ title }) => {
       delay(1000);
       toast.error("Warning! There is high level of gas in your house!", {
         position: "bottom-right",
-        autoClose: 5000,
+        autoClose: 300000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    } else {
+      // toast.success("The gas is " + gasStatus, {
+      //   position: "bottom-right",
+      //   autoClose: 5000,
+      //   hideProgressBar: false,
+      //   closeOnClick: true,
+      //   pauseOnHover: true,
+      //   draggable: true,
+      //   progress: undefined,
+      //   theme: "light",
+      // });
+    }
+  };
+  const alertBin = () => {
+    if (binStatus === "open") {
+      delay(1000);
+      toast.error("Hey your bin if full. Please throw away dont be lazy", {
+        position: "bottom-right",
+        autoClose: 300000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -379,9 +471,36 @@ const Header = ({ title }) => {
                         </h5>
                       </div>
                     ))}
+                    {[...binNotifications].reverse().map((item) => (
+                      <div>
+                        <div
+                          key={item.id}
+                          className="d-flex justify-content-between"
+                        >
+                          <a className="p-2"> Bin is {item.state} </a>
+                          <button
+                            onClick={() => {
+                              // console.log(item.id);
+                              const filteredNotifications =
+                                binNotifications.filter((i) => i.id != item.id);
+                              setBinNotification(filteredNotifications);
+                            }}
+                            className="btn-close p-2 text-red-700"
+                          >
+                            X
+                          </button>
+                        </div>
+                        <h5 className="text-xs p-2">
+                          {" "}
+                          - {Math.round((Date.now() - item.id) / 1000)} Seconds
+                          Ago{" "}
+                        </h5>
+                      </div>
+                    ))}
 
                     {doorNotifications.length &&
-                    gasNotifications.length == 0 ? (
+                    gasNotifications.length &&
+                    binNotifications == 0 ? (
                       <div className="mt-2 py-1 text-sm">
                         No new notifications
                       </div>

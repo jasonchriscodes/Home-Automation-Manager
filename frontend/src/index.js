@@ -13,7 +13,7 @@ root.render(
 );
 
 //Kommunicate plugin init
-Kommunicate.init("9f08bf80ee62045baca9c9b8bbed2508", {
+Kommunicate.init("1eb2e7248fdfb64e5011b7dbf02904c71", {
   automaticChatOpenOnNavigation: true,
   popupWidget: true,
 });

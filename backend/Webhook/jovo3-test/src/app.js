@@ -38,7 +38,7 @@ app.setHandler({
     const device = this.$inputs.Room.name;
     const res = await updateDevice(device, "on");
     console.log(res);
-    this.ask("Sure! I will turn on your lights");
+    this.tell(`Sure! I will turn on your ${device} lights`);
   },
   async CustomTurnOffLightIntent() {
     console.log(this.$inputs.Room.name);
@@ -46,7 +46,7 @@ app.setHandler({
     console.log(device);
     const res = await updateDevice(device, "off");
     console.log(res);
-    this.tell("Sure! I will turn off your lights");
+    this.tell(`Sure! I will turn off your ${device} lights`);
   },
   async TurnOnDevicesExcLightIntent() {
     console.log(this.$inputs.Devices.name);
