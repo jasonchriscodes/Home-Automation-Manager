@@ -10,7 +10,7 @@ def update_document(my_device, status):
 
     collection = db['devices']
     collection.update_one({"deviceName": my_device }, {"$set": {"status":f'{status}'}})
-    print("Update Complete")
+    # print("Update Complete")
 
 SENSOR_PIN = 17
 RELAY_PIN = 18
